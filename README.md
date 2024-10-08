@@ -1,3 +1,4 @@
+
 # SaySwitch — A Starter Pack for Agency Banking Apps
 
 ## Project Overview
@@ -46,19 +47,34 @@ SaySwitch is designed with the user in mind, emphasizing accessibility, usabilit
 
 ## App Structure
 
-   - `src/`
-     - `components/`        # Reusable UI components
-     - `contexts/`          # Context API for state management
-     - `navigation/`        # Stack and tab navigators
-     - `services/`          # API services and local storage logic
-     - `store/`             # State management (if using Redux or similar)
-     - `screens/`           # Screen components for different views
-     - `utils/`             # Utility functions and helpers
-     - `assets/`            # Images, icons, and fonts
-     - `hooks/`             # Custom hooks
-     - `styles/`            # Global styles and theme configuration
-     - `config/`            # Configuration files (e.g., environment variables)
+```plaintext
 
+root/
+│
+├── app/                # Main app folder for Expo Router
+│   ├── _layout.js      # Main layout for the app
+│   ├── (auth)/         # Authentication-related screens
+│   │   ├── _layout.js  # Layout for auth screens
+│   │   ├── login.js    # Login screen
+│   │   ├── onboarding.js # Onboarding screen
+│   │   └── welcome.js  # Welcome screen
+│   └── (tab)/          # Tab-related screens
+│       ├── _layout.js  # Layout for tab screens
+│       ├── home.js     # Home screen
+│       ├── profile.js   # Profile screen
+│       └── transactions.js # Transactions screen
+│
+├── hooks/              # Custom hooks for data fetching and logic
+│
+├── contexts/           # Contexts for state management
+│
+├── services/           # API services for backend interaction
+│
+└── assets/             # Static files such as images and icons
+
+```
+
+---
 
 ## Navigation Overview
 
