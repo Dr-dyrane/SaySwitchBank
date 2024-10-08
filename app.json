@@ -2,7 +2,7 @@
   "expo": {
     "name": "SaySwitchBank",
     "slug": "SaySwitchBank",
-    "scheme": "com.dyrane.SaySwitchBank",
+    "scheme": "yourappname",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
