@@ -29,9 +29,12 @@ export default function TabsLayout() {
 						<Ionicons name="home-outline" color={color} size={24} />
 					), // Add Ionicons for Home tab
 					headerShown: true,
-                    headerTitle: () => null, 
+					headerTitle: () => null,
 					headerLeft: () => (
-						<View style={{ marginLeft: 16 }} className='flex flex-row items-center justify-between space-x-4'>
+						<View
+							style={{ marginLeft: 16 }}
+							className="flex flex-row items-center justify-between space-x-4"
+						>
 							{/* User Profile Picture */}
 							<Image
 								source={require("../../assets/profile.jpg")} // User profile icon
@@ -43,14 +46,14 @@ export default function TabsLayout() {
 									borderColor: "#ccc",
 								}}
 							/>
-                            <Text
-                            style={{
-                                fontWeight:'bold',
-                                fontSize:16
-                            }}
-								>
-									Hi {user.email}
-								</Text>
+							<Text
+								style={{
+									fontWeight: "bold",
+									fontSize: 16,
+								}}
+							>
+								Hi {user.username}
+							</Text>
 						</View>
 					),
 					headerRight: () => (

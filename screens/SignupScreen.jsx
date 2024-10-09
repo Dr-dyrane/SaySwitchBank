@@ -5,7 +5,8 @@ import * as Yup from "yup";
 import Input from "../components/form/Input"; // Reusable Input Component
 import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
-import { useAuth } from "../contexts/AuthContext";
+import useSignUp from "../hooks/mutations/useSignup";
+import { useToast } from "../contexts/ToastContext";
 
 // Validation Schema for the Signup Form
 const SignupSchema = Yup.object().shape({
@@ -21,21 +22,25 @@ const SignupSchema = Yup.object().shape({
 
 const SignupScreen = () => {
 	const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+	const { showToast } = useToast();
 	const router = useRouter();
+	const { signUp } = useSignUp();
 
 	// Simulate Signup API Call
 	const handleSignup = async (values) => {
 		setLoading(true);
 		try {
-			// Simulate a successful signup after 2 seconds (replace with actual API call)
-			await new Promise((resolve) => setTimeout(resolve, 2000));
-			// Call the login function with the provided values
-			await login(values); // Make sure login returns a promise
-			// Call the login function with the provided values
-			router.replace("/(tabs)")
+			const { email, password, username } = values; // Extract email, password, and username from values
+			const isSignedUp = await signUp({ email, password, username });
+			if (isSignedUp) {
+				// Navigate to a different screen or show a success message
+				router.replace("/(tabs)"); // Navigate on successful login
+				showToast("Sign-up successful!", "success"); // Show success toast
+			}
 		} catch (error) {
-			Alert.alert("Error", "Something went wrong. Please try again.");
+			//console.error("Sign-up error:", error); // Log error for debugging
+			// Handle error (e.g., show a toast or alert)
+			showToast("Sign-up failed: " + error.message, "error"); // Show error toast
 		} finally {
 			setLoading(false);
 		}
@@ -43,7 +48,7 @@ const SignupScreen = () => {
 
 	return (
 		<LinearGradient
-    colors={["#fff", "#f0fff4", "#fff"]}
+			colors={["#fff", "#f0fff4", "#fff"]}
 			className="flex-1 justify-center items-center p-4 bg-backgroundLight"
 		>
 			<Text className="text-3xl font-bold text-primary mb-6">Sign Up</Text>

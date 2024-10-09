@@ -14,15 +14,17 @@ export const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
 	const [user, setUser] = useState(null); // Initialize user state
 	const [loading, setLoading] = useState(true); // Loading state
+	const [token, setToken] = useState(null); // Initialize token state
 
 	// Authentication status derived from user state
 	const authStatus = useMemo(
 		() => ({
-			isAuthenticated: !!user, // true if user exists
+			isAuthenticated: !!user && !!token, // true if user and token exist
 			isLoggedIn: !!user, // alias for isAuthenticated
 			email: user?.email || null, // return email or null if not logged in
+			username: user?.username || null, // return email or null if not logged in
 		}),
-		[user]
+		[user, token]
 	);
 
 	// Check if a user is stored on mount and set loading state accordingly
@@ -30,8 +32,12 @@ export const AuthProvider = ({ children }) => {
 		const checkUser = async () => {
 			try {
 				const storedUser = await AsyncStorage.getItem("user");
+				const storedToken = await AsyncStorage.getItem("token");
 				if (storedUser) {
 					setUser(JSON.parse(storedUser));
+				}
+				if (storedToken) {
+					setToken(storedToken);
 				}
 			} catch (error) {
 				console.error("Error loading user data from storage:", error);
@@ -42,11 +48,16 @@ export const AuthProvider = ({ children }) => {
 		checkUser();
 	}, []);
 
-	// Login function to set user and store in AsyncStorage
+	// Login function to set user and token and store in AsyncStorage
 	const login = async (userData) => {
+		//console.log('userData', userData)
 		try {
 			setUser(userData);
 			await AsyncStorage.setItem("user", JSON.stringify(userData));
+			if (userData.token) {
+				setToken(userData.token);
+				await AsyncStorage.setItem("token", userData.token);
+			}
 		} catch (error) {
 			console.error("Error saving user data:", error);
 		}
@@ -56,7 +67,9 @@ export const AuthProvider = ({ children }) => {
 	const logout = async () => {
 		try {
 			setUser(null);
+			setToken(null);
 			await AsyncStorage.removeItem("user");
+			await AsyncStorage.removeItem("token");
 		} catch (error) {
 			console.error("Error clearing user data:", error);
 		}
@@ -67,6 +80,7 @@ export const AuthProvider = ({ children }) => {
 		() => ({
 			user: {
 				email: authStatus.email,
+				username: authStatus.username,
 				isAuthenticated: authStatus.isAuthenticated,
 				isLoggedIn: authStatus.isLoggedIn,
 			},

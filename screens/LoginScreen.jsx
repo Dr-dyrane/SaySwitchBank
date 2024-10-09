@@ -4,8 +4,9 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import Input from "../components/form/Input"; // Reusable Input Component
 import { LinearGradient } from "expo-linear-gradient";
-import { useAuth } from "../contexts/AuthContext";
 import { useRouter } from "expo-router";
+import { useToast } from "../contexts/ToastContext";
+import useLogin from "../hooks/mutations/useLogin";
 
 // Validation Schema for the Form
 const LoginSchema = Yup.object().shape({
@@ -17,26 +18,25 @@ const LoginSchema = Yup.object().shape({
 
 const LoginScreen = () => {
 	const [loading, setLoading] = useState(false);
-	const { login } = useAuth();
+	const { login: loginUser } = useLogin();
 	const router = useRouter();
+	const { showToast } = useToast();
 
 	// Simulate Login API Call
 	const handleLogin = async (values) => {
 		setLoading(true);
 		try {
-			// Simulate a successful login after 2 seconds (replace with actual API call)
-			await new Promise((resolve) => setTimeout(resolve, 2000));
-
-			// Call the login function with the provided values
-			await login(values); // Make sure login returns a promise
-			// Call the login function with the provided values
-			router.replace("/(tabs)");
-
-			// Optional: You can navigate to another screen after a successful login here
+			const isLoggedIn = await loginUser(values); // Call the login function from useLogin
+			if (isLoggedIn) {
+				// Check if login was successful
+				router.replace("/(tabs)"); // Navigate on successful login
+				showToast("Login successful!", "success");
+			}
 		} catch (error) {
-			Alert.alert("Error", "Something went wrong. Please try again.");
+			//console.error("Login error:", error); // Log error for debugging
+			showToast("Login failed: " + error.message, "error");
 		} finally {
-			setLoading(false);
+			setLoading(false); // Always set loading to false
 		}
 	};
 
