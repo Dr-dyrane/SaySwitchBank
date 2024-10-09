@@ -1,3 +1,5 @@
+//app/_layout.js
+
 import React, { useEffect , useState} from "react";
 import { Stack, useRouter } from "expo-router";
 import { AuthProvider, useAuth } from "../contexts/AuthContext"; // Ensure both are imported
