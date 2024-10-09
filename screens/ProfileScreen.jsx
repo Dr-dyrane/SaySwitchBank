@@ -23,6 +23,7 @@ const ProfileScreen = () => {
 	const [username, setUsername] = useState("");
 	const [gender, setGender] = useState("");
 	const [email, setEmail] = useState("");
+	const [phone, setPhone] = useState("");
 	const [address, setAddress] = useState("");
 	const [dateOfBirth, setDateOfBirth] = useState("");
 	const [imageUri, setImageUri] = useState(null);
@@ -40,6 +41,7 @@ const ProfileScreen = () => {
 				setUsername(userData.username || "testUser");
 				setGender(userData.gender || "Male");
 				setEmail(userData.email || "test@example.com");
+				setPhone(userData.mobile || "08036049719");
 				setAddress(userData.address || "Somehwere in Nigeria");
 				setDateOfBirth(userData.dateOfBirth || "26 02 1994");
 				setImageUri(userData.imageUri || null);
@@ -89,6 +91,7 @@ const ProfileScreen = () => {
 				username,
 				gender,
 				email,
+				phone,
 				address,
 				dateOfBirth,
 				imageUri,
@@ -106,17 +109,20 @@ const ProfileScreen = () => {
 			setIsLoading(false);
 		}
 	};
-	// Handler to update each specific field
+
 	const handleFieldUpdate = async (field, value) => {
+		if (!validate(value)) {
+			showToast(`Invalid ${field}`, "error"); // Show error for invalid field
+			return; // Exit if validation fails
+		}
 		try {
-			// Update logic for the specific field, can include API calls or state updates
-			// For example:
 			await updateUserAPI({ [field]: value });
 			showToast(`${field} updated successfully`, "success");
 		} catch (error) {
 			showToast(`Failed to update ${field}`, "error");
 		}
 	};
+
 	// Render the profile screen
 	return (
 		<LinearGradient colors={["#fff", "#f0fff4", "#fff"]} className="flex-1 p-4">
@@ -127,10 +133,10 @@ const ProfileScreen = () => {
 				</View>
 			) : (
 				<ScrollView>
-					<View className="items-center mb-4 bg-primary p-4 rounded-2xl">
+					<View className="flex flex-row space-x-4 items-center mb-4 bg-primary p-4 rounded-2xl">
 						<Pressable
 							onPress={pickImage}
-							className="relative border-2 rounded-full mb-4 border-accent"
+							className="relative border-2 rounded-full border-accent"
 						>
 							<Image
 								source={
@@ -138,14 +144,17 @@ const ProfileScreen = () => {
 										? { uri: imageUri }
 										: require("../assets/profile.jpg")
 								}
-								className="w-32 h-32 rounded-full"
+								className="w-24 h-24 rounded-full"
 							/>
 							{/* Icon Overlay */}
-							<View className="absolute bottom-2 right-0 p-2 bg-secondary/50 rounded-full">
+							<View className="absolute bottom-2 -right-2 p-2 bg-secondary/50 rounded-full">
 								<Ionicons name="camera" size={20} color="#fff" />
 							</View>
 						</Pressable>
-						<Text className="text-xl font-bold text-white">{username}</Text>
+						<View className='flex flex-col'>
+							<Text className="text-xl font-bold text-white">{fullName}</Text>
+							<Text className="text-xl font-bold text-white">{phone}</Text>
+						</View>
 					</View>
 
 					{/* Field Group */}
@@ -170,7 +179,7 @@ const ProfileScreen = () => {
 							label="Gender"
 							value={gender}
 							onChange={setGender}
-							iconName={gender.toLowerCase() || 'male'}
+							iconName={gender.toLowerCase() || "male"}
 							onUpdate={() => handleFieldUpdate("gender", gender)}
 							fieldType="gender" // Specify field type for validation
 						/>
@@ -181,6 +190,14 @@ const ProfileScreen = () => {
 							iconName="mail"
 							onUpdate={() => handleFieldUpdate("email", email)}
 							fieldType="email" // Specify field type for validation
+						/>
+						<ProfileField
+							label="Phone Number"
+							value={phone}
+							onChange={setPhone}
+							iconName="call"
+							onUpdate={() => handleFieldUpdate("phone", phone)}
+							fieldType="number" // Specify field type for validation
 						/>
 						<ProfileField
 							label="Address"

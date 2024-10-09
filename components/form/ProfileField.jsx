@@ -1,9 +1,16 @@
-import React, { useState } from 'react';
-import { View, TextInput, Text, Pressable, Alert } from 'react-native';
+import React, { useState } from "react";
+import { View, TextInput, Text, Pressable, Alert } from "react-native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons"; // Icon packages
 
 // Custom component to render editable fields
-const ProfileField = ({ label, value, onChange, iconName, onUpdate, fieldType }) => {
+const ProfileField = ({
+	label,
+	value,
+	onChange,
+	iconName,
+	onUpdate,
+	fieldType,
+}) => {
 	// Warning state
 	const [warning, setWarning] = useState("");
 
@@ -14,10 +21,13 @@ const ProfileField = ({ label, value, onChange, iconName, onUpdate, fieldType })
 			case "username":
 				return value.trim().length > 0; // Must not be empty
 			case "gender":
-				return value.trim().length > 0; 
+				return value.trim().length > 0;
 			case "email":
 				const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 				return emailPattern.test(value); // Valid email format
+			case "number":
+				const phonePattern = /^[0-9]{10,15}$/; // Adjust the regex pattern based on your phone number requirements
+				return phonePattern.test(value); // Valid phone number format
 			case "address":
 				return value.trim().length > 0; // Must not be empty
 			case "dateOfBirth":
@@ -54,7 +64,7 @@ const ProfileField = ({ label, value, onChange, iconName, onUpdate, fieldType })
 			<View className="rounded-full border bg-primary/10 border-gray-500/10 p-3">
 				<Ionicons name={iconName} size={20} color="gray" />
 			</View>
-			<View className="flex flex-col flex-1 p-1 rounded-lg bg-white/25">
+			<View className="flex flex-col flex-1 p-1 px-2 rounded-lg bg-white/30">
 				<TextInput
 					value={value}
 					onChangeText={(text) => {
@@ -83,4 +93,4 @@ const ProfileField = ({ label, value, onChange, iconName, onUpdate, fieldType })
 	);
 };
 
-export default ProfileField
+export default ProfileField;
