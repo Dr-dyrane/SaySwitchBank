@@ -34,7 +34,7 @@ export default function TabsLayout() {
 						<View style={{ marginLeft: 16 }} className='flex flex-row items-center justify-between space-x-4'>
 							{/* User Profile Picture */}
 							<Image
-								source={require("../../assets/icon.png")} // User profile icon
+								source={require("../../assets/profile.jpg")} // User profile icon
 								style={{
 									width: 32,
 									height: 32,

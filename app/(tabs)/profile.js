@@ -5,7 +5,7 @@ const Profile = () => {
   return (
     <View className="flex-1 justify-center items-center p-4">
       <Image
-        source={require('../../assets/icon.png')} // Replace with your actual profile picture
+        source={require('../../assets/profile.jpg')} // Replace with your actual profile picture
         className="w-32 h-32 rounded-full mb-4" // Profile picture styling
       />
       <Text className="text-2xl font-bold mb-2">John Doe</Text>
