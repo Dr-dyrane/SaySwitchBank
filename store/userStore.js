@@ -136,6 +136,26 @@ const userStore = {
 			throw error; // Rethrow error for further handling
 		}
 	},
+
+	// Function to update user data, including profile image key
+	updateUser: async (newData) => {
+		try {
+			const currentUserData = await AsyncStorage.getItem("currentUser");
+			if (!currentUserData) {
+				throw new Error("User not found");
+			}
+
+			const currentUser = JSON.parse(currentUserData);
+			const updatedUser = { ...currentUser, ...newData }; // Merge new data with existing user data
+
+			// Save updated user data
+			await AsyncStorage.setItem("currentUser", JSON.stringify(updatedUser));
+			return { data: updatedUser };
+		} catch (error) {
+			console.error("Update user error:", error.message);
+			throw error;
+		}
+	},
 };
 
 export default userStore;
