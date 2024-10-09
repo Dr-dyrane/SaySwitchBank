@@ -5,7 +5,7 @@ import React, {
 	useEffect,
 	useRef,
 } from "react";
-import { Text, View, Animated, Image } from "react-native";
+import { Text, View, Animated, Image, Pressable } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import logo from "../assets/logo.png"; // Replace with your actual logo
@@ -104,21 +104,30 @@ const ToastProvider = ({ children }) => {
 	};
 
 	const renderIcon = () => {
+		let icon;
+
 		if (toast.icon) {
-			return toast.icon; // If a custom icon is passed
+			icon = toast.icon; // If a custom icon is passed
+		} else {
+			switch (toast.type) {
+				case "success":
+					icon = <Ionicons name="checkmark-circle" size={24} color="white" />;
+					break;
+				case "error":
+					icon = <MaterialIcons name="error" size={24} color="white" />;
+					break;
+				case "info":
+					icon = <Ionicons name="information-circle" size={24} color="white" />;
+					break;
+				case "warning":
+					icon = <MaterialIcons name="warning" size={24} color="white" />;
+					break;
+				default:
+					icon = null;
+			}
 		}
-		switch (toast.type) {
-			case "success":
-				return <Ionicons name="checkmark-circle" size={24} color="white" />;
-			case "error":
-				return <MaterialIcons name="error" size={24} color="white" />;
-			case "info":
-				return <Ionicons name="information-circle" size={24} color="white" />;
-			case "warning":
-				return <MaterialIcons name="warning" size={24} color="white" />;
-			default:
-				return null;
-		}
+
+		return <Pressable onPress={hideToast}>{icon}</Pressable>;
 	};
 
 	return (
