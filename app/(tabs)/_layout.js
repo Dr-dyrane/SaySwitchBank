@@ -28,8 +28,12 @@ export default function TabsLayout() {
 				name="index"
 				options={{
 					title: "Home",
-					tabBarIcon: ({ color, size }) => (
-						<Ionicons name="home-outline" color={color} size={24} />
+					tabBarIcon: ({ color, size, focused }) => (
+						<Ionicons
+							name={focused ? "home" : "home-outline"}
+							color={color}
+							size={24}
+						/>
 					), // Add Ionicons for Home tab
 					headerShown: true,
 					headerTitle: () => null,
@@ -93,8 +97,12 @@ export default function TabsLayout() {
 				name="transactions"
 				options={{
 					title: "Transactions",
-					tabBarIcon: ({ color, size }) => (
-						<Ionicons name="wallet-outline" color={color} size={24} />
+					tabBarIcon: ({ color, size, focused }) => (
+						<Ionicons
+							name={focused ? "wallet" : "wallet-outline"}
+							color={color}
+							size={24}
+						/>
 					), // Add Ionicons for Transactions tab
 					headerShown: true,
 				}}
@@ -105,8 +113,12 @@ export default function TabsLayout() {
 				name="profile"
 				options={{
 					title: "Profile",
-					tabBarIcon: ({ color, size }) => (
-						<Ionicons name="person-outline" color={color} size={24} />
+					tabBarIcon: ({ color, size, focused }) => (
+						<Ionicons
+							name={focused ? "person" : "person-outline"}
+							color={color}
+							size={24}
+						/>
 					), // Add Ionicons for Profile tab
 					headerShown: true,
 				}}
