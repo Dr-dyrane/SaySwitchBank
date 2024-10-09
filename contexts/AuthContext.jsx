@@ -8,19 +8,24 @@ import React, {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ActivityIndicator, View } from "react-native";
 
-export const AuthContext = createContext();
+// Create AuthContext
+export const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
-	const [user, setUser] = useState(null); // Initialize user as null
-	const [loading, setLoading] = useState(true);
+	const [user, setUser] = useState(null); // Initialize user state
+	const [loading, setLoading] = useState(true); // Loading state
 
-	// Define the authentication object derived from the user state
-	const authStatus = {
-		isAuthenticated: !!user, // true if user is not null
-		isLoggedIn: !!user, // true if user is not null
-		email: user ? user.email : null, // user email, or null if not authenticated
-	};
+	// Authentication status derived from user state
+	const authStatus = useMemo(
+		() => ({
+			isAuthenticated: !!user, // true if user exists
+			isLoggedIn: !!user, // alias for isAuthenticated
+			email: user?.email || null, // return email or null if not logged in
+		}),
+		[user]
+	);
 
+	// Check if a user is stored on mount and set loading state accordingly
 	useEffect(() => {
 		const checkUser = async () => {
 			try {
@@ -29,7 +34,7 @@ export const AuthProvider = ({ children }) => {
 					setUser(JSON.parse(storedUser));
 				}
 			} catch (error) {
-				console.error("Failed to load user from storage:", error);
+				console.error("Error loading user data from storage:", error);
 			} finally {
 				setLoading(false);
 			}
@@ -37,41 +42,56 @@ export const AuthProvider = ({ children }) => {
 		checkUser();
 	}, []);
 
+	// Login function to set user and store in AsyncStorage
 	const login = async (userData) => {
-		setUser(userData);
-		await AsyncStorage.setItem("user", JSON.stringify(userData));
+		try {
+			setUser(userData);
+			await AsyncStorage.setItem("user", JSON.stringify(userData));
+		} catch (error) {
+			console.error("Error saving user data:", error);
+		}
 	};
 
+	// Logout function to clear user data
 	const logout = async () => {
-		setUser(null); // Set user to null on logout
-		await AsyncStorage.removeItem("user");
+		try {
+			setUser(null);
+			await AsyncStorage.removeItem("user");
+		} catch (error) {
+			console.error("Error clearing user data:", error);
+		}
 	};
 
-	// Memoize the context value to prevent unnecessary re-renders
-	const value = useMemo(
+	// Memoize context value to avoid unnecessary re-renders
+	const authContextValue = useMemo(
 		() => ({
 			user: {
-				email: authStatus.email, // Only include email in the value
+				email: authStatus.email,
 				isAuthenticated: authStatus.isAuthenticated,
 				isLoggedIn: authStatus.isLoggedIn,
 			},
-			loading,
 			login,
 			logout,
+			loading,
 		}),
-		[loading, authStatus, user] // Only depend on loading and authStatus
+		[authStatus, loading] // Only depend on user, authStatus, and loading
 	);
 
+	// Spinner component when loading is true
 	if (loading) {
-		// Render the spinner while loading
 		return (
-			<View className="flex-1 justify-center items-center">
+			<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
 				<ActivityIndicator size="large" color="#00ff00" />
 			</View>
 		);
 	}
 
-	return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+	// Render the context provider with the memoized value
+	return (
+		<AuthContext.Provider value={authContextValue}>
+			{children}
+		</AuthContext.Provider>
+	);
 };
 
 // Custom hook to use the AuthContext
