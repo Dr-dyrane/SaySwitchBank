@@ -4,10 +4,13 @@ import { useRouter } from "expo-router";
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
 import { useAuth } from "../../contexts/AuthContext";
+import { useToast } from "../../contexts/ToastContext";
 
 export default function TabsLayout() {
 	const router = useRouter();
 	const { logout, user } = useAuth();
+	const { showToast } = useToast();
+
 	return (
 		<Tabs
 			screenOptions={{
@@ -59,9 +62,16 @@ export default function TabsLayout() {
 					headerRight: () => (
 						<TouchableOpacity
 							style={{ marginRight: 16 }}
-							onPress={() => {
-								logout();
-								router.replace("/(auth)"); // Redirect to the auth stack (login/signup screen)
+							onPress={async () => {
+								const result = await logout(); // Call the logout function
+								if (result.success) {
+									// Show success toast if logout is successful
+									showToast(result.message, "success");
+									router.replace("/(auth)"); // Redirect to the auth stack (login/signup screen)
+								} else {
+									// Show error toast if logout fails
+									showToast(result.message, "error");
+								}
 							}}
 						>
 							{/* Logo with text */}

@@ -50,16 +50,19 @@ export const AuthProvider = ({ children }) => {
 
 	// Login function to set user and token and store in AsyncStorage
 	const login = async (userData) => {
-		//console.log('userData', userData)
 		try {
 			setUser(userData);
 			await AsyncStorage.setItem("user", JSON.stringify(userData));
+
 			if (userData.token) {
 				setToken(userData.token);
 				await AsyncStorage.setItem("token", userData.token);
 			}
+
+			return true; // Return true when login is successful
 		} catch (error) {
 			console.error("Error saving user data:", error);
+			return false; // Return false in case of any error
 		}
 	};
 
@@ -70,8 +73,10 @@ export const AuthProvider = ({ children }) => {
 			setToken(null);
 			await AsyncStorage.removeItem("user");
 			await AsyncStorage.removeItem("token");
+			return { success: true, message: "Successfully logged out" }; // Return success message
 		} catch (error) {
 			console.error("Error clearing user data:", error);
+			return { success: false, message: "Logout failed" }; // Return failure message
 		}
 	};
 
