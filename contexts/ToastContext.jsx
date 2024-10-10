@@ -150,7 +150,7 @@ const ToastProvider = ({ children }) => {
 									borderColor: "rgba(192, 217, 90, 0.5)",
 									borderRadius: 9999,
 									marginRight: 12,
-									backgroundColor: "rgba(192, 217, 90, 0.5)",
+									backgroundColor: "rgba(255, 255, 255, 0.5)",
 								}}
 							>
 								<Image
