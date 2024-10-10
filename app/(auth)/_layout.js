@@ -37,7 +37,7 @@ export default function AuthLayout() {
 					headerRight: () => (
 						<Pressable
 							onPress={() => router.push("signup")}
-							className="rounded-full border border-primary bg-secondary p-2"
+							className="rounded-full border border-primary bg-accent/10 p-2"
 						>
 							<Ionicons
 								name="person-add-outline" // New rounded icon for sign up
@@ -56,7 +56,7 @@ export default function AuthLayout() {
 					headerRight: () => (
 						<Pressable
 							onPress={() => router.push("signup")}
-							className="rounded-full border border-gray-500 p-2"
+							className="rounded-full border border-gray-500 p-2 bg-accent/10"
 						>
 							<Ionicons
 								name="chevron-forward-outline" // Ionicon for skip
@@ -75,7 +75,7 @@ export default function AuthLayout() {
 					headerRight: () => (
 						<Pressable
 							onPress={() => router.push("login")}
-							className="rounded-full border border-primary p-2 bg-secondary"
+							className="rounded-full border border-primary p-2 bg-accent/10"
 						>
 							<AntDesign
 								name="login" // Ionicon for login
