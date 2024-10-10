@@ -25,6 +25,7 @@ export default function TabsLayout() {
 					fontWeight: "bold", // Bold font for the title
 					fontSize: 18, // Adjust the size if needed
 				},
+				headerShadowVisible: false,
 				headerLeft: () => (
 					<Ionicons
 						name="arrow-back"
