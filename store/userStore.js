@@ -32,25 +32,25 @@ const userStore = {
 				users.push(userStore.staticUserData); // Add static user data to the array
 			}
 
-			console.log("Retrieved users from AsyncStorage:", users); // Debugging output
+			// console.log("Retrieved users from AsyncStorage:", users); // Debugging output
 
 			// Check if the credentials match any user by email
 			const user = users.find((user) => {
 				const userEmail = user.email ? user.email.trim().toLowerCase() : null; // Trim and lower case the user email
 				const inputEmail = credentials.email.trim().toLowerCase(); // Trim and lower case the input email
 
-				console.log(
-					`Comparing user email: ${userEmail} with input email: ${inputEmail}`
-				); // Debugging output
+				// console.log(
+				// 	`Comparing user email: ${userEmail} with input email: ${inputEmail}`
+				// ); // Debugging output
 
 				return userEmail === inputEmail;
 			});
 
 			// Validate user and password
 			if (user) {
-				console.log("User found:", user); // Debugging output
-				console.log("User password:", user.password); // Debugging output
-				console.log("Input password:", credentials.password); // Debugging output
+				// console.log("User found:", user); // Debugging output
+				// console.log("User password:", user.password); // Debugging output
+				// console.log("Input password:", credentials.password); // Debugging output
 
 				if (user.password === credentials.password) {
 					// Password matches

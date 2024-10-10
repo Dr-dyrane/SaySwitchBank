@@ -37,10 +37,10 @@ const TransactionsScreen = () => {
 				transactions.
 			</Text>
 			{/* You can add more components here as needed */}
-			<Button title="Show Success Toast" onPress={handleSuccess} />
+			{/* <Button title="Show Success Toast" onPress={handleSuccess} />
 			<Button title="Show Error Toast" onPress={handleError} />
 			<Button title="Show Warning Toast" onPress={handleWarning} />
-			<Button title="Simulate API Call" onPress={tryCatchFunction} />
+			<Button title="Simulate API Call" onPress={tryCatchFunction} /> */}
 		</LinearGradient>
 	);
 };
