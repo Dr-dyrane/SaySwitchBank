@@ -83,7 +83,7 @@ const SignupScreen = () => {
 			{!keyboardVisible && (
 				<View className="flex flex-col flex-shrink">
 					{/* Conditionally render the image if the keyboard is not visible */}
-					<View className="justify-center space-y-2 flex-1">
+					<View className="justify-center space-y-2">
 						<Text className="text-6xl text-center font-[900] text-primary">
 							Register
 						</Text>
@@ -94,7 +94,7 @@ const SignupScreen = () => {
 
 					<Image
 						source={require("../assets/sign/signup.png")}
-						className="w-[220px] h-[220px]"
+						className="w-[220px] h-[220px] flex-1"
 						resizeMode="contain"
 					/>
 				</View>

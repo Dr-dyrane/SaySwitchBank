@@ -5,6 +5,7 @@ import { Stack, useRouter } from "expo-router";
 import { AuthProvider, useAuth } from "../contexts/AuthContext"; // Ensure both are imported
 import * as NavigationBar from "expo-navigation-bar";
 import ToastProvider from "../contexts/ToastContext";
+import { StatusBar } from "expo-status-bar";
 
 export default function RootLayout() {
 	// Move AuthProvider outside the return statement to ensure useAuth can be used
@@ -26,6 +27,7 @@ export default function RootLayout() {
 	return (
 		<AuthProvider>
 			<ToastProvider>
+				<StatusBar style="dark" backgroundColor="white" />
 				<AuthenticatedStack />
 			</ToastProvider>
 		</AuthProvider>

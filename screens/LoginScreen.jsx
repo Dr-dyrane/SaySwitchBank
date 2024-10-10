@@ -79,7 +79,7 @@ const LoginScreen = () => {
 			className="flex-1 justify-between items-center p-6 bg-backgroundLight"
 		>
 			<View className="flex flex-col flex-shrink">
-				<View className="flex-1 justify-center space-y-2">
+				<View className="justify-center space-y-2">
 					<Text className="text-6xl text-center font-[900] text-primary">
 						Welcome Back
 					</Text>
@@ -90,7 +90,7 @@ const LoginScreen = () => {
 				{!keyboardVisible && (
 					<Image
 						source={require("../assets/sign/login.png")}
-						className="contain w-[320px] h-[320px]"
+						className="contain w-[320px] h-[320px] flex-1"
 						resizeMode="contain"
 					/>
 				)}
