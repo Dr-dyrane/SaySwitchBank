@@ -74,7 +74,7 @@ const ToastProvider = ({ children }) => {
 	const getBackgroundColor = () => {
 		switch (toast.type) {
 			case "success":
-				return ["#4CAF50", "#81C784"];
+				return ["#008773", "#4CAF50"];
 			case "error":
 				return ["#F44336", "#E57373"];
 			case "info":

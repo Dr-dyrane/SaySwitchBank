@@ -7,6 +7,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useRouter } from "expo-router";
 import useSignUp from "../hooks/mutations/useSignup";
 import { useToast } from "../contexts/ToastContext";
+import { Ionicons } from "@expo/vector-icons";
 
 // Validation Schema for the Signup Form
 const SignupSchema = Yup.object().shape({
@@ -49,7 +50,7 @@ const SignupScreen = () => {
 	return (
 		<LinearGradient
 			colors={["#fff", "#f0fff4", "#fff"]}
-			className="flex-1 justify-center items-center p-4 bg-backgroundLight"
+			className="flex-1 justify-center items-center p-6 bg-backgroundLight"
 		>
 			<Text className="text-3xl font-bold text-primary mb-6">Sign Up</Text>
 
@@ -118,12 +119,15 @@ const SignupScreen = () => {
 						<Pressable
 							onPress={handleSubmit}
 							disabled={loading}
-							className="w-full bg-primary rounded-xl py-4 mt-4 flex items-center justify-center"
+							className="w-full bg-primary rounded-xl py-4 text-lg mt-4 flex flex-row px-6 items-center justify-between space-x-4"
 							android_ripple={{ color: "#333" }}
 						>
 							<Text className="text-white text-lg">
 								{loading ? "Signing up..." : "Sign Up"}
 							</Text>
+							<View className="w-8 h-8 bg-none border border-white rounded-full justify-center items-center">
+								<Ionicons name="arrow-forward" size={18} color="white" />
+							</View>
 						</Pressable>
 					</>
 				)}

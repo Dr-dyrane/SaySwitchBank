@@ -14,13 +14,26 @@ export default function TabsLayout() {
 	return (
 		<Tabs
 			screenOptions={{
-				tabBarActiveTintColor: "green", // Active tab color
+				tabBarActiveTintColor: "#008773", // Active tab color
 				tabBarInactiveTintColor: "gray", // Inactive tab color
 				tabBarStyle: { backgroundColor: "#fff" }, // Tab bar background color
 				headerStyle: { backgroundColor: "#fff" }, // Header background color
 				headerTitleAlign: "center", // Center the title on all screens
 				gestureEnabled: true, // Enable gestures for swiping between tabs
 				gestureDirection: "horizontal", // Swipe gesture direction
+				headerTitleStyle: {
+					fontWeight: "bold", // Bold font for the title
+					fontSize: 18, // Adjust the size if needed
+				},
+				headerLeft: () => (
+					<Ionicons
+						name="arrow-back"
+						size={24}
+						color="black"
+						onPress={() => router.back()} // Go back to the previous screen
+						style={{ marginLeft: 20 }} // Adjust styling as needed
+					/>
+				),
 			}}
 		>
 			{/* Home Tab */}

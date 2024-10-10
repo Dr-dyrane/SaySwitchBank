@@ -46,8 +46,8 @@ const OnboardingScreen = () => {
 
 	return (
 		<LinearGradient
-    colors={["#fff", "#f0fff4", "#fff"]}
-			className="flex-1 justify-center items-center p-4"
+			colors={["#fff", "#f0fff4", "#fff"]}
+			className="flex-1 justify-center items-center p-6"
 			{...panResponder}
 		>
 			<Animated.View className="flex-1 justify-center items-center mb-6">
@@ -69,11 +69,18 @@ const OnboardingScreen = () => {
 				<Pressable
 					onPress={() => handleSwipeRight()}
 					className={`py-2 px-4 rounded-lg ${
-						currentIndex === 0 ? "bg-gray-400" : "bg-gray-600"
+						currentIndex === 0 ? "bg-gray-400/10" : "bg-gray-600/10"
 					}`}
 					disabled={currentIndex === 0}
+					style={{ opacity: currentIndex === 0 ? 0.5 : 1 }} // Add opacity for the disabled state
 				>
-					<Text className="text-white font-bold">Back</Text>
+					<Text
+						className={`${
+							currentIndex === 0 ? "text-gray-400" : "text-black"
+						} font-bold`} // Change text color when disabled
+					>
+						Back
+					</Text>
 				</Pressable>
 
 				<View className="flex-row items-center">
@@ -97,11 +104,17 @@ const OnboardingScreen = () => {
 					}}
 					className={`py-2 px-4 rounded-lg ${
 						currentIndex === onboardingData.length - 1
-							? "bg-primary"
-							: "bg-green-500"
+							? "bg-primary/10"
+							: "bg-green-500/10"
 					}`}
 				>
-					<Text className="text-white font-bold">
+					<Text
+						className={`font-bold ${
+							currentIndex === onboardingData.length - 1
+								? "text-primary"
+								: "text-black"
+						}`}
+					>
 						{currentIndex === onboardingData.length - 1 ? "Register" : "Next"}
 					</Text>
 				</Pressable>

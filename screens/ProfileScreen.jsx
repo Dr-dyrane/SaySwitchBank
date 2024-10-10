@@ -125,7 +125,7 @@ const ProfileScreen = () => {
 
 	// Render the profile screen
 	return (
-		<LinearGradient colors={["#fff", "#f0fff4", "#fff"]} className="flex-1 p-4">
+		<LinearGradient colors={["#fff", "#f0fff4", "#fff"]} className="flex-1 p-6">
 			{isDataLoading ? (
 				// Show a loading spinner while data is loading
 				<View className="flex-1 justify-center items-center">
@@ -136,7 +136,7 @@ const ProfileScreen = () => {
 					<View className="flex flex-row space-x-4 items-center mb-4 bg-primary p-4 rounded-2xl">
 						<Pressable
 							onPress={pickImage}
-							className="relative border-2 rounded-full border-accent"
+							className="relative border-2 rounded-full border-accent/50"
 						>
 							<Image
 								source={
@@ -147,11 +147,11 @@ const ProfileScreen = () => {
 								className="w-24 h-24 rounded-full"
 							/>
 							{/* Icon Overlay */}
-							<View className="absolute bottom-2 -right-2 p-2 bg-secondary/50 rounded-full">
+							<View className="absolute bottom-2 -right-2 p-2 bg-accent/50 rounded-full">
 								<Ionicons name="camera" size={20} color="#fff" />
 							</View>
 						</Pressable>
-						<View className='flex flex-col'>
+						<View className="flex flex-col">
 							<Text className="text-xl font-bold text-white">{fullName}</Text>
 							<Text className="text-xl font-bold text-white">{phone}</Text>
 						</View>
@@ -220,12 +220,15 @@ const ProfileScreen = () => {
 					{/* Save Button */}
 					<Pressable
 						onPress={handleUpdateProfile}
-						className="mt-4 bg-primary p-4 rounded-xl items-center"
+						className="flex flex-row mt-4 bg-primary p-4 rounded-xl items-center w-full px-6 justify-between space-x-4"
 						disabled={isLoading}
 					>
 						<Text className="text-white font-bold text-lg">
 							{isLoading ? "Updating..." : "Save Changes"}
 						</Text>
+						<View className="w-8 h-8 bg-none border border-white rounded-full justify-center items-center">
+							<Ionicons name="arrow-down" size={18} color="white" />
+						</View>
 					</Pressable>
 				</ScrollView>
 			)}
