@@ -58,7 +58,7 @@ export default function TabsLayout() {
 							{/* User Profile Picture */}
 							<Image
 								source={require("../../assets/profile.jpg")} // User profile icon
-								resizeMode="contain"
+								resizeMode="fit"
 								style={{
 									width: 32,
 									height: 32,

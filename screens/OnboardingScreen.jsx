@@ -17,6 +17,7 @@ import useSwipeGesture from "../utils/useSwipeGesture";
 import welcome from "../assets/features/welcome.png";
 import transfer from "../assets/features/transfer.png";
 import bill from "../assets/features/bill.png";
+import secure from "../assets/features/secure.png";
 
 const onboardingData = [
 	{
@@ -40,6 +41,13 @@ const onboardingData = [
 		icon: "wallet-outline",
 		image: bill,
 		colorHex: "#d268cc",
+	},
+	{
+		title: "Secure Banking",
+		description: "Your data is protected with the latest encryption technologies.",
+		icon: "shield-checkmark-outline", // You can choose an appropriate icon
+		image: secure, // Replace with the path to the secure banking image
+		colorHex: "#4caf50", // Example color for secure banking
 	},
 ];
 

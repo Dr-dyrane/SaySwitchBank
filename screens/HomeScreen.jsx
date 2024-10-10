@@ -16,10 +16,11 @@ const QuickAction = ({
 		style={{
 			backgroundColor: backgroundColor || "#f0f0f0",
 			flex: 1,
+			flexDirection: "row",
 			padding: 16,
 			borderRadius: 10,
 			alignItems: "center",
-			justifyContent: "center",
+			justifyContent: "between",
 			marginBottom: 10,
 			marginHorizontal: 5,
 		}}
@@ -30,14 +31,16 @@ const QuickAction = ({
 				backgroundColor: "#ffffff", // Background for icon
 				borderRadius: 30,
 				padding: 10,
-				marginBottom: 8,
+				marginBottom: 0,
 			}}
 		>
 			<Ionicons name={iconName} size={24} color={iconColor || "#000"} />
 		</View>
-		<Text style={{ fontWeight: "bold", color: "#333", textAlign: "center" }}>
-			{title}
-		</Text>
+		<View className='flex-1'>
+			<Text style={{ fontWeight: "bold", color: "#333", textAlign: "center" }}>
+				{title}
+			</Text>
+		</View>
 	</TouchableOpacity>
 );
 
@@ -105,7 +108,7 @@ export default function HomeScreen() {
 					</Text>
 				</View>
 
-				{/* Quick Actions Grid (2 Columns) */}
+				{/* Quick Actions Grid (2 Rows, 2 Columns) */}
 				<View
 					style={{
 						flexDirection: "row",
@@ -114,14 +117,21 @@ export default function HomeScreen() {
 					}}
 				>
 					{quickActions.map((action, index) => (
-						<QuickAction
+						<View
 							key={index} // Use index as key (consider using a unique identifier if available)
-							title={action.title}
-							iconName={action.iconName}
-							iconColor={action.iconColor}
-							backgroundColor={action.backgroundColor}
-							onPress={action.onPress}
-						/>
+							style={{
+								width: "48%", // Set width to 48% to create two columns
+								marginBottom: 10, // Space between rows
+							}}
+						>
+							<QuickAction
+								title={action.title}
+								iconName={action.iconName}
+								iconColor={action.iconColor}
+								backgroundColor={action.backgroundColor}
+								onPress={action.onPress}
+							/>
+						</View>
 					))}
 				</View>
 			</ScrollView>
