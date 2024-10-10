@@ -1,7 +1,7 @@
 // components/layout/HeaderLogo.js
 
 import React from "react";
-import { Image, Text, TouchableOpacity } from "react-native";
+import { Image, Text, TouchableOpacity, View } from "react-native";
 import { useRouter } from "expo-router";
 
 const HeaderLogo = () => {
@@ -20,15 +20,16 @@ const HeaderLogo = () => {
 			onPress={handleLogoPress}
 			accessible={true}
 			accessibilityLabel="Back to previous screen"
-			className='flex flex-row items-center justify-center space-x-2'
+			className="flex flex-row items-center justify-center"
 		>
-			<Text className='text-xl font-extrabold'>SaySwitch</Text>
-			<Image
-				source={require("../../assets/logo.png")}
-				style={{ width: 24, height: 24, marginLeft: 0 }}
-				className="mr-4 rounded-full"
-				resizeMode="contain"
-			/>
+			<View className="flex flex-row items-center justify-center">
+				<Text className="text-2xl font-bold">SaySwitch</Text>
+				<Image
+					source={require("../../assets/logo.png")}
+					className="ml-1 w-5 h-5"
+					resizeMode="contain"
+				/>
+			</View>
 		</TouchableOpacity>
 	);
 };
