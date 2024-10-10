@@ -60,8 +60,8 @@ const ProfileField = ({
 	};
 
 	return (
-		<View className="flex flex-row items-center justify-start space-x-2 mb-2 px-2 py-1 rounded-xl bg-primary/10">
-			<View className="rounded-full border bg-primary/10 border-gray-500/10 p-3">
+		<View className="flex flex-row items-center justify-start space-x-2 mb-2 px-2 py-1 rounded-xl bg-accent/10 border-l-4 border-accent/50 shadow-md">
+			<View className="rounded-full border bg-accent/10 border-primary/10 p-3">
 				<Ionicons name={iconName} size={20} color="gray" />
 			</View>
 			<View className="flex flex-col flex-1 p-1 px-2 rounded-lg bg-white/30">

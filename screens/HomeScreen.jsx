@@ -15,6 +15,7 @@ const QuickAction = ({
 	<TouchableOpacity
 		style={{
 			backgroundColor: backgroundColor || "#f0f0f0",
+            borderColor: iconColor,
 			flex: 1,
 			flexDirection: "row",
 			padding: 16,
@@ -25,6 +26,7 @@ const QuickAction = ({
 			marginHorizontal: 5,
 		}}
 		onPress={onPress}
+        className='border-l-4'
 	>
 		<View
 			style={{
@@ -91,7 +93,7 @@ export default function HomeScreen() {
 		>
 			<ScrollView style={{ flex: 1, width: "100%", padding: 16 }}>
 				{/* Account Balance Card */}
-				<View className="bg-primary mb-6 p-4 rounded-xl">
+				<View className="bg-primary mb-6 p-4 rounded-xl border-l-4 border-accent/50">
 					<Text style={{ fontSize: 14, color: "#fff" }}>Your Balance</Text>
 					<Text
 						style={{

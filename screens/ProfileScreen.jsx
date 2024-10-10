@@ -133,7 +133,7 @@ const ProfileScreen = () => {
 				</View>
 			) : (
 				<ScrollView>
-					<View className="flex flex-row space-x-4 items-center mb-4 bg-primary p-4 rounded-2xl">
+					<View className="flex flex-row space-x-4 items-center mb-4 bg-primary border-l-4 shadow-md border-accent/50 p-4 rounded-2xl">
 						<Pressable
 							onPress={pickImage}
 							className="relative border-2 rounded-full border-accent/50"
@@ -221,7 +221,7 @@ const ProfileScreen = () => {
 					{/* Save Button */}
 					<Pressable
 						onPress={handleUpdateProfile}
-						className="flex flex-row mt-4 bg-primary p-4 rounded-xl items-center w-full px-6 justify-between space-x-4"
+						className="flex flex-row mt-4 bg-primary p-4 rounded-xl items-center w-full px-6 justify-between space-x-4 border-l-4 border-accent/50 shadow-md"
 						disabled={isLoading}
 					>
 						<Text className="text-white font-bold text-lg">
