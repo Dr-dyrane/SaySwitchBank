@@ -4,6 +4,7 @@ import React from "react";
 import { View, Text, Image, Pressable } from "react-native";
 import { useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
+import { Ionicons } from "@expo/vector-icons";
 
 const WelcomeScreen = () => {
 	const router = useRouter();
@@ -21,12 +22,12 @@ const WelcomeScreen = () => {
 				/>
 			</View>
 			<Image
-					source={require("../assets/hero.png")}
-					className="contain w-[400px] h-[400px]"
-				/>
+				source={require("../assets/hero/hero.png")}
+				className="contain w-[400px] h-[400px]"
+			/>
 			{/* Features Section */}
 			<View className="mb-6 text-left flex-1 justify-end">
-				<Text className="text-6xl font-[900] text-primary mb-2">
+				<Text className="text-6xl font-[900] text-primary mb-2 tracking-tighter">
 					Empowering Your Financial Journey.
 				</Text>
 				<Text className="text-lg text-gray-500">
@@ -38,12 +39,15 @@ const WelcomeScreen = () => {
 				{/* Container for buttons */}
 				<View className="flex-row mt-6 w-full">
 					<Pressable
-						className="bg-primary flex-1 px-6 py-4 rounded-xl"
+						className="bg-primary flex-1 flex-row px-6 py-4 rounded-xl items-center justify-between space-x-4"
 						onPress={() => router.push("onboarding")}
 					>
 						<Text className="text-white text-xl font-bold text-center">
 							Get Started
 						</Text>
+						<View className="w-8 h-8 bg-none border border-white rounded-full justify-center items-center">
+							<Ionicons name="arrow-forward" size={18} color="white" />
+						</View>
 					</Pressable>
 				</View>
 
