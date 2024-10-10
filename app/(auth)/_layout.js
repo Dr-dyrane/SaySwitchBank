@@ -1,7 +1,7 @@
 // app/(auth)/_layout.js
 
 import { Stack } from "expo-router";
-import { Alert, Pressable } from "react-native";
+import { Alert, Pressable, Text, View } from "react-native";
 import { useRouter } from "expo-router";
 import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { commonScreenOptions } from "../../utils/navigationOptions";
@@ -24,9 +24,9 @@ export default function AuthLayout() {
 					headerTitleAlign: "center", // Center the title
 					gestureEnabled: true,
 					gestureDirection: "horizontal",
-                    headerStyle: {
-                        backgroundColor: '#fff', // Set the header background color
-                      },
+					headerStyle: {
+						backgroundColor: "#fff", // Set the header background color
+					},
 				}}
 			/>
 
@@ -37,13 +37,10 @@ export default function AuthLayout() {
 					headerRight: () => (
 						<Pressable
 							onPress={() => router.push("signup")}
-							className="rounded-full border border-primary bg-accent/10 p-2"
+							className="flex flex-row items-center justify-center"
 						>
-							<Ionicons
-								name="person-add-outline" // New rounded icon for sign up
-								size={16}
-								color="green"
-							/>
+							<Text className='text-md text-gray-500'> Dont have an acount?</Text>
+							<Text className='text-primary ml-1 text-md'>Sign up</Text>
 						</Pressable>
 					),
 				})}
@@ -56,14 +53,10 @@ export default function AuthLayout() {
 					headerRight: () => (
 						<Pressable
 							onPress={() => router.push("signup")}
-							className="rounded-full border border-gray-500 p-2 bg-accent/10"
+							className=""
 						>
-							<Ionicons
-								name="chevron-forward-outline" // Ionicon for skip
-								size={16}
-								color="#000"
-								onPress={() => router.push("signup")}
-							/>
+							<Text className='text-lg text-primary'>Skip
+							</Text>
 						</Pressable>
 					),
 				})}
@@ -75,13 +68,9 @@ export default function AuthLayout() {
 					headerRight: () => (
 						<Pressable
 							onPress={() => router.push("login")}
-							className="rounded-full border border-primary p-2 bg-accent/10"
-						>
-							<AntDesign
-								name="login" // Ionicon for login
-								size={16}
-								color="green"
-							/>
+							className="flex flex-row items-center justify-center"
+						><Text className='text-md text-gray-500'> Already have an acount?</Text>
+							<Text className='text-primary ml-1 text-md'>Login</Text>
 						</Pressable>
 					),
 				})}

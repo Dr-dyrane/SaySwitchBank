@@ -36,7 +36,7 @@ const ProfileScreen = () => {
 			setIsDataLoading(true); // Start loading
 			try {
 				const { data: userData } = await getCurrentUserAPI();
-				console.log(userData);
+				//console.log(userData);
 				setFullName(userData.fullName || "Test User");
 				setUsername(userData.username || "testUser");
 				setGender(userData.gender || "Male");

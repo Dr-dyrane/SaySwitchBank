@@ -9,6 +9,7 @@ export const commonScreenOptions = ({ title, headerRight }) => ({
     fontWeight: 'bold',
     fontSize: 20,
   },
+  headerTitle: '',
   headerStyle: {
     backgroundColor: '#fff', // Set the header background color
   },

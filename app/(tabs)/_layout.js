@@ -53,7 +53,7 @@ export default function TabsLayout() {
 					headerLeft: () => (
 						<View
 							style={{ marginLeft: 16 }}
-							className="flex flex-row items-center justify-between space-x-4"
+							className="flex flex-row items-center justify-between space-x-2"
 						>
 							{/* User Profile Picture */}
 							<Image
@@ -63,18 +63,21 @@ export default function TabsLayout() {
 									width: 32,
 									height: 32,
 									borderRadius: 20, // Rounded profile picture
-									borderWidth: 2,
+									borderWidth: 1,
 									borderColor: "#ccc",
 								}}
 							/>
-							<Text
-								style={{
-									fontWeight: "bold",
-									fontSize: 16,
-								}}
-							>
-								Hi {user.username}
-							</Text>
+							<View>
+								<Text
+									style={{
+										fontWeight: "bold",
+										fontSize: 16,
+									}}
+								>
+									Hi {user.username}
+								</Text>
+								<Text className="text-sm text-gray-500">{user.email}</Text>
+							</View>
 						</View>
 					),
 					headerRight: () => (
@@ -94,7 +97,7 @@ export default function TabsLayout() {
 						>
 							{/* Logo with text */}
 							<View style={{ flexDirection: "row", alignItems: "center" }}>
-							<AntDesign name="logout" size={14} color="red" />
+								<AntDesign name="logout" size={14} color="red" />
 								<Text
 									style={{ fontWeight: "bold", fontSize: 16 }}
 									className="text-red-500 ml-2"
