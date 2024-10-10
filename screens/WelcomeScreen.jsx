@@ -11,7 +11,7 @@ const WelcomeScreen = () => {
 	return (
 		<LinearGradient
 			colors={["#fff", "#f0fff4", "#fff"]}
-			className="flex-1 min-h-screen justify-between items-center p-8 py-16 w-full"
+			className="flex-1 min-h-screen justify-between items-center p-8 pb-16 pt-14 w-full"
 		>
 			<View className="flex flex-row items-center justify-center">
 				<Text className="text-2xl font-bold">SaySwitch</Text>
@@ -20,10 +20,19 @@ const WelcomeScreen = () => {
 					className="ml-1 w-5 h-5"
 				/>
 			</View>
+			
 
-			<Text className="text-3xl font-bold text-primary mb-6">
-				Welcome to Sayswith Bank
-			</Text>
+			{/* Features Section */}
+			<View className="mb-6 text-left flex-1 justify-end">
+				<Text className="text-6xl font-[900] text-primary mb-2">
+					Empowering Your Financial Journey.
+				</Text>
+				<Text className="text-lg text-gray-500">
+					Experience seamless banking with innovative services designed for your
+					everyday needs.
+				</Text>
+			</View>
+
 			<View>
 				{/* Container for buttons */}
 				<View className="flex-row mt-6 w-full">

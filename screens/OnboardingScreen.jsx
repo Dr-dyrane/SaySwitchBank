@@ -54,10 +54,10 @@ const OnboardingScreen = () => {
 				<Ionicons
 					name={onboardingData[currentIndex].icon}
 					size={60}
-					color="#000"
+					color="green"
 					className="mb-5"
 				/>
-				<Text className="text-3xl font-bold text-center mb-2">
+				<Text className="text-3xl font-bold text-primary text-center mb-2">
 					{onboardingData[currentIndex].title}
 				</Text>
 				<Text className="text-lg text-gray-600 text-center">
