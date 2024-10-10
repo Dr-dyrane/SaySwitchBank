@@ -20,7 +20,7 @@ export default function AuthLayout() {
 				name="index"
 				options={{
 					title: "Welcome to Sayswitch",
-					headerShown: true,
+					headerShown: false,
 					headerTitleAlign: "center", // Center the title
 					gestureEnabled: true,
 					gestureDirection: "horizontal",

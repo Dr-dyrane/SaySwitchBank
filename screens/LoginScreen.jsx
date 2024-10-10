@@ -86,7 +86,7 @@ const LoginScreen = () => {
 						<Pressable
 							onPress={handleSubmit}
 							disabled={loading}
-							className="w-full bg-primary rounded-xl py-3 mt-4 flex items-center justify-center"
+							className="w-full bg-primary rounded-xl py-4 text-lg mt-4 flex items-center justify-center"
 							android_ripple={{ color: "#333" }}
 						>
 							<Text className="text-white text-lg">

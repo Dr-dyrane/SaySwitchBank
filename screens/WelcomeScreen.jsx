@@ -11,31 +11,43 @@ const WelcomeScreen = () => {
 	return (
 		<LinearGradient
 			colors={["#fff", "#f0fff4", "#fff"]}
-			className="flex-1 min-h-screen justify-center items-center p-4 w-full"
+			className="flex-1 min-h-screen justify-between items-center p-8 py-16 w-full"
 		>
-			<Image
-				source={require("../assets/logo.png")}
-				className="w-32 h-32 mb-8"
-			/>
+			<View className="flex flex-row items-center justify-center">
+				<Text className="text-2xl font-bold">SaySwitch</Text>
+				<Image
+					source={require("../assets/logo.png")}
+					className="ml-1 w-5 h-5"
+				/>
+			</View>
+
 			<Text className="text-3xl font-bold text-primary mb-6">
 				Welcome to Sayswith Bank
 			</Text>
+			<View>
+				{/* Container for buttons */}
+				<View className="flex-row mt-6 w-full">
+					<Pressable
+						className="bg-primary flex-1 px-6 py-4 rounded-xl"
+						onPress={() => router.push("onboarding")}
+					>
+						<Text className="text-white text-xl font-bold text-center">
+							Get Started
+						</Text>
+					</Pressable>
+				</View>
 
-			{/* Container for buttons */}
-			<View className="flex-row mt-6 space-x-4">
-				<Pressable
-					className="bg-primary px-6 py-3 rounded-xl"
-					onPress={() => router.push("onboarding")}
-				>
-					<Text className="text-white font-bold">Get Started</Text>
-				</Pressable>
-
-				<Pressable
-					className="border border-primary px-6 py-3 rounded-xl"
-					onPress={() => router.push("login")}
-				>
-					<Text className="text-primary font-bold">Login</Text>
-				</Pressable>
+				{/* Prompt for existing users */}
+				<Text className="mt-4 text-lg text-center text-gray-600">
+					Already have an account?
+					{"  "}
+					<Text
+						className="text-primary font-bold"
+						onPress={() => router.push("login")}
+					>
+						Login
+					</Text>
+				</Text>
 			</View>
 		</LinearGradient>
 	);
