@@ -11,7 +11,7 @@ const WelcomeScreen = () => {
 	return (
 		<LinearGradient
 			colors={["#fff", "#f0fff4", "#fff"]}
-			className="flex-1 min-h-screen justify-between items-center p-8 pb-16 pt-14 w-full"
+			className="flex-1 min-h-screen justify-between items-center p-8 pb-16 pt-14 w-full relative"
 		>
 			<View className="flex flex-row items-center justify-center">
 				<Text className="text-2xl font-bold">SaySwitch</Text>
@@ -20,8 +20,10 @@ const WelcomeScreen = () => {
 					className="ml-1 w-5 h-5"
 				/>
 			</View>
-			
-
+			<Image
+					source={require("../assets/hero.png")}
+					className="contain w-[400px] h-[400px]"
+				/>
 			{/* Features Section */}
 			<View className="mb-6 text-left flex-1 justify-end">
 				<Text className="text-6xl font-[900] text-primary mb-2">
@@ -32,7 +34,6 @@ const WelcomeScreen = () => {
 					everyday needs.
 				</Text>
 			</View>
-
 			<View>
 				{/* Container for buttons */}
 				<View className="flex-row mt-6 w-full">
