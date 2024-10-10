@@ -44,62 +44,70 @@ const LoginScreen = () => {
 	return (
 		<LinearGradient
 			colors={["#fff", "#f0fff4", "#fff"]}
-			className="flex-1 justify-center items-center p-6 bg-backgroundLight"
+			className="flex-1 justify-between items-center p-6 pb-16 pt-14 bg-backgroundLight"
 		>
-			<Text className="text-3xl font-bold text-primary mb-6">Login</Text>
+			<View className="mb-6 justify-center space-y-2">
+				<Text className="text-6xl text-center font-[900] text-primary">
+					Welcome Back
+				</Text>
+				<Text className="text-lg text-center text-gray-500">
+					Login to your account
+				</Text>
+			</View>
+			<View className='w-full'>
+				<Formik
+					initialValues={{ email: "", password: "" }}
+					validationSchema={LoginSchema}
+					onSubmit={handleLogin}
+				>
+					{({
+						handleChange,
+						handleBlur,
+						handleSubmit,
+						values,
+						errors,
+						touched,
+					}) => (
+						<>
+							{/* Email Input */}
+							<Input
+								label="Email"
+								placeholder="Enter your email"
+								onChangeText={handleChange("email")}
+								onBlur={handleBlur("email")}
+								value={values.email}
+								error={touched.email && errors.email}
+							/>
 
-			<Formik
-				initialValues={{ email: "", password: "" }}
-				validationSchema={LoginSchema}
-				onSubmit={handleLogin}
-			>
-				{({
-					handleChange,
-					handleBlur,
-					handleSubmit,
-					values,
-					errors,
-					touched,
-				}) => (
-					<>
-						{/* Email Input */}
-						<Input
-							label="Email"
-							placeholder="Enter your email"
-							onChangeText={handleChange("email")}
-							onBlur={handleBlur("email")}
-							value={values.email}
-							error={touched.email && errors.email}
-						/>
+							{/* Password Input */}
+							<Input
+								label="Password"
+								placeholder="Enter your password"
+								secureTextEntry
+								onChangeText={handleChange("password")}
+								onBlur={handleBlur("password")}
+								value={values.password}
+								error={touched.password && errors.password}
+							/>
 
-						{/* Password Input */}
-						<Input
-							label="Password"
-							placeholder="Enter your password"
-							secureTextEntry
-							onChangeText={handleChange("password")}
-							onBlur={handleBlur("password")}
-							value={values.password}
-							error={touched.password && errors.password}
-						/>
-
-						{/* Submit Button */}
-						<Pressable
-							onPress={handleSubmit}
-							disabled={loading}
-							className="w-full bg-primary rounded-xl py-4 text-lg mt-4 flex flex-row px-6 items-center justify-between space-x-4"
-							android_ripple={{ color: "#333" }}
-						>
-							<Text className="text-white text-xl">
-								{loading ? "Logging in..." : "Login"}
-							</Text>
-							<View className="w-8 h-8 bg-none border border-white rounded-full justify-center items-center">
-								<Ionicons name="arrow-forward" size={18} color="white" />
-							</View>
-						</Pressable>
-					</>
-				)}
-			</Formik>
+							{/* Submit Button */}
+							<Pressable
+								onPress={handleSubmit}
+								disabled={loading}
+								className="w-full bg-primary rounded-xl py-4 text-lg mt-4 flex flex-row px-6 items-center justify-between space-x-4"
+								android_ripple={{ color: "#333" }}
+							>
+								<Text className="text-white text-xl">
+									{loading ? "Logging in..." : "Login"}
+								</Text>
+								<View className="w-8 h-8 bg-none border border-white rounded-full justify-center items-center">
+									<Ionicons name="arrow-forward" size={18} color="white" />
+								</View>
+							</Pressable>
+						</>
+					)}
+				</Formik>
+			</View>
 
 			{/* Loading Indicator */}
 			{loading && (

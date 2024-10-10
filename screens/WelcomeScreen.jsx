@@ -29,7 +29,7 @@ const WelcomeScreen = () => {
 			/>
 			{/* Features Section */}
 			<View className="mb-6 text-left flex-1 justify-end">
-				<Text className="text-6xl  font-[900] text-primary mb-2 tracking-tighter">
+				<Text className="text-6xl font-[900] text-primary mb-2 tracking-tighter">
 					Empowering Your Financial Journey.
 				</Text>
 				<Text className="text-lg text-gray-500">
