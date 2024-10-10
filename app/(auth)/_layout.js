@@ -3,7 +3,7 @@
 import { Stack } from "expo-router";
 import { Alert, Pressable } from "react-native";
 import { useRouter } from "expo-router";
-import { Ionicons } from "@expo/vector-icons";
+import { AntDesign, Ionicons } from "@expo/vector-icons";
 import { commonScreenOptions } from "../../utils/navigationOptions";
 
 export default function AuthLayout() {
@@ -77,8 +77,8 @@ export default function AuthLayout() {
 							onPress={() => router.push("login")}
 							className="rounded-full border border-primary p-2 bg-secondary"
 						>
-							<Ionicons
-								name="key-outline" // Ionicon for login
+							<AntDesign
+								name="login" // Ionicon for login
 								size={16}
 								color="green"
 							/>

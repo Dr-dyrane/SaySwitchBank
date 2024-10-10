@@ -1,5 +1,5 @@
 import { Tabs } from "expo-router";
-import { Ionicons } from "@expo/vector-icons"; // Import Ionicons for tab icons
+import { AntDesign, Ionicons } from "@expo/vector-icons"; // Import Ionicons for tab icons
 import { useRouter } from "expo-router";
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
@@ -94,11 +94,12 @@ export default function TabsLayout() {
 						>
 							{/* Logo with text */}
 							<View style={{ flexDirection: "row", alignItems: "center" }}>
+							<AntDesign name="logout" size={14} color="red" />
 								<Text
 									style={{ fontWeight: "bold", fontSize: 16 }}
-									className="text-red-500"
+									className="text-red-500 ml-2"
 								>
-									logout
+									Logout
 								</Text>
 							</View>
 						</TouchableOpacity>
