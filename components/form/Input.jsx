@@ -10,7 +10,7 @@ const Input = ({ label, placeholder, onChangeText, value, error, secureTextEntry
       <Text className="mb-2 text-gray-700">{label}</Text>
       <View className="relative flex-row items-center">
         {icon && (
-          <Ionicons name={icon} size={24} color="#008773" style={{ marginHorizontal: 10 }} />
+          <Ionicons name={icon} size={24} color="#0087736a" style={{ marginHorizontal: 10 }} />
         )}
         <TextInput
           className={`flex-1 p-4 py-3 bg-[#f0fff4] border rounded-lg ${error ? 'border-red-500' : 'border-gray-300'}`}
