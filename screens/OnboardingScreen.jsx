@@ -1,11 +1,22 @@
 // screens/OnboardingScreen.js
 
 import React, { useState, useRef } from "react";
-import { View, Text, Pressable, PanResponder, Animated } from "react-native";
+import {
+	View,
+	Text,
+	Pressable,
+	PanResponder,
+	Animated,
+	Image,
+} from "react-native";
 import { useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
 import useSwipeGesture from "../utils/useSwipeGesture";
+
+import welcome from "../assets/features/welcome.png";
+import transfer from "../assets/features/transfer.png";
+import bill from "../assets/features/bill.png";
 
 const onboardingData = [
 	{
@@ -13,16 +24,22 @@ const onboardingData = [
 		description:
 			"Experience seamless banking at your fingertips with SaySwitch.",
 		icon: "cash-outline",
+		image: welcome,
+		colorHex: "#d268cc",
 	},
 	{
 		title: "Easy Money Transfers",
 		description: "Send and receive money quickly and securely.",
 		icon: "arrow-redo-outline",
+		image: transfer,
+		colorHex: "#96a6da",
 	},
 	{
 		title: "Bill Payments Made Simple",
 		description: "Pay your bills effortlessly and never miss a deadline.",
 		icon: "wallet-outline",
+		image: bill,
+		colorHex: "#d268cc",
 	},
 ];
 
@@ -46,54 +63,87 @@ const OnboardingScreen = () => {
 
 	return (
 		<LinearGradient
-			colors={["#fff", "#f0fff4", "#fff"]}
-			className="flex-1 justify-center items-center p-6"
+			colors={["#fff", onboardingData[currentIndex].colorHex + "20", "#fff"]}
+			className="flex-1 justify-between items-center p-6"
 			{...panResponder}
 		>
-			<Animated.View className="flex-1 justify-center items-center mb-6">
-				<Ionicons
-					name={onboardingData[currentIndex].icon}
-					size={60}
-					color="green"
-					className="mb-5"
+			<Animated.View className="flex justify-center items-center">
+				<Image
+					source={onboardingData[currentIndex].image}
+					resizeMode="contain"
+					className="w-[360px] h-[400px]"
 				/>
-				<Text className="text-3xl font-bold text-primary text-center mb-2">
-					{onboardingData[currentIndex].title}
-				</Text>
-				<Text className="text-lg text-gray-600 text-center">
-					{onboardingData[currentIndex].description}
-				</Text>
 			</Animated.View>
 
-			<View className="flex-row justify-between mb-5 w-full px-4">
+			<Animated.View className="flex justify-center items-center mb-20">
+				<View className="flex flex-row space-x-4 justify-center items-center">
+					{/* Icon container with dynamic color */}
+					<View
+						style={{
+							borderColor: onboardingData[currentIndex].colorHex + "50", // Slightly transparent border
+							backgroundColor: onboardingData[currentIndex].colorHex + "20", // Light background based on colorHex
+						}}
+						className="border-2 rounded-full p-3"
+					>
+						<Ionicons
+							name={onboardingData[currentIndex].icon}
+							size={60}
+							color={onboardingData[currentIndex].colorHex}
+						/>
+					</View>
+
+					{/* Text container */}
+					<View className="flex flex-col items-start justify-start flex-shrink">
+						<Text
+							style={{ color: onboardingData[currentIndex].colorHex }}
+							className="text-3xl font-bold text-start mb-2"
+						>
+							{onboardingData[currentIndex].title}
+						</Text>
+						<Text className="text-lg text-slate-800 text-start">
+							{onboardingData[currentIndex].description}
+						</Text>
+					</View>
+				</View>
+			</Animated.View>
+
+			<View className="flex-row justify-between mb-5 w-full">
+				{/* Back Button */}
 				<Pressable
 					onPress={() => handleSwipeRight()}
-					className={`py-2 px-4 rounded-lg ${
+					className={`flex-1 py-2.5 mx-2 rounded-lg ${
 						currentIndex === 0 ? "bg-gray-400/10" : "bg-gray-600/10"
 					}`}
 					disabled={currentIndex === 0}
-					style={{ opacity: currentIndex === 0 ? 0.5 : 1 }} // Add opacity for the disabled state
+					style={{ opacity: currentIndex === 0 ? 0.5 : 1 }} // Opacity for disabled state
 				>
 					<Text
-						className={`${
-							currentIndex === 0 ? "text-gray-400" : "text-black"
-						} font-bold`} // Change text color when disabled
+						style={{ color: currentIndex === 0 ? "#a0aec0" : "black" }} // Use current hex color
+						className="font-bold text-center"
 					>
 						Back
 					</Text>
 				</Pressable>
 
-				<View className="flex-row items-center">
+				{/* Indicator Dots */}
+				<View className="flex-row items-center flex-1 justify-center">
 					{onboardingData.map((_, index) => (
 						<View
 							key={index}
 							className={`w-2.5 h-2.5 rounded-full mx-1 ${
 								currentIndex === index ? "bg-green-400" : "bg-gray-300"
 							}`}
+							style={{
+								backgroundColor:
+									currentIndex === index
+										? onboardingData[index].colorHex
+										: "gray",
+							}} // Use colorHex for active indicator
 						/>
 					))}
 				</View>
 
+				{/* Next/Register Button */}
 				<Pressable
 					onPress={() => {
 						if (currentIndex === onboardingData.length - 1) {
@@ -102,18 +152,23 @@ const OnboardingScreen = () => {
 							handleSwipeLeft();
 						}
 					}}
-					className={`py-2 px-4 rounded-lg ${
+					className={`flex-1 py-2.5 mx-2 rounded-lg ${
 						currentIndex === onboardingData.length - 1
 							? "bg-primary/10"
 							: "bg-green-500/10"
 					}`}
+					style={{
+						backgroundColor:
+							currentIndex === onboardingData.length - 1
+								? onboardingData[currentIndex].colorHex + '80' // Use colorHex for Register button
+								: onboardingData[currentIndex].colorHex + '80' , // Use colorHex for Next button
+					}}
 				>
 					<Text
-						className={`font-bold ${
-							currentIndex === onboardingData.length - 1
-								? "text-primary"
-								: "text-black"
-						}`}
+						style={{
+							color: "black",
+						}} // Use current hex color for text
+						className="font-bold text-center"
 					>
 						{currentIndex === onboardingData.length - 1 ? "Register" : "Next"}
 					</Text>

@@ -144,6 +144,7 @@ const ProfileScreen = () => {
 										? { uri: imageUri }
 										: require("../assets/profile.jpg")
 								}
+                                 resizeMode='contain'
 								className="w-24 h-24 rounded-full"
 							/>
 							{/* Icon Overlay */}

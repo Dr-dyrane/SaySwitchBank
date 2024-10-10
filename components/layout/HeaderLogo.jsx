@@ -25,6 +25,7 @@ const HeaderLogo = () => {
 				source={require("../../assets/logo.png")}
 				style={{ width: 24, height: 24, marginLeft: 0 }}
 				className="mr-4 rounded-full"
+				resizeMode="contain"
 			/>
 		</TouchableOpacity>
 	);

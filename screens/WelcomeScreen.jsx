@@ -19,11 +19,13 @@ const WelcomeScreen = () => {
 				<Image
 					source={require("../assets/logo.png")}
 					className="ml-1 w-5 h-5"
+					resizeMode="contain"
 				/>
 			</View>
 			<Image
 				source={require("../assets/hero/hero.png")}
 				className="contain w-[400px] h-[400px]"
+				resizeMode="contain"
 			/>
 			{/* Features Section */}
 			<View className="mb-6 text-left flex-1 justify-end">

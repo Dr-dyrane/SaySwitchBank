@@ -6,7 +6,7 @@ export const commonScreenOptions = ({ title, headerRight }) => ({
   headerLeft: () => <HeaderLogo />,
   headerTintColor: '#000',
   headerTitleStyle: {
-    fontWeight: 'normal',
+    fontWeight: 'bold',
     fontSize: 20,
   },
   headerStyle: {
