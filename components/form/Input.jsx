@@ -2,15 +2,18 @@ import React, { useState } from 'react';
 import { View, TextInput, Text, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; // Using Expo icons
 
-const Input = ({ label, placeholder, onChangeText, value, error, secureTextEntry = false }) => {
+const Input = ({ label, placeholder, onChangeText, value, error, secureTextEntry = false, icon }) => {
   const [isPasswordVisible, setPasswordVisible] = useState(secureTextEntry);
 
   return (
     <View className="w-full mb-4">
       <Text className="mb-2 text-gray-700">{label}</Text>
-      <View className="relative">
+      <View className="relative flex-row items-center">
+        {icon && (
+          <Ionicons name={icon} size={24} color="#008773" style={{ marginHorizontal: 10 }} />
+        )}
         <TextInput
-          className={`p-4 py-3 bg-[#f0fff4] border rounded-lg w-full ${error ? 'border-red-500' : 'border-gray-300'}`}
+          className={`flex-1 p-4 py-3 bg-[#f0fff4] border rounded-lg ${error ? 'border-red-500' : 'border-gray-300'}`}
           placeholder={placeholder}
           onChangeText={onChangeText}
           value={value}

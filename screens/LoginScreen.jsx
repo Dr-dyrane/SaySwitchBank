@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, Pressable, ActivityIndicator, Alert } from "react-native";
+import { View, Text, Pressable, ActivityIndicator, Alert, ScrollView } from "react-native";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import Input from "../components/form/Input"; // Reusable Input Component
@@ -44,7 +44,7 @@ const LoginScreen = () => {
 	return (
 		<LinearGradient
 			colors={["#fff", "#f0fff4", "#fff"]}
-			className="flex-1 justify-between items-center p-6 pb-16 pt-14 bg-backgroundLight"
+			className="flex-1 justify-center items-center p-6 pb-16 pt-14 bg-backgroundLight"
 		>
 			<View className="mb-6 justify-center space-y-2">
 				<Text className="text-6xl text-center font-[900] text-primary">
@@ -54,7 +54,7 @@ const LoginScreen = () => {
 					Login to your account
 				</Text>
 			</View>
-			<View className='w-full'>
+			<ScrollView className="w-full">
 				<Formik
 					initialValues={{ email: "", password: "" }}
 					validationSchema={LoginSchema}
@@ -73,6 +73,7 @@ const LoginScreen = () => {
 							<Input
 								label="Email"
 								placeholder="Enter your email"
+								icon="mail" // Pass the email icon
 								onChangeText={handleChange("email")}
 								onBlur={handleBlur("email")}
 								value={values.email}
@@ -83,6 +84,7 @@ const LoginScreen = () => {
 							<Input
 								label="Password"
 								placeholder="Enter your password"
+								icon="lock-closed" // Pass the password icon
 								secureTextEntry
 								onChangeText={handleChange("password")}
 								onBlur={handleBlur("password")}
@@ -107,7 +109,7 @@ const LoginScreen = () => {
 						</>
 					)}
 				</Formik>
-			</View>
+			</ScrollView>
 
 			{/* Loading Indicator */}
 			{loading && (
