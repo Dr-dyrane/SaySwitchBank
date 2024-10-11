@@ -75,7 +75,7 @@ const OnboardingScreen = () => {
 			className="flex-1 justify-between items-center p-6"
 			{...panResponder}
 		>
-			<Animated.View className="flex justify-center items-center">
+			<Animated.View className="flex-1 justify-center items-center">
 				<Image
 					source={onboardingData[currentIndex].image}
 					resizeMode="contain"

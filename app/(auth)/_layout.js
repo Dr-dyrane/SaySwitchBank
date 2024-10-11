@@ -37,7 +37,7 @@ export default function AuthLayout() {
 					headerRight: () => (
 						<Pressable
 							onPress={() => router.push("signup")}
-							className="flex flex-row items-center justify-center max-w-[40vw] mr-2"
+							className="flex flex-row items-center justify-center max-w-[38vw] mr-2"
 						>
 							<Text
 								numberOfLines={2}
