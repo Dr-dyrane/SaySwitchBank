@@ -37,10 +37,16 @@ export default function AuthLayout() {
 					headerRight: () => (
 						<Pressable
 							onPress={() => router.push("signup")}
-							className="flex flex-row items-center justify-center"
+							className="flex flex-row items-center justify-center max-w-[40vw] mr-2"
 						>
-							<Text className='text-md text-gray-500'> Dont have an acount?</Text>
-							<Text className='text-primary ml-1 text-md'>Sign up</Text>
+							<Text
+								numberOfLines={2}
+								ellipsizeMode="tail"
+								className="text-md text-gray-500"
+							>
+								Dont have an acount?
+							</Text>
+							<Text className="text-primary ml-1 text-md">Sign up</Text>
 						</Pressable>
 					),
 				})}
@@ -51,12 +57,8 @@ export default function AuthLayout() {
 				options={commonScreenOptions({
 					title: "Onboarding",
 					headerRight: () => (
-						<Pressable
-							onPress={() => router.push("signup")}
-							className=""
-						>
-							<Text className='text-lg text-primary'>Skip
-							</Text>
+						<Pressable onPress={() => router.push("signup")} className="">
+							<Text className="text-lg text-primary">Skip</Text>
 						</Pressable>
 					),
 				})}
@@ -68,9 +70,16 @@ export default function AuthLayout() {
 					headerRight: () => (
 						<Pressable
 							onPress={() => router.push("login")}
-							className="flex flex-row items-center justify-center"
-						><Text className='text-md text-gray-500'> Already have an acount?</Text>
-							<Text className='text-primary ml-1 text-md'>Login</Text>
+							className="flex flex-row items-center justify-center max-w-[40vw] mr-2"
+						>
+							<Text
+								numberOfLines={2}
+								ellipsizeMode="tail"
+								className="text-md text-gray-500"
+							>
+								Already have an acount?
+							</Text>
+							<Text className="text-primary ml-1 text-md">Login</Text>
 						</Pressable>
 					),
 				})}

@@ -77,7 +77,7 @@ export default function TabsLayout() {
 								>
 									Hi {user.username}
 								</Text>
-								<Text className="text-sm text-gray-500">{user.email}</Text>
+								{/* <Text className="text-sm text-gray-500">{user.email}</Text> */}
 							</View>
 						</View>
 					),

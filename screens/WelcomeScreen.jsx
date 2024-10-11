@@ -1,7 +1,7 @@
 // screens/WelcomeScreen.js
 
 import React from "react";
-import { View, Text, Image, Pressable } from "react-native";
+import { View, Text, Image, Pressable, ScrollView } from "react-native";
 import { useRouter } from "expo-router";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons";
@@ -28,15 +28,17 @@ const WelcomeScreen = () => {
 				resizeMode="contain"
 			/>
 			{/* Features Section */}
-			<View className="mb-6 text-left flex-1 justify-end">
-				<Text className="text-6xl font-[900] text-primary mb-2 tracking-tighter">
-					Empowering Your Financial Journey.
-				</Text>
-				<Text className="text-lg text-gray-500">
-					Experience seamless banking with innovative services designed for your
-					everyday needs.
-				</Text>
-			</View>
+			<ScrollView>
+				<View className="mb-6 text-left justify-end">
+					<Text className="text-6xl font-[900] text-primary mb-2 tracking-tighter">
+						Empowering Your Financial Journey.
+					</Text>
+					<Text className="text-lg text-gray-500">
+						Experience seamless banking with innovative services designed for
+						your everyday needs.
+					</Text>
+				</View>
+			</ScrollView>
 			<View>
 				{/* Container for buttons */}
 				<View className="flex-row mt-6 w-full">

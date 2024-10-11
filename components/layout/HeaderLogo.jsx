@@ -22,8 +22,10 @@ const HeaderLogo = () => {
 			accessibilityLabel="Back to previous screen"
 			className="flex flex-row items-center justify-center"
 		>
-			<View className="flex flex-row items-center justify-center">
-				<Text className="text-2xl font-bold">SaySwitch</Text>
+			<View className="flex flex-row items-center justify-center max-w-[40vw]">
+				<Text numberOfLines={2} className="text-2xl font-bold max-w-[160px]">
+					SaySwitch
+				</Text>
 				<Image
 					source={require("../../assets/logo.png")}
 					className="ml-1 w-5 h-5"
