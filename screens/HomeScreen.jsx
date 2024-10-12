@@ -83,7 +83,7 @@ export default function HomeScreen() {
 	// Get status category
 	const statusCategory = getStatusCategory(transactions.payment_response_code);
 	// Limit the number of transactions to show on the home page
-	const displayedTransactions = transactions.slice(0, 4); // Only show first 3
+	const displayedTransactions = transactions.slice(0, 5); // Only show first 3
 
 	// Calculate total debit and credit from the transactions data
 	const totalDebit = transactions
@@ -139,7 +139,13 @@ export default function HomeScreen() {
 				width: "100%",
 			}}
 		>
-			<ScrollView style={{ flex: 1, width: "100%", padding: 16 }}>
+			<ScrollView
+				style={{
+					flex: 1,
+					width: "100%",
+					paddingHorizontal: 16,
+				}}
+			>
 				{/* Account Balance Card */}
 				<View className="bg-primary mb-6 p-4 rounded-xl border-l-4 border-accent/50">
 					<View className="flex-row justify-between">
