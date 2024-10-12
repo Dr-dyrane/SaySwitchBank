@@ -312,6 +312,7 @@ To set up the project locally, follow these steps:
 
    ```bash
    eas update
+   eas update --branch preview2
    ```
 
    This will push your latest changes to users who have installed your app.
