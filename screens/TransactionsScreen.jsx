@@ -1,13 +1,18 @@
 import React, { useState } from "react";
-import { ScrollView, View, Modal, Button } from "react-native";
-import TransactionCard from "../components/transactions/TransactionCard";
+import { ScrollView, View, Modal } from "react-native";
+import TransactionCard, {
+	getStatusCategory,
+} from "../components/transactions/TransactionCard";
 import transactions from "../data/transactions";
 import TransDetails from "../components/transactions/TransDetails";
 import { LinearGradient } from "expo-linear-gradient";
+import FilterHeader from "../components/transactions/FilterHeader";
 
 const TransactionPage = () => {
 	const [modalVisible, setModalVisible] = useState(false);
 	const [selectedTransactionId, setSelectedTransactionId] = useState(null);
+	const [filter, setFilter] = useState("All"); // State for filter
+	const [date, setDate] = useState(new Date().toLocaleDateString()); // State for date
 
 	const handleViewDetails = (id) => {
 		setSelectedTransactionId(id);
@@ -19,10 +24,29 @@ const TransactionPage = () => {
 		setSelectedTransactionId(null);
 	};
 
+	// Function to handle filter change
+	const handleFilterChange = (status) => {
+		setFilter(status);
+	};
+
+	// Filter transactions based on the selected filter
+	const filteredTransactions = transactions.filter((transaction) => {
+		if (filter === "All") return true;
+		return getStatusCategory(transaction.payment_response_code) === filter;
+	});
+
 	return (
-		<LinearGradient colors={["#fff", "#f0fff4", "#fff"]} className="p-4">
+		<LinearGradient
+			colors={["#fff", "#f0fff4", "#fff"]}
+			className="p-4 min-h-screen"
+		>
+			<FilterHeader
+				onFilterChange={handleFilterChange}
+				currentFilter={filter}
+				date={date}
+			/>
 			<ScrollView>
-				{transactions.map((transaction) => (
+				{filteredTransactions.map((transaction) => (
 					<TransactionCard
 						key={transaction.id}
 						transaction={transaction}

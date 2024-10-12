@@ -70,7 +70,7 @@ export default function HomeScreen() {
 	};
 
 	// State for dynamic balance and hide/show functionality
-	const [balanceVisible, setBalanceVisible] = useState(true);
+	const [balanceVisible, setBalanceVisible] = useState(false);
 	const [balance, setBalance] = useState(12350.0); // Dynamic balance
 
 	// Get status category
@@ -136,8 +136,23 @@ export default function HomeScreen() {
 				{/* Account Balance Card */}
 				<View className="bg-primary mb-6 p-4 rounded-xl border-l-4 border-accent/50">
 					<View className="flex-row justify-between">
-						<Text style={{ fontSize: 14, color: "#fff" }}>Your Balance</Text>
-						<TouchableOpacity onPress={toggleBalanceVisibility}>
+						<Text
+							style={{
+								fontSize: 32,
+								fontWeight: "bold",
+								color: "#fff",
+								marginTop: 8,
+							}}
+						>
+							{balanceVisible ? `$${balance.toFixed(2)}` : "****"}
+						</Text>
+						<TouchableOpacity
+							onPress={toggleBalanceVisibility}
+							className="flex-row items-center justify-center"
+						>
+							<Text className="mr-2 text-white">
+								{balanceVisible ? "Hide Balance" : "Show Balance"}
+							</Text>
 							<Ionicons
 								name={balanceVisible ? "eye-off" : "eye"}
 								size={24}
@@ -145,16 +160,7 @@ export default function HomeScreen() {
 							/>
 						</TouchableOpacity>
 					</View>
-					<Text
-						style={{
-							fontSize: 32,
-							fontWeight: "bold",
-							color: "#fff",
-							marginTop: 8,
-						}}
-					>
-						{balanceVisible ? `$${balance.toFixed(2)}` : "****"}
-					</Text>
+
 					<Text style={{ fontSize: 14, color: "#fff", marginTop: 4 }}>
 						Available Balance
 					</Text>
@@ -190,6 +196,7 @@ export default function HomeScreen() {
 						flexDirection: "row",
 						flexWrap: "wrap",
 						justifyContent: "space-between",
+						
 					}}
 					className="mb-6"
 				>

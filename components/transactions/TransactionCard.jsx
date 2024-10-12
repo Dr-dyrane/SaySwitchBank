@@ -85,10 +85,11 @@ const TransactionCard = ({ transaction, onViewDetails }) => {
 	return (
 		<TouchableOpacity
 			onPress={handleRowClick}
+
 			style={{
 				backgroundColor:
 					statusCategory === "Completed"
-						? "rgba(240, 253, 244, 0.5)"
+						? "rgba(240, 253, 244, 1)"
 						: statusCategory === "Pending"
 						? "rgba(254, 252, 232, 0.5)" // Light yellow background for pending
 						: "rgba(254, 242, 242, 0.5)",
@@ -98,9 +99,14 @@ const TransactionCard = ({ transaction, onViewDetails }) => {
 				flexDirection: "row",
 				justifyContent: "space-between",
 				alignItems: "center",
-				borderWidth: 1, // Set border width
-				borderColor: "rgba(0, 0, 0, 0.05)",
+				borderColor:
+					statusCategory === "Completed"
+						? "#065f4640"
+						: statusCategory === "Pending"
+						? "#ca8a0440"
+						: "#991b1b40",
 			}}
+			className="border-l-4"
 		>
 			{/* Type */}
 			<View
