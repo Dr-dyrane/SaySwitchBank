@@ -164,7 +164,7 @@ const HeaderSection = ({ handleCloseModal, selectedTransactionId }) => (
 		<TouchableOpacity onPress={handleCloseModal}>
 			<Icon name="arrow-back" size={24} color="black" />
 		</TouchableOpacity>
-		<Text className="text-2xl">Transaction Details</Text>
+		<Text className="text-xl">Transaction Details</Text>
 		<Text className="text-lg">ID: {selectedTransactionId || "N/A"}</Text>
 	</View>
 );

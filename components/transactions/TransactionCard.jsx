@@ -3,16 +3,16 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; // Icon for directional arrows
 
 export const getStatusCategory = (payment_response_code) => {
-    const approvedCodes = ["00"];
-    const pendingCodes = ["01", "02"];
+	const approvedCodes = ["00"];
+	const pendingCodes = ["01", "02"];
 
-    if (approvedCodes.includes(payment_response_code)) {
-        return "Completed";
-    } else if (pendingCodes.includes(payment_response_code)) {
-        return "Pending";
-    } else {
-        return "Failed";
-    }
+	if (approvedCodes.includes(payment_response_code)) {
+		return "Completed";
+	} else if (pendingCodes.includes(payment_response_code)) {
+		return "Pending";
+	} else {
+		return "Failed";
+	}
 };
 
 const TransactionCard = ({ transaction, onViewDetails }) => {
@@ -84,9 +84,8 @@ const TransactionCard = ({ transaction, onViewDetails }) => {
 				flexDirection: "row",
 				justifyContent: "space-between",
 				alignItems: "center",
-                borderWidth: 1, // Set border width
-                borderColor:
-                 "rgba(0, 0, 0, 0.05)"
+				borderWidth: 1, // Set border width
+				borderColor: "rgba(0, 0, 0, 0.05)",
 			}}
 		>
 			{/* Type */}
