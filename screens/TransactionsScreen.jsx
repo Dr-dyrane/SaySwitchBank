@@ -3,7 +3,7 @@ import { ScrollView, View, Modal, Button } from "react-native";
 import TransactionCard from "../components/transactions/TransactionCard";
 import transactions from "../data/transactions";
 import TransDetails from "../components/transactions/TransDetails";
-
+import { LinearGradient } from "expo-linear-gradient";
 
 const TransactionPage = () => {
 	const [modalVisible, setModalVisible] = useState(false);
@@ -20,7 +20,7 @@ const TransactionPage = () => {
 	};
 
 	return (
-		<View className="p-4">
+		<LinearGradient colors={["#fff", "#f0fff4", "#fff"]} className="p-4">
 			<ScrollView>
 				{transactions.map((transaction) => (
 					<TransactionCard
@@ -44,7 +44,7 @@ const TransactionPage = () => {
 					/>
 				</View>
 			</Modal>
-		</View>
+		</LinearGradient>
 	);
 };
 

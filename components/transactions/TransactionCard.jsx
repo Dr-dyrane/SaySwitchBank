@@ -84,6 +84,9 @@ const TransactionCard = ({ transaction, onViewDetails }) => {
 				flexDirection: "row",
 				justifyContent: "space-between",
 				alignItems: "center",
+                borderWidth: 1, // Set border width
+                borderColor:
+                 "rgba(0, 0, 0, 0.05)"
 			}}
 		>
 			{/* Type */}

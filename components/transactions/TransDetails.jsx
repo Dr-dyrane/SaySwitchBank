@@ -52,17 +52,16 @@ const TransDetails = ({ setModalIsOpen, selectedTransactionId }) => {
 		return transaction; // Return the found transaction
 	};
 
-	// Usage example
 	const selectedTransaction = getSingleTrans();
 
 	// Fallback values
 	const data = selectedTransaction || {
 		narration: "No description available",
 		amount: 0,
-		fee: 200,
+		fee: 0,
 		currency_id: "NGN",
-		transaction_reference: 0,
-		stan: 0,
+		transaction_reference: "N/A",
+		stan: "N/A",
 		payment_response_code: "00",
 		payment_response_message: "No response message available",
 		transaction_date: new Date().toISOString(),
@@ -76,7 +75,7 @@ const TransDetails = ({ setModalIsOpen, selectedTransactionId }) => {
 		<View className="flex flex-col items-center justify-center">
 			<View
 				style={{ backgroundColor: "#f5f5f5" }}
-				className="flex flex-col w-full max-w-[80vw] p-6 rounded-3xl shadow-lg justify-between items-center"
+				className="flex flex-col w-full max-w-[80vw] p-6 rounded-3xl border border-accent/10 shadow-lg justify-between items-center"
 			>
 				<HeaderSection
 					handleCloseModal={() => setModalIsOpen(false)}
@@ -134,12 +133,12 @@ const TitleSection = ({
 		{isReversed && (
 			<Text className="text-red-600">This transaction was reversed</Text>
 		)}
-		<View className='flex flex-row items-center justify-center space-x-1'>
+		<View className="flex flex-row items-center justify-center space-x-1">
 			<Icon
 				name={
 					statusCategory === "Successful" ? "checkmark-circle" : "close-circle"
 				}
-				className={` text-lg ${
+				className={`text-lg ${
 					statusCategory === "Successful" ? "text-green-800" : "text-red-800"
 				}`}
 				size={16}
@@ -163,7 +162,10 @@ const TransactionSummary = ({ amount, fee, currencyName }) => {
 				Amount ({currencyName}): ₦
 				{amount.toLocaleString("en-US", { minimumFractionDigits: 2 }) || "0.00"}
 			</Text>
-			<Text>Fee: ₦{fee || "0.00"}</Text>
+			<Text>
+				Fee: ₦
+				{fee || "0.00"}
+			</Text>
 		</View>
 	);
 };
