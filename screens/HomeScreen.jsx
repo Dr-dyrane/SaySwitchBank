@@ -187,7 +187,7 @@ export default function HomeScreen() {
 								status={statusCategory} // Pass dynamic status
 							/>
 							<Text style={{ color: "#fff", marginLeft: 4 }}>
-								Debit: ${totalDebit.toFixed(2)}
+								Debit: ₦{totalDebit.toFixed(2)}
 							</Text>
 						</View>
 						<View className="flex-row items-center">
@@ -197,7 +197,7 @@ export default function HomeScreen() {
 								status={statusCategory} // Pass dynamic status
 							/>
 							<Text style={{ color: "#fff", marginLeft: 4 }}>
-								Credit: ${totalCredit.toFixed(2)}
+								Credit: ₦{totalCredit.toFixed(2)}
 							</Text>
 						</View>
 					</View>

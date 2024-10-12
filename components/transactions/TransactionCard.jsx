@@ -143,7 +143,7 @@ const TransactionCard = ({ transaction, onViewDetails }) => {
 						color: direction === "Credit" ? "#065f46" : "#991b1b",
 					}}
 				>
-					{direction === "Credit" ? "+" : "-"}N {amount.toFixed(2)}
+					{direction === "Credit" ? "+" : "-"}₦ {amount.toFixed(2)}
 				</Text>
 				<View
 					style={{
