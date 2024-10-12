@@ -56,13 +56,25 @@ const TransactionCard = ({ transaction, onViewDetails }) => {
 			<Ionicons
 				name="arrow-up"
 				size={24}
-				color={statusCategory === "Completed" ? "#065f46" : "#991b1b"}
+				color={
+					statusCategory === "Completed"
+						? "#065f46"
+						: statusCategory === "Pending"
+						? "#ca8a04"
+						: "#991b1b"
+				} // Yellow for pending
 			/>
 		) : (
 			<Ionicons
 				name="arrow-down"
 				size={24}
-				color={statusCategory === "Completed" ? "#065f46" : "#991b1b"}
+				color={
+					statusCategory === "Completed"
+						? "#065f46"
+						: statusCategory === "Pending"
+						? "#ca8a04"
+						: "#991b1b"
+				}
 			/>
 		);
 
@@ -77,6 +89,8 @@ const TransactionCard = ({ transaction, onViewDetails }) => {
 				backgroundColor:
 					statusCategory === "Completed"
 						? "rgba(240, 253, 244, 0.5)"
+						: statusCategory === "Pending"
+						? "rgba(254, 252, 232, 0.5)" // Light yellow background for pending
 						: "rgba(254, 242, 242, 0.5)",
 				padding: 10,
 				marginBottom: 10,
@@ -89,7 +103,6 @@ const TransactionCard = ({ transaction, onViewDetails }) => {
 			}}
 		>
 			{/* Type */}
-
 			<View
 				style={{
 					justifyContent: "center",
@@ -99,6 +112,8 @@ const TransactionCard = ({ transaction, onViewDetails }) => {
 					backgroundColor:
 						statusCategory === "Completed"
 							? "rgba(16, 185, 129, 0.1)"
+							: statusCategory === "Pending"
+							? "rgba(202, 138, 4, 0.1)" // Yellow for pending
 							: "rgba(239, 68, 68, 0.1)", // Conditional background color
 				}}
 			>
@@ -127,14 +142,23 @@ const TransactionCard = ({ transaction, onViewDetails }) => {
 				<View
 					style={{
 						backgroundColor:
-							statusCategory === "Completed" ? "#d1fae5" : "#fee2e2",
+							statusCategory === "Completed"
+								? "#d1fae5"
+								: statusCategory === "Pending"
+								? "#fef3c7" // Yellow for pending status background
+								: "#fee2e2",
 						paddingHorizontal: 5,
 						borderRadius: 5,
 					}}
 				>
 					<Text
 						style={{
-							color: statusCategory === "Completed" ? "#065f46" : "#991b1b",
+							color:
+								statusCategory === "Completed"
+									? "#065f46"
+									: statusCategory === "Pending"
+									? "#ca8a04" // Yellow for pending text
+									: "#991b1b",
 							fontSize: 12,
 						}}
 					>
