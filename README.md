@@ -264,6 +264,8 @@ SaySwitch is designed to make API calls to a backend service. Since the backend 
 - **Phase 3**: Add push notifications and location services.
 - **Phase 4**: Finalize structure for API calls, ready for backend integration.
 
+---
+
 ## Installation and Setup
 
 To set up the project locally, follow these steps:
@@ -283,21 +285,42 @@ To set up the project locally, follow these steps:
 
 3. **Configure environment variables** (if necessary):
 
-   - Create a `.env` file at the root of the project and define your variables.
+   - Create a `.env` file at the root of the project and define your variables. Ensure sensitive information like API keys are stored here.
 
 4. **Run the application**:
 
    ```bash
    expo start
    ```
-4. **Build the application for android playstore and apk**:
+
+5. **Build the application for Android Play Store and APK**:
+
+   Use these commands to generate a production-ready APK or submit to the Play Store:
 
    ```bash
    eas build --platform android
    eas build -p android --profile preview2
    ```
 
----
+   - The `preview2` profile in `eas.json` is configured to generate APK files. You can modify this profile to suit different build needs.
+  
+6. **OTA (Over-the-Air) Updates with EAS**:
+
+   After the APK has been generated and deployed, you can push over-the-air updates (such as JavaScript or asset changes) without requiring users to download a new version from the Play Store.
+
+   To send an update to all users:
+
+   ```bash
+   eas update
+   ```
+
+   This will push your latest changes to users who have installed your app.
+
+### Key Notes:
+- **`eas update`** allows you to update the app without needing a full rebuild and Play Store re-submission. Ideal for minor fixes or improvements.
+- Ensure that `expo-updates` is installed and properly configured to enable OTA updates in your app.
+
+--- 
 
 ## UX/UI Philosophy
 
