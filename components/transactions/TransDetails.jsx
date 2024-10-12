@@ -92,7 +92,13 @@ const TransDetails = ({ setModalIsOpen, selectedTransactionId }) => {
 
 	return (
 		<LinearGradient
-			colors={["#fff", "#f0fff4", "#fff"]}
+			colors={
+				statusCategory === "Successful"
+					? ["#fff", "#f0fff4", "#fff"] // Greenish shade for success
+					: statusCategory === "Pending"
+					? ["#fff", "#fffbe0", "#fff"] // Yellowish shade for pending
+					: ["#fff", "#ffe0e0", "#fff"] // Reddish shade for failure
+			}
 			className="flex flex-col w-full h-full p-6 bg-backgroundLight  justify-start items-center"
 		>
 			<HeaderSection
@@ -118,6 +124,37 @@ const TransDetails = ({ setModalIsOpen, selectedTransactionId }) => {
 				date={formatDate(data.transaction_date)}
 				responseMessage={data.payment_response_message}
 			/>
+			<View className="w-full flex-row justify-between mt-auto mb-4 p-2">
+				<TouchableOpacity
+					className="flex-1 mr-2 bg-gray-200 py-3 rounded-3xl flex-row items-center justify-center"
+					onPress={() => console.log("CTA 1 Pressed")}
+				>
+					<Icon
+						name="alert-circle-outline"
+						size={20}
+						color="gray"
+						className="mr-2"
+					/>
+					<Text className="text-center font-bold text-gray-700">
+						Report an issue
+					</Text>
+				</TouchableOpacity>
+
+				<TouchableOpacity
+					className="flex-1 ml-2 bg-green-500 py-3 rounded-3xl flex-row items-center justify-center"
+					onPress={() => console.log("CTA 2 Pressed")}
+				>
+					<Icon
+						name="share-social-outline"
+						size={20}
+						color="white"
+						className="mr-2"
+					/>
+					<Text className="text-center font-bold text-white">
+						Share Receipt
+					</Text>
+				</TouchableOpacity>
+			</View>
 		</LinearGradient>
 	);
 };
@@ -140,11 +177,15 @@ const TitleSection = ({
 }) => (
 	<View
 		className={`p-6 pt-10 rounded-2xl mb-4 w-full justify-center space-y-4 flex items-center relative ${
-			statusCategory === "Successful" ? "bg-green-100" : "bg-red-100"
+			statusCategory === "Successful"
+				? "bg-green-100"
+				: statusCategory === "Pending"
+				? "bg-yellow-100" // Background color for Pending status
+				: "bg-red-100"
 		}`}
 	>
 		<View className="absolute -top-6 flex items-center justify-center">
-			<View className="border border-primary rounded-full bg-green-100">
+			<View className="border border-gray-400/50 rounded-full bg-green-100">
 				<Image
 					source={logo}
 					resizeMode="fit"
@@ -168,17 +209,28 @@ const TitleSection = ({
 					name={
 						statusCategory === "Successful"
 							? "checkmark-circle"
+							: statusCategory === "Pending"
+							? "time-outline" // Icon for pending status
 							: "close-circle"
 					}
 					className={`text-lg ${
-						statusCategory === "Successful" ? "text-green-800" : "text-red-800"
+						statusCategory === "Successful"
+							? "text-green-800"
+							: statusCategory === "Pending"
+							? "text-yellow-500" // Styling for pending status
+							: "text-red-800"
 					}`}
 					size={16}
 					color="currentColor"
 				/>
+
 				<Text
 					className={`flex flex-row items-center text-lg ${
-						statusCategory === "Successful" ? "text-green-800" : "text-red-800"
+						statusCategory === "Successful"
+							? "text-green-800"
+							: statusCategory === "Pending"
+							? "text-yellow-800" // Text color for Pending status
+							: "text-red-800"
 					}`}
 				>
 					{statusCategory}
@@ -264,7 +316,7 @@ const TransactionDetails = ({
 			</View>
 
 			<View
-				className={`mt-4 p-3 rounded-lg ${
+				className={`mt-4 p-3 rounded-xl ${
 					statusCategory === "Successful"
 						? "bg-green-100 text-green-700"
 						: statusCategory === "Pending"
