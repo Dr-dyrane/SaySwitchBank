@@ -3,6 +3,8 @@ import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons"; // Expo Icons
 import { useAuth } from "../contexts/AuthContext";
+import TransactionCard from "../components/transactions/TransactionCard";
+import transactions from "../data/transactions";
 
 // Modular Quick Action Component
 const QuickAction = ({
@@ -15,7 +17,7 @@ const QuickAction = ({
 	<TouchableOpacity
 		style={{
 			backgroundColor: backgroundColor || "#f0f0f0",
-            borderColor: iconColor,
+			borderColor: iconColor,
 			flex: 1,
 			flexDirection: "row",
 			padding: 16,
@@ -26,7 +28,7 @@ const QuickAction = ({
 			marginHorizontal: 5,
 		}}
 		onPress={onPress}
-        className='border-l-4'
+		className="border-l-4"
 	>
 		<View
 			style={{
@@ -38,7 +40,7 @@ const QuickAction = ({
 		>
 			<Ionicons name={iconName} size={24} color={iconColor || "#000"} />
 		</View>
-		<View className='flex-1'>
+		<View className="flex-1">
 			<Text style={{ fontWeight: "bold", color: "#333", textAlign: "center" }}>
 				{title}
 			</Text>
@@ -48,6 +50,11 @@ const QuickAction = ({
 
 export default function HomeScreen() {
 	const { user } = useAuth(); // Use the AuthContext to access user info
+
+	const handleViewDetails = (id) => {
+		console.log("Transaction ID: ", id);
+		// Add your detail viewing logic here
+	};
 
 	// Array of quick actions data
 	const quickActions = [
@@ -117,6 +124,7 @@ export default function HomeScreen() {
 						flexWrap: "wrap",
 						justifyContent: "space-between",
 					}}
+					className="mb-6"
 				>
 					{quickActions.map((action, index) => (
 						<View
@@ -136,6 +144,14 @@ export default function HomeScreen() {
 						</View>
 					))}
 				</View>
+
+				{transactions.map((transaction) => (
+					<TransactionCard
+						key={transaction.id}
+						transaction={transaction}
+						onViewDetails={handleViewDetails}
+					/>
+				))}
 			</ScrollView>
 		</LinearGradient>
 	);
