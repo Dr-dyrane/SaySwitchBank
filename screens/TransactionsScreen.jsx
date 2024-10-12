@@ -1,16 +1,26 @@
-import React from "react";
-import { ScrollView, View } from "react-native";
+import React, { useState } from "react";
+import { ScrollView, View, Modal, Button } from "react-native";
 import TransactionCard from "../components/transactions/TransactionCard";
 import transactions from "../data/transactions";
+import TransDetails from "../components/transactions/TransDetails";
+
 
 const TransactionPage = () => {
+	const [modalVisible, setModalVisible] = useState(false);
+	const [selectedTransactionId, setSelectedTransactionId] = useState(null);
+
 	const handleViewDetails = (id) => {
-		console.log("Transaction ID: ", id);
-		// Add your detail viewing logic here
+		setSelectedTransactionId(id);
+		setModalVisible(true);
+	};
+
+	const closeModal = () => {
+		setModalVisible(false);
+		setSelectedTransactionId(null);
 	};
 
 	return (
-		<View className='p-4'>
+		<View className="p-4">
 			<ScrollView>
 				{transactions.map((transaction) => (
 					<TransactionCard
@@ -20,6 +30,20 @@ const TransactionPage = () => {
 					/>
 				))}
 			</ScrollView>
+			{/* Modal for Transaction Details */}
+			<Modal
+				animationType="slide"
+				transparent={true}
+				visible={modalVisible}
+				onRequestClose={closeModal}
+			>
+				<View className="flex-1 justify-center">
+					<TransDetails
+						setModalIsOpen={closeModal}
+						selectedTransactionId={selectedTransactionId}
+					/>
+				</View>
+			</Modal>
 		</View>
 	);
 };
