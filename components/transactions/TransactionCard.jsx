@@ -2,6 +2,19 @@ import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons"; // Icon for directional arrows
 
+export const getStatusCategory = (payment_response_code) => {
+    const approvedCodes = ["00"];
+    const pendingCodes = ["01", "02"];
+
+    if (approvedCodes.includes(payment_response_code)) {
+        return "Completed";
+    } else if (pendingCodes.includes(payment_response_code)) {
+        return "Pending";
+    } else {
+        return "Failed";
+    }
+};
+
 const TransactionCard = ({ transaction, onViewDetails }) => {
 	const {
 		id,
@@ -22,19 +35,6 @@ const TransactionCard = ({ transaction, onViewDetails }) => {
 		hour: "2-digit",
 		minute: "2-digit",
 	});
-
-	const getStatusCategory = (payment_response_code) => {
-		const approvedCodes = ["00"];
-		const pendingCodes = ["01", "02"];
-
-		if (approvedCodes.includes(payment_response_code)) {
-			return "Completed";
-		} else if (pendingCodes.includes(payment_response_code)) {
-			return "Pending";
-		} else {
-			return "Failed";
-		}
-	};
 
 	// Get status category
 	const statusCategory = getStatusCategory(payment_response_code);
