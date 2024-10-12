@@ -1,12 +1,15 @@
-import React from "react";
-import { View, Text, TouchableOpacity } from "react-native";
+import React, { useEffect } from "react";
+import { View, Text, TouchableOpacity, Image } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons"; // Using Ionicons for icons
 import transactions from "../../data/transactions";
 import { useToast } from "../../contexts/ToastContext";
+import { LinearGradient } from "expo-linear-gradient";
+import * as NavigationBar from "expo-navigation-bar";
+import logo from "./../../assets/icon.png";
 
 // Function to map currency ID to currency name (ISO 4217)
 const getCurrencyName = (currencyId) => {
-	return currencyId === "NGN" ? "Naira" : "USD"; // Fallback for other currencies
+	return currencyId === "NGN" ? "NGN" : "NGN"; // Fallback for other currencies
 };
 
 // Helper function to get status category
@@ -38,6 +41,22 @@ const formatDate = (date) => {
 // Main Transaction Details Component
 const TransDetails = ({ setModalIsOpen, selectedTransactionId }) => {
 	const { showToast } = useToast();
+
+	// Move AuthProvider outside the return statement to ensure useAuth can be used
+	useEffect(() => {
+		const setNavBar = async () => {
+			await NavigationBar.setBackgroundColorAsync("white"); // Set the navigation bar background color to white
+			await NavigationBar.setButtonStyleAsync("dark"); // Set button styles to dark
+		};
+
+		setNavBar();
+
+		// Cleanup function to reset the styles when unmounted
+		return () => {
+			NavigationBar.setBackgroundColorAsync("transparent");
+			NavigationBar.setButtonStyleAsync("light");
+		};
+	}, []);
 
 	// Function to get a single transaction's details
 	const getSingleTrans = () => {
@@ -72,46 +91,44 @@ const TransDetails = ({ setModalIsOpen, selectedTransactionId }) => {
 	const statusCategory = getStatusCategory(data.payment_response_code);
 
 	return (
-		<View className="flex flex-col items-center justify-center">
-			<View
-				style={{ backgroundColor: "#f5f5f5" }}
-				className="flex flex-col w-full max-w-[80vw] p-6 rounded-3xl border border-accent/10 shadow-lg justify-between items-center"
-			>
-				<HeaderSection
-					handleCloseModal={() => setModalIsOpen(false)}
-					selectedTransactionId={selectedTransactionId}
-				/>
-				<TitleSection
-					transferDescription={data.narration}
-					amount={data.amount}
-					statusCategory={statusCategory}
-					isReversed={data.is_reversed}
-				/>
-				<TransactionSummary
-					amount={data.amount}
-					fee={data.fee}
-					currencyName={currencyName}
-				/>
-				<TransactionDetails
-					description={data.narration}
-					reference={data.transaction_reference}
-					stan={data.stan}
-					statusCategory={statusCategory}
-					date={formatDate(data.transaction_date)}
-					responseMessage={data.payment_response_message}
-				/>
-			</View>
-		</View>
+		<LinearGradient
+			colors={["#fff", "#f0fff4", "#fff"]}
+			className="flex flex-col w-full h-full p-6 bg-backgroundLight  justify-start items-center"
+		>
+			<HeaderSection
+				handleCloseModal={() => setModalIsOpen(false)}
+				selectedTransactionId={selectedTransactionId}
+			/>
+			<TitleSection
+				transferDescription={data.narration}
+				amount={data.amount}
+				statusCategory={statusCategory}
+				isReversed={data.is_reversed}
+			/>
+			<TransactionSummary
+				amount={data.amount}
+				fee={data.fee}
+				currencyName={currencyName}
+			/>
+			<TransactionDetails
+				description={data.narration}
+				reference={data.transaction_reference}
+				stan={data.stan}
+				statusCategory={statusCategory}
+				date={formatDate(data.transaction_date)}
+				responseMessage={data.payment_response_message}
+			/>
+		</LinearGradient>
 	);
 };
 
 const HeaderSection = ({ handleCloseModal, selectedTransactionId }) => (
-	<View className="flex flex-row justify-between items-center mb-4 w-full">
+	<View className="flex flex-row justify-between items-center mb-10 w-full">
+		<TouchableOpacity onPress={handleCloseModal}>
+			<Icon name="arrow-back" size={24} color="black" />
+		</TouchableOpacity>
 		<Text className="text-2xl">Transaction Details</Text>
 		<Text className="text-lg">ID: {selectedTransactionId || "N/A"}</Text>
-		<TouchableOpacity onPress={handleCloseModal}>
-			<Icon name="close" size={24} color="black" />
-		</TouchableOpacity>
 	</View>
 );
 
@@ -122,50 +139,63 @@ const TitleSection = ({
 	isReversed,
 }) => (
 	<View
-		className={`p-4 rounded-lg mb-4 w-full justify-center flex items-center ${
+		className={`p-6 pt-10 rounded-2xl mb-4 w-full justify-center space-y-4 flex items-center relative ${
 			statusCategory === "Successful" ? "bg-green-100" : "bg-red-100"
 		}`}
 	>
+		<View className="absolute -top-6 flex items-center justify-center">
+			<View className="border border-primary rounded-full bg-green-100">
+				<Image
+					source={logo}
+					resizeMode="fit"
+					className="w-12 h-12 rounded-full"
+				/>
+			</View>
+
+			<Text className="font-bold">SSB</Text>
+		</View>
 		<Text className="text-lg">{transferDescription}</Text>
-		<Text className="text-xl font-bold">
-			₦{amount.toLocaleString("en-US", { minimumFractionDigits: 2 }) || "0.00"}
-		</Text>
-		{isReversed && (
-			<Text className="text-red-600">This transaction was reversed</Text>
-		)}
-		<View className="flex flex-row items-center justify-center space-x-1">
-			<Icon
-				name={
-					statusCategory === "Successful" ? "checkmark-circle" : "close-circle"
-				}
-				className={`text-lg ${
-					statusCategory === "Successful" ? "text-green-800" : "text-red-800"
-				}`}
-				size={16}
-				color="currentColor"
-			/>
-			<Text
-				className={`flex flex-row items-center text-lg ${
-					statusCategory === "Successful" ? "text-green-800" : "text-red-800"
-				}`}
-			>
-				{statusCategory}
+		<View className="flex justify-center items-center">
+			<Text className="text-3xl font-bold">
+				₦
+				{amount.toLocaleString("en-US", { minimumFractionDigits: 2 }) || "0.00"}
 			</Text>
+			{isReversed && (
+				<Text className="text-red-600">This transaction was reversed</Text>
+			)}
+			<View className="flex flex-row items-center justify-center space-x-1">
+				<Icon
+					name={
+						statusCategory === "Successful"
+							? "checkmark-circle"
+							: "close-circle"
+					}
+					className={`text-lg ${
+						statusCategory === "Successful" ? "text-green-800" : "text-red-800"
+					}`}
+					size={16}
+					color="currentColor"
+				/>
+				<Text
+					className={`flex flex-row items-center text-lg ${
+						statusCategory === "Successful" ? "text-green-800" : "text-red-800"
+					}`}
+				>
+					{statusCategory}
+				</Text>
+			</View>
 		</View>
 	</View>
 );
 
 const TransactionSummary = ({ amount, fee, currencyName }) => {
 	return (
-		<View className="mb-4 bg-white p-4 rounded-lg w-full shadow">
+		<View className="mb-4 bg-white p-4 rounded-2xl space-y-2 w-full shadow">
 			<Text>
 				Amount ({currencyName}): ₦
 				{amount.toLocaleString("en-US", { minimumFractionDigits: 2 }) || "0.00"}
 			</Text>
-			<Text>
-				Fee: ₦
-				{fee || "0.00"}
-			</Text>
+			<Text>Fee: ₦{fee || "0.00"}</Text>
 		</View>
 	);
 };
@@ -177,15 +207,82 @@ const TransactionDetails = ({
 	statusCategory,
 	date,
 	responseMessage,
-}) => (
-	<View className="mb-4 bg-white p-4 rounded-lg shadow w-full">
-		<Text>Description: {description}</Text>
-		<Text>Reference: {reference || "N/A"}</Text>
-		<Text>STAN: {stan || "N/A"}</Text>
-		<Text>Status: {statusCategory}</Text>
-		<Text>Date: {date}</Text>
-		<Text>Response Message: {responseMessage || "No response"}</Text>
-	</View>
-);
+}) => {
+	return (
+		<View className="mb-4 bg-white p-6 rounded-2xl shadow w-full">
+			{/* Section Header */}
+			<Text className="text-lg font-bold mb-4 text-gray-800">
+				Transaction Details
+			</Text>
+
+			{/* Detail Row: Description */}
+			<View className="flex flex-row justify-between mb-2">
+				<Text className="text-gray-500 font-medium">Description:</Text>
+				<Text className="text-gray-900 font-semibold text-right">
+					{description || "N/A"}
+				</Text>
+			</View>
+
+			{/* Detail Row: Reference */}
+			<View className="flex flex-row justify-between mb-2">
+				<Text className="text-gray-500 font-medium">Reference:</Text>
+				<Text className="text-gray-900 font-semibold text-right">
+					{reference || "N/A"}
+				</Text>
+			</View>
+
+			{/* Detail Row: STAN */}
+			<View className="flex flex-row justify-between mb-2">
+				<Text className="text-gray-500 font-medium">STAN:</Text>
+				<Text className="text-gray-900 font-semibold text-right">
+					{stan || "N/A"}
+				</Text>
+			</View>
+
+			{/* Detail Row: Status */}
+			<View className="flex flex-row justify-between mb-2">
+				<Text className="text-gray-500 font-medium">Status:</Text>
+				<Text
+					className={`text-right font-semibold ${
+						statusCategory === "Successful"
+							? "text-green-600"
+							: statusCategory === "Pending"
+							? "text-yellow-500"
+							: "text-red-600"
+					}`}
+				>
+					{statusCategory}
+				</Text>
+			</View>
+
+			{/* Detail Row: Date */}
+			<View className="flex flex-row justify-between mb-2">
+				<Text className="text-gray-500 font-medium">Date:</Text>
+				<Text className="text-gray-900 font-semibold text-right">
+					{date || "N/A"}
+				</Text>
+			</View>
+
+			<View
+				className={`mt-4 p-3 rounded-lg ${
+					statusCategory === "Successful"
+						? "bg-green-100 text-green-700"
+						: statusCategory === "Pending"
+						? "bg-yellow-100 text-yellow-700"
+						: "bg-red-100 text-red-700"
+				}`}
+			>
+				<Text className="text-center font-semibold">
+					{responseMessage ||
+						(statusCategory === "Successful"
+							? "Transaction completed successfully"
+							: statusCategory === "Pending"
+							? "Transaction is pending"
+							: "Transaction failed. Please try again.")}
+				</Text>
+			</View>
+		</View>
+	);
+};
 
 export default TransDetails;
