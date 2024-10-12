@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, TouchableOpacity, ScrollView, Modal } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons"; // Expo Icons
 import { useAuth } from "../contexts/AuthContext";
@@ -8,6 +8,7 @@ import TransactionCard, {
 } from "../components/transactions/TransactionCard";
 import transactions from "../data/transactions"; // Imported transactions
 import { useRouter } from "expo-router";
+import TransDetails from "../components/transactions/TransDetails";
 
 // Modular Quick Action Component
 const QuickAction = ({
@@ -53,15 +54,24 @@ const QuickAction = ({
 
 export default function HomeScreen() {
 	const { user } = useAuth(); // Use the AuthContext to access user info
-	const router = useRouter()
+	const router = useRouter();
+
+	const [modalVisible, setModalVisible] = useState(false);
+	const [selectedTransactionId, setSelectedTransactionId] = useState(null);
+
+	const handleViewDetails = (id) => {
+		setSelectedTransactionId(id);
+		setModalVisible(true);
+	};
+
+	const closeModal = () => {
+		setModalVisible(false);
+		setSelectedTransactionId(null);
+	};
 
 	// State for dynamic balance and hide/show functionality
 	const [balanceVisible, setBalanceVisible] = useState(true);
 	const [balance, setBalance] = useState(12350.0); // Dynamic balance
-
-	const handleViewDetails = (id) => {
-		console.log("Transaction ID: ", id);
-	};
 
 	// Get status category
 	const statusCategory = getStatusCategory(transactions.payment_response_code);
@@ -212,7 +222,7 @@ export default function HomeScreen() {
 				))}
 
 				{/* Optional: Add a "View More" button to navigate to full transaction history */}
-				<TouchableOpacity onPress={() => router.push('transactions')}>
+				<TouchableOpacity onPress={() => router.push("transactions")}>
 					<Text
 						style={{ textAlign: "center", color: "#1E90FF", marginTop: 20 }}
 					>
@@ -220,6 +230,20 @@ export default function HomeScreen() {
 					</Text>
 				</TouchableOpacity>
 			</ScrollView>
+			{/* Modal for Transaction Details */}
+			<Modal
+				animationType="slide"
+				transparent={true}
+				visible={modalVisible}
+				onRequestClose={closeModal}
+			>
+				<View className="flex-1 justify-center">
+					<TransDetails
+						setModalIsOpen={closeModal}
+						selectedTransactionId={selectedTransactionId}
+					/>
+				</View>
+			</Modal>
 		</LinearGradient>
 	);
 }
@@ -233,8 +257,7 @@ const StatusIcon = ({ iconName, iconColor, status }) => {
 				alignItems: "center",
 				padding: 5,
 				borderRadius: 999, // Fully rounded
-				backgroundColor:
-					"rgba(255, 255, 255, 0.1)"
+				backgroundColor: "rgba(255, 255, 255, 0.1)",
 			}}
 		>
 			<Ionicons name={iconName} size={20} color={iconColor} />
