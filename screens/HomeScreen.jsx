@@ -1,5 +1,12 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, ScrollView, Modal } from "react-native";
+import {
+	View,
+	Text,
+	TouchableOpacity,
+	ScrollView,
+	Modal,
+	Pressable,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { Ionicons } from "@expo/vector-icons"; // Expo Icons
 import { useAuth } from "../contexts/AuthContext";
@@ -196,9 +203,8 @@ export default function HomeScreen() {
 						flexDirection: "row",
 						flexWrap: "wrap",
 						justifyContent: "space-between",
-						
 					}}
-					className="mb-6"
+					className="mb-2"
 				>
 					{quickActions.map((action, index) => (
 						<View
@@ -219,6 +225,15 @@ export default function HomeScreen() {
 					))}
 				</View>
 
+				<View className="flex flex-row items-center justify-between mb-6">
+					<Text>Latest Transactions</Text>
+					<Pressable onPress={() => router.push("transactions")}>
+						<Text style={{ textAlign: "center", color: "#1E90FF" }}>
+							View More
+						</Text>
+					</Pressable>
+				</View>
+
 				{/* Display a limited number of transactions */}
 				{displayedTransactions.map((transaction) => (
 					<TransactionCard
@@ -227,15 +242,6 @@ export default function HomeScreen() {
 						onViewDetails={handleViewDetails}
 					/>
 				))}
-
-				{/* Optional: Add a "View More" button to navigate to full transaction history */}
-				<TouchableOpacity onPress={() => router.push("transactions")}>
-					<Text
-						style={{ textAlign: "center", color: "#1E90FF", marginTop: 20 }}
-					>
-						View More Transactions
-					</Text>
-				</TouchableOpacity>
 			</ScrollView>
 			{/* Modal for Transaction Details */}
 			<Modal
