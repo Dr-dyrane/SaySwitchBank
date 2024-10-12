@@ -37,7 +37,7 @@ const TransactionPage = () => {
 
 	return (
 		<LinearGradient
-			colors={["#fff", "#f0fff4", "#fff"]}
+			colors={["#fff", "#fff", "#fff"]}
 			className="p-4 min-h-screen"
 		>
 			<FilterHeader

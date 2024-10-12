@@ -89,10 +89,10 @@ const TransactionCard = ({ transaction, onViewDetails }) => {
 			style={{
 				backgroundColor:
 					statusCategory === "Completed"
-						? "rgba(240, 253, 244, 1)"
+						? "rgba(240, 253, 244, 0.125)"
 						: statusCategory === "Pending"
-						? "rgba(254, 252, 232, 0.5)" // Light yellow background for pending
-						: "rgba(254, 242, 242, 0.5)",
+						? "rgba(254, 252, 232, 0.125)" // Light yellow background for pending
+						: "rgba(254, 242, 242, 0.125)",
 				padding: 10,
 				marginBottom: 10,
 				borderRadius: 10,
@@ -101,10 +101,10 @@ const TransactionCard = ({ transaction, onViewDetails }) => {
 				alignItems: "center",
 				borderColor:
 					statusCategory === "Completed"
-						? "#065f4640"
+						? "#065f4620"
 						: statusCategory === "Pending"
-						? "#ca8a0440"
-						: "#991b1b40",
+						? "#ca8a0420"
+						: "#991b1b20",
 			}}
 			className="border-l-4"
 		>

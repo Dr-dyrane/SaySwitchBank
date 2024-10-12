@@ -30,6 +30,11 @@
 			"favicon": "./assets/favicon.png"
 		},
 		"plugins": ["expo-router", "expo-font"],
+		"updates": {
+			"fallbackToCacheTimeout": 0,
+			"enabled": true,
+			"checkAutomatically": "ON_LOAD"
+		},
 		"extra": {
 			"eas": {
 				"projectId": "e85f13a9-851b-4d00-9405-5eeebadaceb1"
