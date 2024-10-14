@@ -243,11 +243,22 @@ const TitleSection = ({
 const TransactionSummary = ({ amount, fee, currencyName }) => {
 	return (
 		<View className="mb-4 bg-white p-4 rounded-2xl space-y-2 w-full shadow">
-			<Text>
-				Amount ({currencyName}): ₦
-				{amount.toLocaleString("en-US", { minimumFractionDigits: 2 }) || "0.00"}
-			</Text>
-			<Text>Fee: ₦{fee || "0.00"}</Text>
+			<View className="flex flex-row justify-between mb-2">
+				<Text className="text-gray-500 font-medium">
+					Amount ({currencyName}):
+				</Text>
+				<Text className="text-gray-900 font-semibold text-right">
+					₦
+					{amount.toLocaleString("en-US", { minimumFractionDigits: 2 }) ||
+						"0.00"}
+				</Text>
+			</View>
+			<View className="flex flex-row justify-between mb-2">
+				<Text className="text-gray-500 font-medium">Fee:</Text>
+				<Text className="text-gray-900 font-semibold text-right">
+					₦{fee || "0.00"}
+				</Text>
+			</View>
 		</View>
 	);
 };
