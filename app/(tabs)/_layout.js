@@ -58,7 +58,11 @@ export default function TabsLayout() {
 						>
 							{/* User Profile Picture */}
 							<Image
-								source={require("../../assets/profile.jpg")} // User profile icon
+								source={
+									user.imageUri
+										? { uri: user.imageUri }
+										: require("../../assets/profile.jpg")
+								}
 								resizeMode="fit"
 								style={{
 									width: 32,
@@ -75,7 +79,7 @@ export default function TabsLayout() {
 										fontSize: 16,
 									}}
 								>
-									Hi {user.username}
+									Hi {user.fullName || user.username}
 								</Text>
 								{/* <Text className="text-sm text-gray-500">{user.email}</Text> */}
 							</View>

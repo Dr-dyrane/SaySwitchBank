@@ -16,8 +16,10 @@ import * as ImagePicker from "expo-image-picker";
 import { updateUserAPI, getCurrentUserAPI } from "../api/auth"; // Import both API functions
 import { Ionicons, MaterialIcons } from "@expo/vector-icons"; // Icon packages
 import ProfileField from "../components/form/ProfileField";
+import { useAuth } from "../contexts/AuthContext";
 
 const ProfileScreen = () => {
+	const { syncUserData } = useAuth(); // Get syncUserData from context
 	const { showToast } = useToast();
 	const [fullName, setFullName] = useState("");
 	const [username, setUsername] = useState("");
@@ -97,6 +99,7 @@ const ProfileScreen = () => {
 				imageUri,
 			};
 			await updateUserAPI(updatedData);
+			await syncUserData();
 			showToast("Profile updated successfully", "success");
 		} catch (error) {
 			// Handle and show detailed error message
@@ -144,7 +147,7 @@ const ProfileScreen = () => {
 										? { uri: imageUri }
 										: require("../assets/profile.jpg")
 								}
-                                 resizeMode='fit'
+								resizeMode="fit"
 								className="w-24 h-24 rounded-full"
 							/>
 							{/* Icon Overlay */}

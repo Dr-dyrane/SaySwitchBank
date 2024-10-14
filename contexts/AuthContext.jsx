@@ -7,6 +7,8 @@ import React, {
 } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ActivityIndicator, View } from "react-native";
+import { getCurrentUserAPI } from "../api/auth";
+
 
 // Create AuthContext
 export const AuthContext = createContext(null);
@@ -16,39 +18,47 @@ export const AuthProvider = ({ children }) => {
 	const [loading, setLoading] = useState(true); // Loading state
 	const [token, setToken] = useState(null); // Initialize token state
 
+	// **1. Fetch and Sync User Data from API**
+	const syncUserData = async () => {
+		try {
+			const storedToken = await AsyncStorage.getItem("token");
+			if (storedToken) {
+				// Call your API to get the latest user data
+				const { data: userData } = await getCurrentUserAPI(storedToken);
+
+				if (userData) {
+					setUser(userData);
+					setToken(storedToken);
+					// Optionally store the updated user data in AsyncStorage
+					await AsyncStorage.setItem("user", JSON.stringify(userData));
+				}
+			}
+		} catch (error) {
+			console.error("Error syncing user data from API:", error);
+		} finally {
+			setLoading(false); // Stop loading when done
+		}
+	};
+
+	// Use effect to sync data when component mounts
+	useEffect(() => {
+		syncUserData(); // Sync user data on mount
+	}, []);
+
 	// Authentication status derived from user state
 	const authStatus = useMemo(
 		() => ({
-			isAuthenticated: !!user && !!token, // true if user and token exist
-			isLoggedIn: !!user, // alias for isAuthenticated
-			email: user?.email || null, // return email or null if not logged in
-			username: user?.username || null, // return email or null if not logged in
+			isAuthenticated: !!user && !!token, // `true` if user and token exist
+			isLoggedIn: !!user, // Alias for isAuthenticated
+			email: user?.email || null, // Return email or null if not logged in
+			username: user?.username || null, // Return username or null if not logged in
+			fullName: user?.fullName || null, 
+			imageUri: user?.imageUri || null, 
 		}),
 		[user, token]
 	);
 
-	// Check if a user is stored on mount and set loading state accordingly
-	useEffect(() => {
-		const checkUser = async () => {
-			try {
-				const storedUser = await AsyncStorage.getItem("user");
-				const storedToken = await AsyncStorage.getItem("token");
-				if (storedUser) {
-					setUser(JSON.parse(storedUser));
-				}
-				if (storedToken) {
-					setToken(storedToken);
-				}
-			} catch (error) {
-				console.error("Error loading user data from storage:", error);
-			} finally {
-				setLoading(false);
-			}
-		};
-		checkUser();
-	}, []);
-
-	// Login function to set user and token and store in AsyncStorage
+	// **2. Login function**: Set user and token from API response
 	const login = async (userData) => {
 		try {
 			setUser(userData);
@@ -66,7 +76,7 @@ export const AuthProvider = ({ children }) => {
 		}
 	};
 
-	// Logout function to clear user data
+	// **3. Logout function**: Clear user data and token
 	const logout = async () => {
 		try {
 			setUser(null);
@@ -80,23 +90,26 @@ export const AuthProvider = ({ children }) => {
 		}
 	};
 
-	// Memoize context value to avoid unnecessary re-renders
+	// Memoize the context value to avoid unnecessary re-renders
 	const authContextValue = useMemo(
 		() => ({
 			user: {
 				email: authStatus.email,
 				username: authStatus.username,
+				fullName: authStatus.fullName,
+				imageUri: authStatus.imageUri,
 				isAuthenticated: authStatus.isAuthenticated,
 				isLoggedIn: authStatus.isLoggedIn,
 			},
 			login,
 			logout,
+			syncUserData, // **Expose syncUserData here**
 			loading,
 		}),
 		[authStatus, loading] // Only depend on user, authStatus, and loading
 	);
 
-	// Spinner component when loading is true
+	// **4. Show a spinner while loading data**
 	if (loading) {
 		return (
 			<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
@@ -105,7 +118,7 @@ export const AuthProvider = ({ children }) => {
 		);
 	}
 
-	// Render the context provider with the memoized value
+	// **5. Provide the context to children components**
 	return (
 		<AuthContext.Provider value={authContextValue}>
 			{children}
@@ -113,7 +126,7 @@ export const AuthProvider = ({ children }) => {
 	);
 };
 
-// Custom hook to use the AuthContext
+// **6. Custom hook to access `AuthContext`**
 export const useAuth = () => {
 	const context = useContext(AuthContext);
 	if (!context) {
