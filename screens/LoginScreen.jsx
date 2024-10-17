@@ -29,7 +29,7 @@ const LoginSchema = Yup.object().shape({
 });
 
 const ResetPasswordSchema = Yup.object().shape({
-	resetCode: Yup.string().required("Reset code is required"),
+	resetToken: Yup.string().required("Reset code is required"),
 	newPassword: Yup.string()
 		.min(6, "Password too short")
 		.required("New password is required"),
@@ -40,7 +40,7 @@ const LoginScreen = () => {
 	const [resetEmail, setResetEmail] = useState("");
 	const [forgotPasswordVisible, setForgotPasswordVisible] = useState(false);
 	const [resetPasswordVisible, setResetPasswordVisible] = useState(false);
-	const [resetCode, setResetCode] = useState("");
+	const [resetToken, setResetToken] = useState("");
 	const { login: loginUser } = useLogin();
 	const { forgotPassword, loading: isLoading } = useForgotPassword();
 	const { resetPassword, loading: isPending } = useResetPassword();
@@ -67,7 +67,7 @@ const LoginScreen = () => {
 		setLoading(true);
 		try {
 			const response = await forgotPassword(email);
-			setResetCode(response.resetToken);
+			setResetToken(response.resetToken);
 			setResetEmail(email);
 			setForgotPasswordVisible(false);
 			setResetPasswordVisible(true);
@@ -83,7 +83,7 @@ const LoginScreen = () => {
 		setLoading(true);
 		try {
 			await resetPassword({
-				resetCode: values.resetCode,
+				resetToken: values.resetToken,
 				newPassword: values.newPassword,
 				email: resetEmail,
 			});
@@ -280,7 +280,7 @@ const LoginScreen = () => {
 						<View className="bg-gray-200 mt-4 p-6 rounded-xl text-center items-center justify-center space-y-2">
 							<Text>Reset Code, Valid for 1 hour</Text>
 							<Text className="text-2xl font-bold tracking-widest">
-								{resetCode}
+								{resetToken}
 							</Text>
 						</View>
 
@@ -292,7 +292,7 @@ const LoginScreen = () => {
 							/>
 						)}
 						<Formik
-							initialValues={{ resetCode: resetCode, newPassword: "" }}
+							initialValues={{ resetToken: resetToken, newPassword: "" }}
 							validationSchema={ResetPasswordSchema}
 							onSubmit={handleResetPassword}
 						>
@@ -309,10 +309,10 @@ const LoginScreen = () => {
 										label="Reset Code"
 										placeholder="Enter your reset code"
 										icon="key"
-										onChangeText={handleChange("resetCode")}
-										onBlur={handleBlur("resetCode")}
-										value={values.resetCode}
-										error={touched.resetCode && errors.resetCode}
+										onChangeText={handleChange("resetToken")}
+										onBlur={handleBlur("resetToken")}
+										value={values.resetToken}
+										error={touched.resetToken && errors.resetToken}
 									/>
 									<Input
 										label="New Password"

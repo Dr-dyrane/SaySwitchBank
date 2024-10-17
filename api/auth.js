@@ -32,5 +32,6 @@ export const forgotPasswordAPI = async (email) => {
 
 // Function to reset password
 export const resetPasswordAPI = async (resetToken, newPassword, email) => {
+    console.log(resetToken, newPassword, email);
 	return await userStore.resetPassword(resetToken, newPassword, email);
 };

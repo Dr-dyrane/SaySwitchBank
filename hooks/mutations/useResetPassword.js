@@ -13,6 +13,7 @@ const useResetPassword = () => {
 		setSuccess(false);
 
 		try {
+			console.log(resetToken, newPassword, email);
 			const response = await resetPasswordAPI(resetToken, newPassword, email); // Call the API
 			setLoading(false);
 			setSuccess(true);
