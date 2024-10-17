@@ -90,7 +90,13 @@ const userStore = {
 				users.push(userStore.staticUserData);
 			}
 
-			if (users.some((user) => user.email === newUser.email)) {
+			if (
+				users.some(
+					(user) =>
+						user.email.trim().toLowerCase() ===
+						newUser.email.trim().toLowerCase()
+				)
+			) {
 				throw new Error("User already exists");
 			}
 
@@ -206,88 +212,91 @@ const userStore = {
 			const updatedUsersData = await AsyncStorage.getItem("users");
 			const updatedUsers = updatedUsersData ? JSON.parse(updatedUsersData) : [];
 			const verifiedUser = updatedUsers.find(
-				(u) => u.email === email && u.resetToken === resetToken
+				(u) =>
+					u.email.trim().toLowerCase() === email.trim().toLowerCase() &&
+					u.resetToken === resetToken
 			);
 
-			console.log("Verified user after reset token:", verifiedUser);
+			//console.log("Verified user after reset token:", verifiedUser);
 
 			if (verifiedUser) {
-				console.log("Password reset initiated. Token:", resetToken);
+				//	console.log("Password reset initiated. Token:", resetToken);
 				return { message: "Password reset initiated", resetToken };
 			} else {
 				throw new Error("Failed to update reset token");
 			}
 		} catch (error) {
-			console.error("Forgot password error:", error.message);
+			//console.error("Forgot password error:", error.message);
 			throw error;
 		}
 	},
 
 	resetPassword: async (data) => {
-		console.log(data);
+		// console.log(data);
 		const { resetToken, newPassword, email } = data; // Destructure the data object
-	
-		console.log("Reset Token:", resetToken);
-		console.log("New Password:", newPassword);
-		console.log("Email:", email);
-	
+
+		// console.log("Reset Token:", resetToken);
+		// console.log("New Password:", newPassword);
+		// console.log("Email:", email);
+
 		try {
 			// Validate resetToken and email
-			if (!resetToken || typeof resetToken !== 'string') {
+			if (!resetToken || typeof resetToken !== "string") {
 				throw new Error("Invalid reset token");
 			}
-			if (!email || typeof email !== 'string') {
+			if (!email || typeof email !== "string") {
 				throw new Error("Invalid email");
 			}
-	
+
 			// Load the latest users data from AsyncStorage
 			const usersData = await AsyncStorage.getItem("users");
 			const users = usersData ? JSON.parse(usersData) : [];
-	
+
 			if (!Array.isArray(users)) {
 				throw new Error("Invalid user data");
 			}
-	
+
 			// Log users before password reset
 			console.log("Users before password reset:", users);
-	
+
 			// Find the user by email (trimmed and lowercase for comparison)
-			const user = users.find((user) =>
-				user.email && user.email.trim().toLowerCase() === email.trim().toLowerCase()
+			const user = users.find(
+				(user) =>
+					user.email &&
+					user.email.trim().toLowerCase() === email.trim().toLowerCase()
 			);
-	
+
 			if (!user) {
 				throw new Error("User not found");
 			}
-	
+
 			// Check if the reset token matches
 			if (String(user.resetToken) !== String(resetToken)) {
 				throw new Error("Invalid or expired reset token");
 			}
-	
+
 			// Check if the reset token has expired
 			if (Date.now() > user.resetTokenExpiry) {
 				throw new Error("Reset token has expired");
 			}
-	
+
 			// Update the user's password
 			user.password = newPassword;
 			delete user.resetToken; // Clean up
 			delete user.resetTokenExpiry; // Clean up
-	
+
 			// Update the user in the users array and save it back to AsyncStorage
 			const updatedUsers = users.map((u) =>
 				u.email === user.email ? user : u
 			);
 			await AsyncStorage.setItem("users", JSON.stringify(updatedUsers));
-	
+
 			return { message: "Password reset successful" };
 		} catch (error) {
-			console.error("Reset password error:", error.message);
+			//console.error("Reset password error:", error.message);
 			throw error;
 		}
 	},
-	
 };
 
 export default userStore;
