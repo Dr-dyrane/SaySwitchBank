@@ -23,7 +23,7 @@ const ToastProvider = ({ children }) => {
 		type: "info",
 		icon: null,
 		position: "bottom",
-		duration: 3000,
+		duration: 2000,
 	});
 
 	const opacity = useRef(new Animated.Value(0)).current;

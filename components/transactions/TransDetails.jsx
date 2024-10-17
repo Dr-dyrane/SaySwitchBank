@@ -99,7 +99,7 @@ const TransDetails = ({ setModalIsOpen, selectedTransactionId }) => {
 					? ["#fff", "#fffbe0", "#fff"] // Yellowish shade for pending
 					: ["#fff", "#ffe0e0", "#fff"] // Reddish shade for failure
 			}
-			className="flex flex-col w-full h-full p-6 bg-backgroundLight  justify-start items-center"
+			className="flex flex-col w-full h-full p-6 pt-3 bg-backgroundLight  justify-start items-center"
 		>
 			<HeaderSection
 				handleCloseModal={() => setModalIsOpen(false)}
@@ -164,8 +164,8 @@ const HeaderSection = ({ handleCloseModal, selectedTransactionId }) => (
 		<TouchableOpacity onPress={handleCloseModal}>
 			<Icon name="arrow-back" size={24} color="black" />
 		</TouchableOpacity>
-		<Text className="text-xl">Transaction Details</Text>
-		<Text className="text-lg">ID: {selectedTransactionId || "N/A"}</Text>
+		<Text className="text-lg">Transaction Details</Text>
+		<Text className="text-md">ID: {selectedTransactionId || "N/A"}</Text>
 	</View>
 );
 
