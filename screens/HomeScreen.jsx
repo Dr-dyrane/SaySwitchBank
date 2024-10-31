@@ -27,32 +27,30 @@ const QuickAction = ({
 }) => (
 	<TouchableOpacity
 		style={{
-			backgroundColor: backgroundColor || "#f0f0f0",
-			borderColor: iconColor,
 			flex: 1,
-			flexDirection: "row",
+			flexDirection: "column",
 			padding: 16,
 			borderRadius: 10,
 			alignItems: "center",
 			justifyContent: "space-between",
 			marginBottom: 10,
-			marginHorizontal: 5,
+			marginHorizontal: 4,
 		}}
 		onPress={onPress}
-		className="border-l-4"
+		className="bg-green-50"
 	>
 		<View
-			style={{
-				backgroundColor: "#ffffff", // Background for icon
-				borderRadius: 30,
-				padding: 10,
-				marginBottom: 0,
-			}}
+			className="p-1.5 bg-slate-200 mb-1 rounded-lg"
+			style={{ backgroundColor: backgroundColor }} // Set background color using inline style
 		>
-			<Ionicons name={iconName} size={24} color={iconColor || "#000"} />
+			<Ionicons name={iconName} size={20} color={iconColor || "#000"} />
 		</View>
+
 		<View className="flex-1">
-			<Text style={{ fontWeight: "bold", color: "#333", textAlign: "center" }}>
+			<Text
+				style={{ fontWeight: "bold", color: "#333", textAlign: "center" }}
+				className="text-xs"
+			>
 				{title}
 			</Text>
 		</View>
@@ -83,7 +81,7 @@ export default function HomeScreen() {
 	// Get status category
 	const statusCategory = getStatusCategory(transactions.payment_response_code);
 	// Limit the number of transactions to show on the home page
-	const displayedTransactions = transactions.slice(0, 5); // Only show first 3
+	const displayedTransactions = transactions.slice(0, 6); // Only show first 3
 
 	// Calculate total debit and credit from the transactions data
 	const totalDebit = transactions
@@ -100,32 +98,32 @@ export default function HomeScreen() {
 	// Array of quick actions data
 	const quickActions = [
 		{
-			title: "Transfer",
-			iconName: "swap-horizontal",
+			title: "Payout",
+			iconName: "arrow-forward-circle-outline",
 			iconColor: "#1E90FF",
 			backgroundColor: "#e6f7ff",
-			onPress: () => console.log("Transfer Money"),
+			onPress: () => console.log("Payout Money"),
 		},
 		{
 			title: "Pay Bills",
-			iconName: "cash",
+			iconName: "card-outline",
 			iconColor: "#32CD32",
 			backgroundColor: "#e6ffe6",
 			onPress: () => console.log("Pay Bills"),
 		},
 		{
-			title: "History",
-			iconName: "receipt",
-			iconColor: "#8A2BE2",
-			backgroundColor: "#f3e6ff",
-			onPress: () => console.log("Transaction History"),
+			title: "Top-Up",
+			iconName: "cellular",
+			iconColor: "#FF4500",
+			backgroundColor: "#ffe6e6",
+			onPress: () => console.log("Top up airtime"),
 		},
 		{
-			title: "Account",
-			iconName: "add-circle",
+			title: "Data",
+			iconName: "wifi",
 			iconColor: "#FFD700",
 			backgroundColor: "#fff9e6",
-			onPress: () => console.log("Add New Account"),
+			onPress: () => console.log("Load data"),
 		},
 	];
 
@@ -203,43 +201,44 @@ export default function HomeScreen() {
 					</View>
 				</View>
 
-				{/* Quick Actions Grid (2 Rows, 2 Columns) */}
-				<View
-					style={{
-						flexDirection: "row",
-						flexWrap: "wrap",
-						justifyContent: "space-between",
-					}}
-					className="mb-2"
-				>
-					{quickActions.map((action, index) => (
-						<View
-							key={index} // Use index as key (consider using a unique identifier if available)
-							style={{
-								width: "48%", // Set width to 48% to create two columns
-								marginBottom: 10, // Space between rows
-							}}
-						>
-							<QuickAction
-								title={action.title}
-								iconName={action.iconName}
-								iconColor={action.iconColor}
-								backgroundColor={action.backgroundColor}
-								onPress={action.onPress}
-							/>
-						</View>
-					))}
+				<View>
+					<Text className='text-gray-500 mb-2'>Make Payment</Text>
+					<View
+						style={{
+							flexDirection: "row",
+							flexWrap: "wrap",
+							justifyContent: "space-between",
+							marginBottom: 10, // Space below the grid
+						}}
+					>
+						{quickActions.map((action, index) => (
+							<View
+								key={index} // Use index as key (consider using a unique identifier if available)
+								style={{
+									width: "22%", // Each action takes about 22% of the width to fit four in a row
+									marginBottom: 10, // Space between rows
+								}}
+							>
+								<QuickAction
+									title={action.title}
+									iconName={action.iconName}
+									iconColor={action.iconColor}
+									backgroundColor={action.backgroundColor}
+									onPress={action.onPress}
+								/>
+							</View>
+						))}
+					</View>
 				</View>
 
 				<View className="flex flex-row items-center justify-between mb-6">
-					<Text>Latest Transactions</Text>
+					<Text className='text-gray-500 '>Latest Transactions</Text>
 					<Pressable onPress={() => router.push("transactions")}>
 						<Text style={{ textAlign: "center", color: "#1E90FF" }}>
 							View More
 						</Text>
 					</Pressable>
 				</View>
-
 				{/* Display a limited number of transactions */}
 				{displayedTransactions.map((transaction) => (
 					<TransactionCard
