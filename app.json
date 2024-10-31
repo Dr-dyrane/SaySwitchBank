@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "SaySwitchPos",
-    "slug": "SaySwitchPos",
+    "name": "SaySwitchBank",
+    "slug": "SaySwitchBank",
     "scheme": "yourappname",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -24,7 +24,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.dyrane.SaySwitchPos"
+      "package": "com.dyrane.SaySwitchBank"
     },
     "web": {
       "favicon": "./assets/favicon.png"
