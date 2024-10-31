@@ -1,10 +1,10 @@
-# SaySwitch — A Starter Pack for Agency Banking Apps
+# SaySwitch — A Starter Pack for Agency Banking POS App
 
 ## Project Overview
 
 ### Description
 
-SaySwitch is a modular and efficient starter pack for building agency banking applications using Expo and React Native. This project facilitates transactions like money transfers, card management, airtime recharge, bill payments, and much more. Built with future scalability in mind, SaySwitch employs modern best practices such as context-based state management, API service setup, and local storage fallbacks for simulating backend data during development.
+SaySwitch is a modular and efficient starter pack for building agency banking applications using Expo and React Native. This project is a **mobile agency banking POS application** designed to facilitate banking services for agents, allowing them to conduct transactions on behalf of customers. The app supports essential agency banking features such as deposits, withdrawals, bill payments, and transaction management, specifically aimed at empowering agents to provide these services without needing P2P (peer-to-peer) functionalities.
 
 ### Goal
 
@@ -50,6 +50,36 @@ SaySwitch is designed with the user in mind, emphasizing accessibility, usabilit
 - **Card Management**: Basic card details (placeholder).
 - **Push Notifications**: Notifications for successful transactions and KYC completion.
 - **Fallback Data Storage**: Placeholder backend with schema-driven dummy data synchronized with local storage.
+
+## Features
+
+### 1. **Agent Dashboard**
+   - Provides a summary of recent transactions, account balance, and notifications.
+   - Easy navigation to key functions like deposits, withdrawals, and payments.
+
+### 2. **Cash Deposits and Withdrawals**
+   - Agents can perform cash deposit and withdrawal transactions on behalf of customers.
+   - Transaction details are recorded, and receipts can be generated.
+
+### 3. **Bill Payments**
+   - Support for utility payments, including electricity, water, and airtime top-ups.
+   - Payment status tracking and receipts for customers.
+
+### 4. **Transaction History**
+   - Comprehensive history of all transactions performed by the agent.
+   - Search and filter options to locate specific transactions quickly.
+
+### 5. **Customer Management**
+   - Store customer details securely for repeat transactions.
+   - Transaction summaries and receipts available per customer.
+
+### 6. **Security and Authentication**
+   - Two-factor authentication (2FA) for secure agent login.
+   - Biometric login options where supported.
+
+### 7. **Reporting and Analytics**
+   - Daily, weekly, and monthly transaction summaries.
+   - Visual insights into transaction volumes, types, and revenue generated.
 
 ## App Structure
 

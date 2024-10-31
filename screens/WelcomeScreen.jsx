@@ -28,14 +28,14 @@ const WelcomeScreen = () => {
 				resizeMode="contain"
 			/>
 			{/* Features Section */}
-			<ScrollView>
+			<ScrollView className=''>
 				<View className="mb-6 text-left justify-end">
 					<Text className="text-6xl font-[900] text-primary mb-2 tracking-tighter">
-						Empowering Your Financial Journey.
+						Transforming Your Payment Experience.
 					</Text>
 					<Text className="text-lg text-gray-500">
-						Experience seamless banking with innovative services designed for
-						your everyday needs.
+						Discover fast and reliable transactions with solutions tailored for
+						your business needs.
 					</Text>
 				</View>
 			</ScrollView>
