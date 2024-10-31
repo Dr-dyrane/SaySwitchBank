@@ -24,7 +24,7 @@ const HeaderLogo = () => {
 		>
 			<View className="flex flex-row items-center justify-center max-w-[40vw]">
 				<Text numberOfLines={2} className="text-2xl font-bold max-w-[160px]">
-					SaySwitch
+					SwitchPay
 				</Text>
 				<Image
 					source={require("../../assets/logo.png")}

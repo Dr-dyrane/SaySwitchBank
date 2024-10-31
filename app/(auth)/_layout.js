@@ -19,7 +19,7 @@ export default function AuthLayout() {
 			<Stack.Screen
 				name="index"
 				options={{
-					title: "Welcome to Sayswitch",
+					title: "Welcome to SwitchPay",
 					headerShown: false,
 					headerTitleAlign: "center", // Center the title
 					gestureEnabled: true,

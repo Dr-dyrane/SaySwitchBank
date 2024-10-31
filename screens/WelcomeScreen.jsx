@@ -15,7 +15,7 @@ const WelcomeScreen = () => {
 			className="flex-1 min-h-screen justify-between items-center p-8 pb-16 pt-14 w-full relative"
 		>
 			<View className="flex flex-row items-center justify-center">
-				<Text className="text-2xl font-bold">SaySwitch</Text>
+				<Text className="text-2xl font-bold">SwitchPay</Text>
 				<Image
 					source={require("../assets/logo.png")}
 					className="ml-1 w-5 h-5"

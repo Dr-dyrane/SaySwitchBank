@@ -15,39 +15,41 @@ import { Ionicons } from "@expo/vector-icons";
 import useSwipeGesture from "../utils/useSwipeGesture";
 
 import welcome from "../assets/features/welcome.png";
-import transfer from "../assets/features/transfer.png";
+import transaction from "../assets/features/transaction.png";
 import bill from "../assets/features/bill.png";
 import secure from "../assets/features/secure.png";
 
 const onboardingData = [
 	{
-		title: "Welcome to SaySwitch",
+		title: "Welcome to SwitchPay",
 		description:
-			"Experience seamless banking at your fingertips with SaySwitch.",
+			"Empowering agents with efficient fund management solutions at their fingertips.",
 		icon: "cash-outline",
 		image: welcome,
 		colorHex: "#d268cc",
 	},
 	{
-		title: "Easy Money Transfers",
-		description: "Send and receive money quickly and securely.",
+		title: "Effortless Transaction Management",
+		description:
+			"Manage customer deposits and withdrawals quickly and securely.",
 		icon: "arrow-redo-outline",
-		image: transfer,
+		image: transaction,
 		colorHex: "#96a6da",
 	},
 	{
-		title: "Bill Payments Made Simple",
-		description: "Pay your bills effortlessly and never miss a deadline.",
+		title: "Simple Bill Payments",
+		description: "Help your customers pay bills effortlessly and on time.",
 		icon: "wallet-outline",
 		image: bill,
 		colorHex: "#d268cc",
 	},
 	{
-		title: "Secure Banking",
-		description: "Your data is protected with the latest encryption technologies.",
-		icon: "shield-checkmark-outline", // You can choose an appropriate icon
-		image: secure, // Replace with the path to the secure banking image
-		colorHex: "#4caf50", // Example color for secure banking
+		title: "Secure Services",
+		description:
+			"Ensure customer data is protected with advanced encryption technologies.",
+		icon: "shield-checkmark-outline",
+		image: secure,
+		colorHex: "#4caf50",
 	},
 ];
 
@@ -168,8 +170,8 @@ const OnboardingScreen = () => {
 					style={{
 						backgroundColor:
 							currentIndex === onboardingData.length - 1
-								? onboardingData[currentIndex].colorHex + '80' // Use colorHex for Register button
-								: onboardingData[currentIndex].colorHex + '80' , // Use colorHex for Next button
+								? onboardingData[currentIndex].colorHex + "80" // Use colorHex for Register button
+								: onboardingData[currentIndex].colorHex + "80", // Use colorHex for Next button
 					}}
 				>
 					<Text

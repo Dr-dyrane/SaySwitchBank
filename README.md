@@ -1,10 +1,10 @@
-# SaySwitch — A Starter Pack for Agency Banking POS App
+# SaySwitch — A Starter Pack for Agency POS App
 
 ## Project Overview
 
 ### Description
 
-SaySwitch is a modular and efficient starter pack for building agency banking applications using Expo and React Native. This project is a **mobile agency banking POS application** designed to facilitate banking services for agents, allowing them to conduct transactions on behalf of customers. The app supports essential agency banking features such as deposits, withdrawals, bill payments, and transaction management, specifically aimed at empowering agents to provide these services without needing P2P (peer-to-peer) functionalities.
+SaySwitch is a modular and efficient starter pack for building agency pos applications using Expo and React Native. This project is a **mobile agency POS application** designed to facilitate pos services for agents, allowing them to conduct transactions on behalf of customers. The app supports essential agency banking features such as deposits, withdrawals, bill payments, and transaction management, specifically aimed at empowering agents to provide these services without needing P2P (peer-to-peer) functionalities.
 
 ### Goal
 
