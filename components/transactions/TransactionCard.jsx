@@ -87,12 +87,6 @@ const TransactionCard = ({ transaction, onViewDetails }) => {
 			onPress={handleRowClick}
 
 			style={{
-				backgroundColor:
-					statusCategory === "Completed"
-						? "rgba(240, 253, 244, 0.125)"
-						: statusCategory === "Pending"
-						? "rgba(254, 252, 232, 0.125)" // Light yellow background for pending
-						: "rgba(254, 242, 242, 0.125)",
 				padding: 10,
 				marginBottom: 10,
 				borderRadius: 10,
@@ -106,7 +100,7 @@ const TransactionCard = ({ transaction, onViewDetails }) => {
 						? "#ca8a0420"
 						: "#991b1b20",
 			}}
-			className="border-l-4"
+			className="bg-slate-50"
 		>
 			{/* Type */}
 			<View
@@ -117,10 +111,10 @@ const TransactionCard = ({ transaction, onViewDetails }) => {
 					borderRadius: 999, // To make it fully rounded
 					backgroundColor:
 						statusCategory === "Completed"
-							? "rgba(16, 185, 129, 0.1)"
+							? "rgba(16, 185, 129, 0.05)"
 							: statusCategory === "Pending"
-							? "rgba(202, 138, 4, 0.1)" // Yellow for pending
-							: "rgba(239, 68, 68, 0.1)", // Conditional background color
+							? "rgba(202, 138, 4, 0.05)" // Yellow for pending
+							: "rgba(239, 68, 68, 0.05)", // Conditional background color
 				}}
 			>
 				{icon}

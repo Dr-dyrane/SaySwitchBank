@@ -229,7 +229,7 @@ export default function HomeScreen() {
 				}}
 			>
 				{/* Account Balance Card */}
-				<View className="bg-primary mb-6 p-4 rounded-xl border-l-4 border-accent/50">
+				<View className="bg-primary mb-6 p-4 rounded-xl">
 					<View className="flex-row justify-between">
 						<Text
 							style={{
@@ -326,7 +326,7 @@ export default function HomeScreen() {
 					</View>
 				</View>
 
-				<View className="flex flex-row items-center justify-between mb-6">
+				<View className="flex flex-row items-center justify-between mb-4">
 					<Text className="text-gray-500 ">Latest Transactions</Text>
 					<Pressable onPress={() => router.push("transactions")}>
 						<Text style={{ textAlign: "center", color: "#008773" }}>
