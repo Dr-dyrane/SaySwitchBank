@@ -1,6 +1,13 @@
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, Modal, FlatList } from "react-native";
+import {
+	View,
+	Text,
+	TouchableOpacity,
+	Modal,
+	TouchableWithoutFeedback,
+} from "react-native";
+import { RadioButton } from "react-native-paper";
 
 const SpendingTrend = ({ totalCredit, totalDebit, statusCategory }) => {
 	const [modalVisible, setModalVisible] = useState(false);
@@ -9,11 +16,9 @@ const SpendingTrend = ({ totalCredit, totalDebit, statusCategory }) => {
 	// Options for dropdown filter
 	const filterOptions = ["This Week", "This Month"];
 
-	// Handle selection from dropdown
-	const handleFilterSelect = (filter) => {
-		setTimeFilter(filter);
-		setModalVisible(false);
-		// Add filtering logic here to update the spending trend based on selected filter
+	const handleOptionSelect = (option) => {
+		setTimeFilter(option);
+		setModalVisible(false); // Close modal when an option is selected
 	};
 
 	return (
@@ -22,47 +27,76 @@ const SpendingTrend = ({ totalCredit, totalDebit, statusCategory }) => {
 				<Text className="text-gray-500">Spending Trend</Text>
 
 				{/* Dropdown button */}
-				<TouchableOpacity className='flex flex-row space-x-1' onPress={() => setModalVisible(true)}>
+				<TouchableOpacity
+					className="flex flex-row space-x-1"
+					onPress={() => setModalVisible(true)}
+				>
 					<Text style={{ color: "#1E90FF" }}>{timeFilter}</Text>
 					<Ionicons name="chevron-down" size={16} color="#1E90FF" />
 				</TouchableOpacity>
 
 				{/* Dropdown Modal */}
 				<Modal
+					animationType="slide"
 					transparent={true}
 					visible={modalVisible}
 					onRequestClose={() => setModalVisible(false)}
 				>
-					<TouchableOpacity
-						style={{ flex: 1, backgroundColor: "rgba(0, 0, 0, 0.5)" }}
-						onPress={() => setModalVisible(false)}
-					>
+					<TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
 						<View
-							className="rounded-b-3xl"
 							style={{
-								backgroundColor: "white",
-								margin: 0,
-								padding: 16,
-								shadowOpacity: 0.3,
-								shadowRadius: 8,
+								flex: 1,
+								backgroundColor: "rgba(0, 0, 0, 0.5)",
 							}}
 						>
-							<Text className="text-lg font-bold mb-2">Select Period</Text>
-							<FlatList
-								data={filterOptions}
-								keyExtractor={(item) => item}
-								renderItem={({ item }) => (
-									<TouchableOpacity onPress={() => handleFilterSelect(item)}>
-										<Text
-											style={{ padding: 10, textAlign: "left", fontSize: 16 }}
-										>
-											{item}
-										</Text>
-									</TouchableOpacity>
-								)}
-							/>
+							<View style={{ flex: 1, justifyContent: "flex-start" }}>
+								<View
+									className="rounded-b-3xl"
+									style={{
+										backgroundColor: "white",
+										margin: 0,
+										padding: 16,
+										shadowOpacity: 0.3,
+										shadowRadius: 8,
+									}}
+								>
+									<Text className="text-lg font-bold mb-2">Select Period</Text>
+									<RadioButton.Group
+										onValueChange={(newValue) => {
+											handleOptionSelect(newValue);
+										}}
+										value={timeFilter}
+									>
+										{filterOptions.map((option) => (
+											<TouchableOpacity
+												key={option}
+												className="flex-row items-center py-2"
+												onPress={() => handleOptionSelect(option)} // Change value on row press
+											>
+												<RadioButton
+													value={option}
+													color="#008773" // Teal color for radio button
+												/>
+												<Text className="ml-2">{option}</Text>
+												{/* Add margin to separate text from button */}
+											</TouchableOpacity>
+										))}
+									</RadioButton.Group>
+								</View>
+								{/* Drag Indicator Bar */}
+								<View
+									style={{
+										height: 4,
+										width: 80,
+										backgroundColor: "#ccc", // Customize color
+										borderRadius: 2,
+										alignSelf: "center",
+										marginTop: 8,
+									}}
+								/>
+							</View>
 						</View>
-					</TouchableOpacity>
+					</TouchableWithoutFeedback>
 				</Modal>
 			</View>
 
