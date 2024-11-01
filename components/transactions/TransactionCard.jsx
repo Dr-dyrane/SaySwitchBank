@@ -121,19 +121,18 @@ const TransactionCard = ({ transaction, onViewDetails }) => {
 			</View>
 
 			{/* Details */}
-			<View style={{ flex: 1, justifyContent: "center", padding: 5 }}>
-				<Text style={{ fontWeight: "bold", fontSize: 16 }}>
+			<View className='space-y-[2px] ml-2' style={{ flex: 1, justifyContent: "center", padding: 5 }}>
+				<Text style={{ fontWeight: "bold"}}>
 					{transferDescription}
 				</Text>
-				<Text style={{ color: "#6b7280" }}>{formattedDate}</Text>
+				<Text className='text-xs' style={{ color: "#6b7280" }}>{formattedDate}</Text>
 			</View>
 
 			{/* Amount and Status */}
-			<View style={{ alignItems: "flex-end", padding: 5 }}>
+			<View style={{ alignItems: "flex-end", padding: 5 }} className='space-y-[2px]'>
 				<Text
 					style={{
 						fontWeight: "bold",
-						fontSize: 14,
 						color: direction === "Credit" ? "#065f46" : "#991b1b",
 					}}
 				>
@@ -147,9 +146,10 @@ const TransactionCard = ({ transaction, onViewDetails }) => {
 								: statusCategory === "Pending"
 								? "#fef3c7" // Yellow for pending status background
 								: "#fee2e2",
-						paddingHorizontal: 5,
-						borderRadius: 5,
+						paddingHorizontal: 8,
+						borderRadius: 6,
 					}}
+					className='py-[4px]'
 				>
 					<Text
 						style={{
@@ -159,7 +159,7 @@ const TransactionCard = ({ transaction, onViewDetails }) => {
 									: statusCategory === "Pending"
 									? "#ca8a04" // Yellow for pending text
 									: "#991b1b",
-							fontSize: 12,
+							fontSize: 10,
 						}}
 					>
 						{statusCategory}

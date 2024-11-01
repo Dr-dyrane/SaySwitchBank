@@ -336,13 +336,15 @@ export default function HomeScreen() {
 				</View>
 
 				{/* Display a limited number of transactions */}
-				{displayedTransactions.map((transaction) => (
-					<TransactionCard
-						key={transaction.id}
-						transaction={transaction}
-						onViewDetails={handleViewDetails}
-					/>
-				))}
+				<View className='px-1'>
+					{displayedTransactions.map((transaction) => (
+						<TransactionCard
+							key={transaction.id}
+							transaction={transaction}
+							onViewDetails={handleViewDetails}
+						/>
+					))}
+				</View>
 			</ScrollView>
 			{/* Modal for Transaction Details */}
 			<Modal
@@ -361,4 +363,3 @@ export default function HomeScreen() {
 		</LinearGradient>
 	);
 }
-
