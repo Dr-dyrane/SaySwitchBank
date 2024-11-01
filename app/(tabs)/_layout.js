@@ -161,6 +161,7 @@ export default function TabsLayout() {
 							size={24}
 						/>
 					),
+					headerTitle: 'More Options',
 					headerShown: true,
 				}}
 			/>
