@@ -152,7 +152,7 @@ export default function TabsLayout() {
 					title: "Transactions",
 					tabBarIcon: ({ color, size, focused }) => (
 						<Ionicons
-							name={focused ? "wallet" : "wallet-outline"}
+							name={focused ? "cash" : "cash-outline"}
 							color={color}
 							size={24}
 						/>
