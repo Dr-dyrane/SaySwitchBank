@@ -254,11 +254,10 @@ export default function HomeScreen() {
 							/>
 						</TouchableOpacity>
 					</View>
+				</View>
 
-					<Text style={{ fontSize: 14, color: "#fff", marginTop: 4 }}>
-						Available Balance
-					</Text>
-
+				<View className="flex flex-col">
+					<Text className="text-gray-500">Spending Trend</Text>
 					{/* Mini dataset of Debit vs Credit */}
 					<View className="flex-row justify-between mt-4">
 						<View className="flex-row items-center">
@@ -267,9 +266,12 @@ export default function HomeScreen() {
 								iconColor="red"
 								status={statusCategory} // Pass dynamic status
 							/>
-							<Text style={{ color: "#fff", marginLeft: 4 }}>
-								Debit: ₦{totalDebit.toFixed(2)}
-							</Text>
+							<View className="flex flex-col">
+								<Text style={{ color: "#000", marginLeft: 4 }}>Money Out</Text>
+								<Text style={{ color: "#000", marginLeft: 4 }}>
+									₦{totalDebit.toFixed(2)}
+								</Text>
+							</View>
 						</View>
 						<View className="flex-row items-center">
 							<StatusIcon
@@ -277,9 +279,12 @@ export default function HomeScreen() {
 								iconColor="#00dfc0"
 								status={statusCategory} // Pass dynamic status
 							/>
-							<Text style={{ color: "#fff", marginLeft: 4 }}>
-								Credit: ₦{totalCredit.toFixed(2)}
-							</Text>
+							<View className="flex flex-col">
+								<Text style={{ color: "#000", marginLeft: 4 }}>Money In</Text>
+								<Text style={{ color: "#000", marginLeft: 4 }}>
+									₦{totalCredit.toFixed(2)}
+								</Text>
+							</View>
 						</View>
 					</View>
 				</View>
