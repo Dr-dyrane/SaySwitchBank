@@ -256,7 +256,7 @@ export default function HomeScreen() {
 					</View>
 				</View>
 
-				<View className="flex flex-col">
+				<View className="flex flex-col mb-6 px-4">
 					<Text className="text-gray-500">Spending Trend</Text>
 					{/* Mini dataset of Debit vs Credit */}
 					<View className="flex-row justify-between mt-4">
@@ -396,7 +396,7 @@ const StatusIcon = ({ iconName, iconColor, status }) => {
 				alignItems: "center",
 				padding: 5,
 				borderRadius: 999, // Fully rounded
-				backgroundColor: "rgba(255, 255, 255, 0.1)",
+				backgroundColor: "rgba(255, 255, 255, 0.3)",
 			}}
 		>
 			<Ionicons name={iconName} size={20} color={iconColor} />
