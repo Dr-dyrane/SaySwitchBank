@@ -16,32 +16,32 @@ const FilterHeader = ({ onFilterChange, currentFilter, date }) => {
 		<View
 			style={{
 				padding: 16,
-				backgroundColor: "#e0fff9",
+				//backgroundColor: "#e0fff9",
 				borderRadius: 10,
 				marginBottom: 24,
-				shadowColor: "#000",
-				shadowOffset: {
-					width: 0,
-					height: 2,
-				},
-				shadowOpacity: 0.25,
-				shadowRadius: 3.84,
-				elevation: 5,
+				// shadowColor: "#000",
+				// shadowOffset: {
+				// 	width: 0,
+				// 	height: 2,
+				// },
+				// shadowOpacity: 0.25,
+				// shadowRadius: 3.84,
+				// elevation: 5,
 			}}
-            className='border-l-4 border-primary'
+            className='bg-slate-50'
 		>
 			<View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-				<View style={{ flexDirection: "column" }}>
-					<Text style={{ fontSize: 18, fontWeight: "bold" }}>
+				<View style={{ flexDirection: "column" }} className='items-center justify-center'>
+					{/* <Text style={{ fontSize: 18, fontWeight: "bold" }}>
 						Transaction History
-					</Text>
-					<Text style={{ fontSize: 10, color: "#6b7280" }}>{date}</Text>
+					</Text> */}
+					<Text style={{ fontSize: 16, color: "#6b7280" }}>{date}</Text>
 				</View>
 
 				<View style={{ flexDirection: "row", alignItems: "center" }}>
 					<Text style={{ color: "#6b7280", marginRight: 10 }}>
 						<Text style={{ fontWeight: "bold" }}>
-							{!showFilters ? "Show Filters" : "Hide Filters"}
+							{currentFilter}
 						</Text>
 					</Text>
 					<TouchableOpacity
@@ -58,9 +58,9 @@ const FilterHeader = ({ onFilterChange, currentFilter, date }) => {
 							color={showFilters ? "green" : "gray"}
 						/>
 					</TouchableOpacity>
-					{currentFilter !== "All" && (
+					{currentFilter !== "All Status" && (
 						<TouchableOpacity
-							onPress={() => onFilterChange("All")} // Clear Filter Option
+							onPress={() => onFilterChange("All Status")} // Clear Filter Option
 							style={{
 								marginLeft: 10,
 								padding: 5,

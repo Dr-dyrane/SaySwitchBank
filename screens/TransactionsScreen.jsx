@@ -11,7 +11,7 @@ import FilterHeader from "../components/transactions/FilterHeader";
 const TransactionPage = () => {
 	const [modalVisible, setModalVisible] = useState(false);
 	const [selectedTransactionId, setSelectedTransactionId] = useState(null);
-	const [filter, setFilter] = useState("All"); // State for filter
+	const [filter, setFilter] = useState("All Status"); // State for filter
 	const [date, setDate] = useState(new Date().toLocaleDateString()); // State for date
 
 	const handleViewDetails = (id) => {
@@ -31,7 +31,7 @@ const TransactionPage = () => {
 
 	// Filter transactions based on the selected filter
 	const filteredTransactions = transactions.filter((transaction) => {
-		if (filter === "All") return true;
+		if (filter === "All Status") return true;
 		return getStatusCategory(transaction.payment_response_code) === filter;
 	});
 

@@ -21,6 +21,12 @@ const FilterButtons = ({ onFilterChange, currentFilter }) => {
     return (
         <View style={{ flexDirection: "row", marginTop: 5 }}>
             <TouchableOpacity
+                onPress={() => onFilterChange("All Status")}
+                style={filterButtonStyles(currentFilter === "All Status", "#888")}
+            >
+                <Text style={{ color: "#333", fontWeight: "bold" }}>All Status</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
                 onPress={() => onFilterChange("Completed")}
                 style={filterButtonStyles(currentFilter === "Completed", "#065f46")}
             >
