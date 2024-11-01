@@ -63,12 +63,17 @@ export default function TabsLayout() {
 				name="index"
 				options={{
 					title: "Home",
-					tabBarIcon: ({ color, size, focused }) => (
-						<Ionicons
-							name={focused ? "home" : "home-outline"}
-							color={color}
-							size={24}
-						/>
+					tabBarIcon: ({ focused }) => (
+						<View style={{ width: 24, height: 24 }}>
+							<Image
+								source={
+									focused
+										? require("../../assets/icons/home-sharp.png") // Focused icon
+										: require("../../assets/icons/home.png") // Unfocused icon
+								}
+								style={{ width: 24, height: 24 }} // Set width and height for the icon
+							/>
+						</View>
 					), // Add Ionicons for Home tab
 					headerShown: true,
 					headerTitle: () => null,
