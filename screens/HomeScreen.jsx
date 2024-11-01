@@ -37,13 +37,13 @@ const QuickAction = ({
 			marginHorizontal: 4,
 		}}
 		onPress={onPress}
-		className="bg-primary/5"
+		className="bg-slate-50"
 	>
 		<View
 			className="p-1.5 bg-slate-200 mb-1 rounded-lg"
-			style={{ backgroundColor: backgroundColor }} // Set background color using inline style
+			style={{ backgroundColor: '#E5F5F1' }} // Set background color using inline style
 		>
-			<Ionicons name={iconName} size={20} color={iconColor || "#000"} />
+			<Ionicons name={iconName} size={20} color={'#008773' || "#000"} />
 		</View>
 
 		<View className="flex-1">
@@ -78,14 +78,14 @@ const BusinessCard = ({
 			marginHorizontal: 4,
 		}}
 		onPress={onPress}
-		className="bg-primary/5 justify-between"
+		className="bg-slate-50 justify-between"
 	>
 		<View className="flex-row flex items-center justify-center">
 			<View
 				className="p-1.5 bg-slate-200 rounded-lg"
-				style={{ backgroundColor: backgroundColor }} // Set background color using inline style
+				style={{ backgroundColor: '#E5F5F1' }} // Set background color using inline style
 			>
-				<Ionicons name={iconName} size={20} color={iconColor || "#000"} />
+				<Ionicons name={iconName} size={20} color={'#008773' || "#000"} />
 			</View>
 
 			<View className="ml-2">
@@ -97,7 +97,7 @@ const BusinessCard = ({
 				</Text>
 			</View>
 		</View>
-		<View className="py-2 rounded-lg px-3 bg-[#f0fff4]">
+		<View className="py-2 rounded-lg px-3 bg-[#fff]">
 			<Text className="text-primary">{number}</Text>
 		</View>
 	</TouchableOpacity>
@@ -127,7 +127,7 @@ export default function HomeScreen() {
 	// Get status category
 	const statusCategory = getStatusCategory(transactions.payment_response_code);
 	// Limit the number of transactions to show on the home page
-	const displayedTransactions = transactions.slice(0, 3); // Only show first 3
+	const displayedTransactions = transactions.slice(0, 2); // Only show first 3
 
 	// Calculate total debit and credit from the transactions data
 	const totalDebit = transactions
@@ -146,7 +146,7 @@ export default function HomeScreen() {
 		{
 			title: "Payout",
 			iconName: "arrow-forward-circle-outline",
-			iconColor: "#1E90FF",
+			iconColor: "#008773",
 			backgroundColor: "#e6f7ff",
 			onPress: () => console.log("Payout Money"),
 		},
@@ -212,7 +212,7 @@ export default function HomeScreen() {
 
 	return (
 		<LinearGradient
-			colors={["#fff", "#f0fff4", "#fff"]}
+			colors={["#fff", "#fff", "#fff"]}
 			style={{
 				flex: 1,
 				justifyContent: "center",
@@ -256,33 +256,40 @@ export default function HomeScreen() {
 					</View>
 				</View>
 
-				<View className="flex flex-col mb-6 px-4">
+				<View className="flex flex-col mb-6 gap-4">
 					<Text className="text-gray-500">Spending Trend</Text>
 					{/* Mini dataset of Debit vs Credit */}
-					<View className="flex-row justify-between mt-4">
-						<View className="flex-row items-center">
+					<View style={{
+							flexDirection: "row",
+							flexWrap: "wrap",
+							justifyContent: "space-between",
+							marginBottom: 0, // Space below the grid
+						}}>
+
+						<View className="flex-row items-center bg-slate-50 p-4 rounded-xl w-[47%]">
 							<StatusIcon
 								iconName="arrow-down"
-								iconColor="red"
+								iconColor="#008773"
 								status={statusCategory} // Pass dynamic status
 							/>
-							<View className="flex flex-col">
-								<Text style={{ color: "#000", marginLeft: 4 }}>Money Out</Text>
+							<View className="flex ml-2 space-y-.5 flex-col">
+								<Text style={{ color: "gray", marginLeft: 4 }}>Money In</Text>
 								<Text style={{ color: "#000", marginLeft: 4 }}>
-									₦{totalDebit.toFixed(2)}
+									₦{totalCredit.toFixed(2)}
 								</Text>
 							</View>
 						</View>
-						<View className="flex-row items-center">
+
+						<View  className="flex-row items-center bg-slate-50 p-4 rounded-xl w-[47%]">
 							<StatusIcon
 								iconName="arrow-up"
-								iconColor="#00dfc0"
+								iconColor="red"
 								status={statusCategory} // Pass dynamic status
 							/>
-							<View className="flex flex-col">
-								<Text style={{ color: "#000", marginLeft: 4 }}>Money In</Text>
+							<View className="flex ml-2 space-y-.5 flex-col">
+								<Text style={{ color: "gray", marginLeft: 4 }}>Money Out</Text>
 								<Text style={{ color: "#000", marginLeft: 4 }}>
-									₦{totalCredit.toFixed(2)}
+									₦{totalDebit.toFixed(2)}
 								</Text>
 							</View>
 						</View>
@@ -396,7 +403,7 @@ const StatusIcon = ({ iconName, iconColor, status }) => {
 				alignItems: "center",
 				padding: 5,
 				borderRadius: 999, // Fully rounded
-				backgroundColor: "rgba(255, 255, 255, 0.3)",
+				backgroundColor: "white",
 			}}
 		>
 			<Ionicons name={iconName} size={20} color={iconColor} />
