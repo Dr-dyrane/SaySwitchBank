@@ -146,14 +146,14 @@ export default function HomeScreen() {
 	const quickActions = [
 		{
 			title: "Payout",
-			iconName: "arrow-forward-circle-outline",
+			iconName: "arrow-forward-circle",
 			iconColor: "#008773",
 			backgroundColor: "#e6f7ff",
 			onPress: () => console.log("Payout Money"),
 		},
 		{
 			title: "Pay Bills",
-			iconName: "card-outline",
+			iconName: "card",
 			iconColor: "#32CD32",
 			backgroundColor: "#e6ffe6",
 			onPress: () => console.log("Pay Bills"),
@@ -179,7 +179,7 @@ export default function HomeScreen() {
 	const BusinessData = [
 		{
 			title: "Businesses",
-			iconName: "business-outline", // Business icon
+			iconName: "business", // Business icon
 			iconColor: "#007BFF", // Bright Blue
 			backgroundColor: "#E9F7FF", // Soft Light Blue
 			number: 3, // Assume there are 3 active businesses
@@ -187,7 +187,7 @@ export default function HomeScreen() {
 		},
 		{
 			title: "Performance",
-			iconName: "bar-chart-outline", // Bar chart icon
+			iconName: "bar-chart", // Bar chart icon
 			iconColor: "#28A745", // Green
 			backgroundColor: "#E6F9E6", // Soft Light Green
 			number: 10, // Assume 10 performance metrics to review
@@ -195,7 +195,7 @@ export default function HomeScreen() {
 		},
 		{
 			title: "Users",
-			iconName: "people-outline", // People icon
+			iconName: "people", // People icon
 			iconColor: "#FFC107", // Amber
 			backgroundColor: "#FFF3CD", // Soft Light Yellow
 			number: 5, // Assume there are 5 users to manage
@@ -203,7 +203,7 @@ export default function HomeScreen() {
 		},
 		{
 			title: "Accounts", // Updated title
-			iconName: "wallet-outline", // Wallet icon for accounts
+			iconName: "wallet", // Wallet icon for accounts
 			iconColor: "#17A2B8", // Teal
 			backgroundColor: "#E3F2F8", // Soft Light Teal
 			number: 4, // Assume there are 4 profiled accounts
@@ -251,7 +251,7 @@ export default function HomeScreen() {
 							<Ionicons
 								name={balanceVisible ? "eye-off" : "eye"}
 								size={24}
-								color="#fff"
+								color="#ddd"
 							/>
 						</TouchableOpacity>
 					</View>
@@ -329,7 +329,7 @@ export default function HomeScreen() {
 				<View className="flex flex-row items-center justify-between mb-6">
 					<Text className="text-gray-500 ">Latest Transactions</Text>
 					<Pressable onPress={() => router.push("transactions")}>
-						<Text style={{ textAlign: "center", color: "#1E90FF" }}>
+						<Text style={{ textAlign: "center", color: "#008773" }}>
 							View More
 						</Text>
 					</Pressable>

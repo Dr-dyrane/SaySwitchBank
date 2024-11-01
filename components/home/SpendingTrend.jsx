@@ -31,8 +31,8 @@ const SpendingTrend = ({ totalCredit, totalDebit, statusCategory }) => {
 					className="flex flex-row space-x-1"
 					onPress={() => setModalVisible(true)}
 				>
-					<Text style={{ color: "#1E90FF" }}>{timeFilter}</Text>
-					<Ionicons name="chevron-down" size={16} color="#1E90FF" />
+					<Text style={{ color: "#008773" }}>{timeFilter}</Text>
+					<Ionicons name="chevron-down" size={16} color="#008773" />
 				</TouchableOpacity>
 
 				{/* Dropdown Modal */}
