@@ -146,6 +146,24 @@ export default function TabsLayout() {
 					headerShown: true,
 				}}
 			/>
+
+			{/* More Tab */}
+			<Tabs.Screen
+				name="more"
+				options={{
+					title: "More",
+					tabBarIcon: ({ color, size, focused }) => (
+						<Ionicons
+							name={
+								focused ? "ellipsis-horizontal-circle-sharp" : "ellipsis-horizontal-circle"
+							}
+							color={color}
+							size={24}
+						/>
+					),
+					headerShown: true,
+				}}
+			/>
 		</Tabs>
 	);
 }

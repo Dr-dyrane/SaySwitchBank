@@ -128,7 +128,7 @@ const ProfileScreen = () => {
 
 	// Render the profile screen
 	return (
-		<LinearGradient colors={["#fff", "#f0fff4", "#fff"]} className="flex-1 p-6">
+		<LinearGradient colors={["#fff", "#f0fff4", "#fff"]} className="flex-1 p-4 pt-0">
 			{isDataLoading ? (
 				// Show a loading spinner while data is loading
 				<View className="flex-1 justify-center items-center">
