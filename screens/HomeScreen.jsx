@@ -16,6 +16,7 @@ import TransactionCard, {
 import transactions from "../data/transactions"; // Imported transactions
 import { useRouter } from "expo-router";
 import TransDetails from "../components/transactions/TransDetails";
+import SpendingTrend from "../components/home/SpendingTrend";
 
 // Modular Quick Action Component
 const QuickAction = ({
@@ -41,9 +42,9 @@ const QuickAction = ({
 	>
 		<View
 			className="p-1.5 bg-slate-200 mb-1 rounded-lg"
-			style={{ backgroundColor: '#E5F5F1' }} // Set background color using inline style
+			style={{ backgroundColor: "#E5F5F1" }} // Set background color using inline style
 		>
-			<Ionicons name={iconName} size={20} color={'#008773' || "#000"} />
+			<Ionicons name={iconName} size={20} color={"#008773" || "#000"} />
 		</View>
 
 		<View className="flex-1">
@@ -83,9 +84,9 @@ const BusinessCard = ({
 		<View className="flex-row flex items-center justify-center">
 			<View
 				className="p-1.5 bg-slate-200 rounded-lg"
-				style={{ backgroundColor: '#E5F5F1' }} // Set background color using inline style
+				style={{ backgroundColor: "#E5F5F1" }} // Set background color using inline style
 			>
-				<Ionicons name={iconName} size={20} color={'#008773' || "#000"} />
+				<Ionicons name={iconName} size={20} color={"#008773" || "#000"} />
 			</View>
 
 			<View className="ml-2">
@@ -256,45 +257,11 @@ export default function HomeScreen() {
 					</View>
 				</View>
 
-				<View className="flex flex-col mb-6 gap-4">
-					<Text className="text-gray-500">Spending Trend</Text>
-					{/* Mini dataset of Debit vs Credit */}
-					<View style={{
-							flexDirection: "row",
-							flexWrap: "wrap",
-							justifyContent: "space-between",
-							marginBottom: 0, // Space below the grid
-						}}>
-
-						<View className="flex-row items-center bg-slate-50 p-4 rounded-xl w-[47%]">
-							<StatusIcon
-								iconName="arrow-down"
-								iconColor="#008773"
-								status={statusCategory} // Pass dynamic status
-							/>
-							<View className="flex ml-2 space-y-.5 flex-col">
-								<Text style={{ color: "gray", marginLeft: 4 }}>Money In</Text>
-								<Text style={{ color: "#000", marginLeft: 4 }}>
-									₦{totalCredit.toFixed(2)}
-								</Text>
-							</View>
-						</View>
-
-						<View  className="flex-row items-center bg-slate-50 p-4 rounded-xl w-[47%]">
-							<StatusIcon
-								iconName="arrow-up"
-								iconColor="red"
-								status={statusCategory} // Pass dynamic status
-							/>
-							<View className="flex ml-2 space-y-.5 flex-col">
-								<Text style={{ color: "gray", marginLeft: 4 }}>Money Out</Text>
-								<Text style={{ color: "#000", marginLeft: 4 }}>
-									₦{totalDebit.toFixed(2)}
-								</Text>
-							</View>
-						</View>
-					</View>
-				</View>
+				<SpendingTrend
+					totalCredit={totalCredit}
+					totalDebit={totalDebit}
+					statusCategory={statusCategory}
+				/>
 
 				<View>
 					<Text className="text-gray-500 mb-4">Make Payment</Text>
@@ -367,6 +334,7 @@ export default function HomeScreen() {
 						</Text>
 					</Pressable>
 				</View>
+
 				{/* Display a limited number of transactions */}
 				{displayedTransactions.map((transaction) => (
 					<TransactionCard
@@ -394,19 +362,3 @@ export default function HomeScreen() {
 	);
 }
 
-// Modular StatusIcon Component
-const StatusIcon = ({ iconName, iconColor, status }) => {
-	return (
-		<View
-			style={{
-				justifyContent: "center",
-				alignItems: "center",
-				padding: 5,
-				borderRadius: 999, // Fully rounded
-				backgroundColor: "white",
-			}}
-		>
-			<Ionicons name={iconName} size={20} color={iconColor} />
-		</View>
-	);
-};
