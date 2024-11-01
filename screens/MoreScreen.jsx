@@ -13,16 +13,16 @@ const MoreScreen = () => {
 
 
 	const options = [
-		{ title: "Settings", icon: "settings-outline", route: "/settings" },
+		{ title: "Settings", icon: "settings", route: "/settings" },
 		{
 			title: "Notifications",
-			icon: "notifications-outline",
+			icon: "notifications",
 			route: "/notifications",
 		},
-		{ title: "Help", icon: "help-circle-outline", route: "/help" },
+		{ title: "Help", icon: "help-circle", route: "/help" },
 		{
 			title: "Log out",
-			icon: "log-out-outline",
+			icon: "log-out",
 			action: async () => {
 				const result = await logout();
 				if (result.success) {
@@ -50,7 +50,7 @@ const MoreScreen = () => {
 						<View
 							className={`${
 								option.title === "Log out" ? "bg-red-50" : "bg-[#E5F5F1]"
-							} p-2 rounded-lg mr-4`}
+							} p-2 rounded-lg`}
 						>
 							<Ionicons
 								name={option.icon}
@@ -58,7 +58,7 @@ const MoreScreen = () => {
 								color={option.title === "Log out" ? "red" : "#008773"}
 							/>
 						</View>
-						<Text className="text-lg ml-2 text-gray-800">{option.title}</Text>
+						<Text className="text-md ml-4 text-gray-800">{option.title}</Text>
 					</View>
 					<Ionicons
 						name="chevron-forward"

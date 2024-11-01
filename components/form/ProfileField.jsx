@@ -60,20 +60,20 @@ const ProfileField = ({
 	};
 
 	return (
-		<View className="flex flex-row items-center justify-start space-x-2 mb-2 px-2 py-1 rounded-xl bg-none border-l-4 border-accent/50 shadow-lg">
-			<View className="rounded-full border bg-white/10 border-primary/10 p-3">
-				<Ionicons name={iconName} size={20} color="black" />
+		<View className="flex flex-row items-center justify-start space-x-2 mb-4 px-2 py-1 rounded-xl bg-slate-50 shadow-lg">
+			<View className="rounded-xl bg-[#E5F5F1] p-3">
+				<Ionicons name={iconName} size={20} color="teal" />
 			</View>
-			<View className="flex flex-col flex-1 p-1 px-2 rounded-lg bg-white/30">
+			<View className="flex flex-col flex-1 p-1 px-2 rounded-xl bg-white/30">
 				<TextInput
 					value={value}
 					onChangeText={(text) => {
 						setWarning(""); // Clear warning when user types
 						onChange(text);
 					}}
-					className="w-48 text-left text-lg"
+					className="w-48 text-left"
 				/>
-				<Text className="text-sm text-gray-400 font-medium">{label}</Text>
+				<Text className="text-xs text-gray-400 font-medium">{label}</Text>
 				{warning ? (
 					<Text className="text-red-500 text-sm">{warning}</Text>
 				) : null}
@@ -85,7 +85,7 @@ const ProfileField = ({
 				<Ionicons
 					name="chevron-forward-outline"
 					size={20}
-					color="#888"
+					color="teal"
 					className="ml-2"
 				/>
 			</Pressable>
