@@ -108,7 +108,7 @@ const SpendingTrend = ({ totalCredit, totalDebit, statusCategory }) => {
 					justifyContent: "space-between",
 					marginBottom: 0,
 				}}
-				className='px-1'
+				className="px-1"
 			>
 				<View className="flex-row items-center bg-slate-50 p-4 rounded-xl w-[47%]">
 					<StatusIcon
@@ -117,7 +117,9 @@ const SpendingTrend = ({ totalCredit, totalDebit, statusCategory }) => {
 						status={statusCategory}
 					/>
 					<View className="flex ml-2 space-y-[2px] flex-col">
-						<Text style={{ color: "gray", marginLeft: 4 }}>Money In</Text>
+						<Text className="text-slate-500" style={{ marginLeft: 4 }}>
+							Cash In
+						</Text>
 						<Text style={{ color: "#000", marginLeft: 4 }}>
 							₦{totalCredit.toFixed(2)}
 						</Text>
@@ -131,7 +133,9 @@ const SpendingTrend = ({ totalCredit, totalDebit, statusCategory }) => {
 						status={statusCategory}
 					/>
 					<View className="flex ml-2 space-y-.5 flex-col">
-						<Text style={{ color: "gray", marginLeft: 4 }}>Money Out</Text>
+						<Text className="text-slate-500" style={{ marginLeft: 4 }}>
+							Cash Out
+						</Text>
 						<Text style={{ color: "#000", marginLeft: 4 }}>
 							₦{totalDebit.toFixed(2)}
 						</Text>
