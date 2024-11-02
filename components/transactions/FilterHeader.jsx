@@ -151,12 +151,12 @@ const FilterHeader = ({
 							onPress={() => onFilterChange("All Status")} // Clear Filter Option
 							style={{
 								marginLeft: 10,
-								padding: 2,
+								padding: 4,
 								backgroundColor: "#ff000020",
 								borderRadius: 30,
 							}}
 						>
-							<Ionicons name="reload" size={16} color="red" />
+							<Ionicons name="reload" size={10} color="red" />
 						</TouchableOpacity>
 					)}
 				</View>
