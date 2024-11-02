@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { ScrollView, View, Modal, Text } from "react-native";
 import TransactionCard, {
 	getStatusCategory,
@@ -11,7 +11,6 @@ import {
 	format,
 	parseISO,
 	startOfMonth,
-	endOfMonth,
 	subMonths,
 } from "date-fns";
 
@@ -45,14 +44,6 @@ const TransactionPage = () => {
 		setStartDate(start);
 		setEndDate(end);
 	};
-
-	// useEffect(() => {
-	// 	return () => {
-	// 		setFilter("All Status");
-	// 		setStartDate(startOfMonth(subMonths(new Date(), 3)));
-	// 		setEndDate(endOfMonth(new Date()));
-	// 	};
-	// }, []);
 
 	const filteredAndSortedTransactions = useMemo(() => {
 		if (!transactions || !Array.isArray(transactions)) {
