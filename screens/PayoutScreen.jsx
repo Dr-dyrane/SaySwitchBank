@@ -41,6 +41,7 @@ export default function PayoutScreen() {
 	const [filteredTransactions, setFilteredTransactions] = useState([]);
 	const router = useRouter();
 	const { showToast } = useToast();
+	const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
 		const sliceCount = step === 1 ? 3 : 2;
@@ -82,16 +83,18 @@ export default function PayoutScreen() {
 	};
 
 	const handlePayout = () => {
-		console.log(
-			`Payout of ₦${amount} from ${selectedAccount.name} with remark: ${remark}`
-		);
-		setStep(1);
-		setSelectedAccount(null);
-		setAmount("");
-		setRemark("");
-		setIsConfirmModalOpen(false);
-		showToast("Transaction successful!", "success");
-		router.replace("/(tabs)");
+		setLoading(true);
+		setTimeout(() => {
+			console.log(`Payout of ₦${amount} from ${selectedAccount.name} with remark: ${remark}`);
+			setStep(1);
+			setSelectedAccount(null);
+			setAmount("");
+			setRemark("");
+			setIsConfirmModalOpen(false);
+			showToast("Transaction successful!", "success");
+			router.replace("/(tabs)");
+			setLoading(false);
+		}, 3000);
 	};
 
 	return (
@@ -282,6 +285,7 @@ export default function PayoutScreen() {
 					amount={amount}
 					selectedAccount={selectedAccount}
 					remark={remark}
+					loading={loading}
 					onConfirm={handlePayout}
 					onClose={() => setIsConfirmModalOpen(false)}
 				/>

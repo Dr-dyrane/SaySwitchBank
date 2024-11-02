@@ -5,6 +5,7 @@ import {
 	TouchableOpacity,
 	Modal,
 	TouchableWithoutFeedback,
+    ActivityIndicator,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -75,6 +76,7 @@ export function ConfirmationModal({
 	remark,
 	onConfirm,
 	onClose,
+	loading,
 }) {
 	return (
 		<Modal visible={isVisible} animationType="slide" transparent={true}>
@@ -173,9 +175,15 @@ export function ConfirmationModal({
 										onPress={onConfirm}
 										className="bg-primary flex flex-row items-center justify-between p-4 rounded-2xl w-full shadow-md"
 									>
-										<Text className="text-white text-center text-lg">Withdraw Funds</Text>
+										<Text className="text-white text-center text-lg">
+											{!loading ? "Withdraw Funds" : "Withdrawing Funds..."}
+										</Text>
 										<View className="w-6 h-6 bg-none border border-white rounded-full justify-center items-center">
-											<Ionicons name="arrow-down" size={18} color="white" />
+											{loading ? (
+												<ActivityIndicator size={18} color="white" />
+											) : (
+												<Ionicons name="arrow-down" size={18} color="white" />
+											)}
 										</View>
 									</TouchableOpacity>
 								</View>
