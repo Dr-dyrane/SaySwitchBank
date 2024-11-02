@@ -9,6 +9,7 @@ import {
 	StyleSheet,
 	KeyboardAvoidingView,
 	Platform,
+	Pressable,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import transactions from "../data/transactions"; // Imported transactions
@@ -134,7 +135,16 @@ export default function PayoutScreen() {
 
 					{step === 2 && (
 						<View>
-							<Text style={styles.subtitle}>Enter Amount</Text>
+							<View className="flex-row justify-between">
+								<Text style={styles.subtitle}>Enter Amount</Text>
+								<Pressable
+									onPress={() => {
+										setStep(1);
+									}}
+								>
+									<Text className='text-primary'>Go Back</Text>
+								</Pressable>
+							</View>
 							<TextInput
 								style={styles.input}
 								value={amount}
