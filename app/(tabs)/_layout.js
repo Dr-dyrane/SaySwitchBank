@@ -117,17 +117,17 @@ export default function TabsLayout() {
 							onPress={() => router.push("/notifications")}
 						>
 							<View style={{ position: "relative" }}>
-								<Ionicons name="notifications" size={18} color="slategray" />
+								<Ionicons name="notifications" size={18} color="#999" />
 
 								{/* Ping Badge */}
-								<View style={{ position: "absolute", top: -4, right: -4 }}>
+								<View style={{ position: "absolute", top: -2, right: -2 }}>
 									<Animated.View
 										style={{
 											position: "absolute",
 											width: 10,
 											height: 10,
 											borderRadius: 999,
-											backgroundColor: "rgba(56, 178, 172, 0.5)", // Teal color with transparency
+											backgroundColor: "rgba(0, 220, 140, 0.5)", // Teal color with transparency
 											transform: [{ scale: pingAnim }],
 											opacity: pingAnim.interpolate({
 												inputRange: [1, 2],
@@ -136,11 +136,12 @@ export default function TabsLayout() {
 										}}
 									/>
 									<View
+									className='border border-white'
 										style={{
 											width: 10,
 											height: 10,
 											borderRadius: 999,
-											backgroundColor: "teal",
+											backgroundColor: "#00dc8c",
 										}}
 									/>
 								</View>
