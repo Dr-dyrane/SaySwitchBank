@@ -21,6 +21,7 @@ import {
 	ConfirmationModal,
 } from "../components/payment/PayoutModals";
 import { useRouter } from "expo-router";
+import { useToast } from "../contexts/ToastContext";
 
 const accounts = [
 	{ id: 1, name: "Main Checking", number: "**** 1234", icon: "business" },
@@ -39,6 +40,7 @@ export default function PayoutScreen() {
 	const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 	const [filteredTransactions, setFilteredTransactions] = useState([]);
 	const router = useRouter();
+	const { showToast } = useToast();
 
 	useEffect(() => {
 		const sliceCount = step === 1 ? 3 : 2;
@@ -88,6 +90,8 @@ export default function PayoutScreen() {
 		setAmount("");
 		setRemark("");
 		setIsConfirmModalOpen(false);
+		showToast("Transaction successful!", "success");
+		router.replace("/(tabs)");
 	};
 
 	return (
