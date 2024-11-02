@@ -34,9 +34,11 @@ const TransactionPage = () => {
 		setSelectedTransactionId(null);
 	};
 
-	// Function to handle filter change
 	const handleFilterChange = (status) => {
-		setFilter(status);
+		const validStatuses = ["All Status", "Completed", "Pending", "Failed"];
+		if (validStatuses.includes(status)) {
+			setFilter(status);
+		}
 	};
 
 	const handleDateChange = (start, end) => {
@@ -46,13 +48,16 @@ const TransactionPage = () => {
 
 	useEffect(() => {
 		return () => {
-			setFilter("");
+			setFilter("All Status");
 			setStartDate(startOfMonth(subMonths(new Date(), 3)));
 			setEndDate(endOfMonth(new Date()));
 		};
 	}, []);
 
 	const filteredAndSortedTransactions = useMemo(() => {
+		if (!transactions || !Array.isArray(transactions)) {
+			return []; // Return an empty array if transactions is null or not an array
+		}
 		return transactions
 			.filter((transaction) => {
 				const transactionDate = parseISO(transaction.transaction_date);
@@ -66,7 +71,7 @@ const TransactionPage = () => {
 			.sort(
 				(a, b) => new Date(b.transaction_date) - new Date(a.transaction_date)
 			);
-	}, [filter, startDate, endDate]);
+	}, [filter, startDate, endDate, transactions]);
 
 	const groupedTransactions = useMemo(() => {
 		const groups = {};
@@ -125,7 +130,7 @@ const TransactionPage = () => {
 				<View className="flex-1 justify-center">
 					<TransDetails
 						setModalIsOpen={closeModal}
-						selectedTransactionId={selectedTransactionId}
+						selectedTransactionId={selectedTransactionId || undefined} // Fallback to undefined if null
 					/>
 				</View>
 			</Modal>
