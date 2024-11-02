@@ -56,11 +56,14 @@ const TransactionPage = () => {
 
 	const filteredAndSortedTransactions = useMemo(() => {
 		if (!transactions || !Array.isArray(transactions)) {
-			return []; // Return an empty array if transactions is null or not an array
+			return [];
 		}
 		return transactions
 			.filter((transaction) => {
 				const transactionDate = parseISO(transaction.transaction_date);
+				if (isNaN(transactionDate.getTime())) {
+					return false; // Skip this transaction if date parsing failed
+				}
 				const statusMatch =
 					filter === "All Status" ||
 					getStatusCategory(transaction.payment_response_code) === filter;
