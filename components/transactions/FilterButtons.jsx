@@ -4,7 +4,7 @@ import { TouchableOpacity, Text, View } from "react-native";
 // Reusable button styles
 const buttonStyles = {
 	padding: 8,
-	borderRadius: 16,
+	borderRadius: 10,
 	marginRight: 5,
 };
 
@@ -23,7 +23,7 @@ const filterButtonStyles = (isActive, color) => {
 
 const FilterButtons = ({ onFilterChange, currentFilter }) => {
 	return (
-		<View style={{ flexDirection: "row", marginTop: 5 }}>
+		<View style={{ flexDirection: "row", marginTop: 5 }} className='justify-between w-full'>
 			<TouchableOpacity
 				onPress={() => onFilterChange("All Status")}
 				style={filterButtonStyles(currentFilter === "All Status", "#888")}

@@ -2,53 +2,122 @@ import React, { useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"; // Importing icons
 import FilterButtons from "./FilterButtons";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import { subMonths, isBefore, isAfter, format, startOfMonth, endOfMonth } from "date-fns";
 
-// Reusable FilterHeader Component
-const FilterHeader = ({ onFilterChange, currentFilter, date }) => {
-	const [showFilters, setShowFilters] = useState(true); // State for toggling filter visibility
+const FilterHeader = ({
+	onFilterChange,
+	currentFilter,
+	startDate,
+	endDate,
+	onDateChange,
+}) => {
+	const [showFilters, setShowFilters] = useState(false); // State for toggling filter visibility
+	const [showDatePicker, setShowDatePicker] = useState(false);
+	const [dateType, setDateType] = useState("start");
+
+	// Define date limits
+	const today = new Date();
+	const threeMonthsAgo = subMonths(today, 3);
 
 	// Function to toggle filter visibility
 	const toggleFilters = () => {
 		setShowFilters((prev) => !prev);
 	};
 
+	const handleDateChange = (event, selectedDate) => {
+		setShowDatePicker(false);
+		if (selectedDate) {
+			if (dateType === "start") {
+				if (
+					isBefore(selectedDate, endDate) ||
+					selectedDate.getTime() === endDate.getTime()
+				) {
+					onDateChange(selectedDate, endDate);
+				} else {
+					alert("Start date must be before the end date.");
+				}
+			} else {
+				if (
+					isAfter(selectedDate, startDate) ||
+					selectedDate.getTime() === startDate.getTime()
+				) {
+					onDateChange(startDate, selectedDate);
+				} else {
+					alert("End date must be after the start date.");
+				}
+			}
+		}
+	};
+
 	return (
 		<View
 			style={{
-				padding: 16,
-				//backgroundColor: "#e0fff9",
+				padding: 4,
 				borderRadius: 10,
 				marginBottom: 24,
-				// shadowColor: "#000",
-				// shadowOffset: {
-				// 	width: 0,
-				// 	height: 2,
-				// },
-				// shadowOpacity: 0.25,
-				// shadowRadius: 3.84,
-				// elevation: 5,
 			}}
-            className='bg-slate-50'
 		>
 			<View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-				<View style={{ flexDirection: "column" }} className='items-center justify-center'>
-					{/* <Text style={{ fontSize: 18, fontWeight: "bold" }}>
-						Transaction History
-					</Text> */}
-					<Text style={{ fontSize: 16, color: "#6b7280" }}>{date}</Text>
+				<View
+					style={{ flexDirection: "row" }}
+					className="items-center justify-center space-x-4 bg-slate-50 p-4 rounded-lg"
+				>
+					<TouchableOpacity
+						onPress={() => {
+							setDateType("start");
+							setShowDatePicker(true);
+							setShowFilters(false);
+						}}
+					>
+						<Text className="text-sm text-gray-600">
+							{format(startDate, "dd MMM")}
+						</Text>
+					</TouchableOpacity>
+					<Ionicons name="arrow-forward" size={16} color="gray" />
+					<TouchableOpacity
+						onPress={() => {
+							setDateType("end");
+							setShowDatePicker(true);
+							setShowFilters(false);
+						}}
+					>
+						<Text className="text-sm text-gray-600">
+							{format(endDate, "dd MMM")}
+						</Text>
+					</TouchableOpacity>
+					{startDate.getTime() !==
+						startOfMonth(subMonths(new Date(), 3)).getTime() && (
+						<TouchableOpacity
+							onPress={() => {
+								onDateChange(
+									startOfMonth(subMonths(new Date(), 3)), // Reset to three months ago
+									new Date() // Reset to today's date
+								); // Resetting to default dates
+								
+								setShowFilters(false);
+							}}
+							style={{
+								marginLeft: 10,
+								padding: 2,
+								backgroundColor: "#ff000020",
+								borderRadius: 30,
+							}}
+						>
+							<Ionicons name="close" size={10} color="red" />
+						</TouchableOpacity>
+					)}
 				</View>
 
 				<View style={{ flexDirection: "row", alignItems: "center" }}>
 					<Text style={{ color: "#6b7280", marginRight: 10 }}>
-						<Text style={{ fontWeight: "bold" }}>
-							{currentFilter}
-						</Text>
+						<Text style={{ fontWeight: "bold" }}>{currentFilter}</Text>
 					</Text>
 					<TouchableOpacity
 						onPress={toggleFilters}
 						style={{
 							padding: 2,
-							backgroundColor: showFilters ? "#00ff0020": '#33333320',
+							backgroundColor: showFilters ? "#00ff0020" : "#33333320",
 							borderRadius: 30,
 						}}
 					>
@@ -76,19 +145,26 @@ const FilterHeader = ({ onFilterChange, currentFilter, date }) => {
 
 			{/* Show descriptive text before the filter options */}
 			{showFilters && (
-				<View className="justify-center w-full items-end">
-					{/* <Text style={{ marginTop: 10, color: "#6b7280" }}>
-						Select a filter to refine your transaction history:
-					</Text> */}
-					<View style={{ flexDirection: "row", marginTop: 5 }}>
-						{/* Show filter buttons only if currentFilter is not "All" */}
-
+				<View className="justify-center w-full items-center">
+					<View style={{ flexDirection: "row", marginTop: 24 }}>
 						<FilterButtons
 							onFilterChange={onFilterChange}
 							currentFilter={currentFilter}
 						/>
 					</View>
 				</View>
+			)}
+
+			{/* DateTimePicker for selecting date */}
+			{showDatePicker && (
+				<DateTimePicker
+					value={dateType === "start" ? startDate : endDate}
+					mode="date"
+					display="default"
+					onChange={handleDateChange}
+					minimumDate={threeMonthsAgo} // Restrict to three months backward
+					maximumDate={today} // Restrict to today
+				/>
 			)}
 		</View>
 	);
