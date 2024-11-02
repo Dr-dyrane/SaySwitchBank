@@ -23,7 +23,7 @@ export default function StacksLayout() {
 			<Stack.Screen
 				name="payout" // The only screen in this stack
 				options={{
-					title: "Withdraw to Profile Account", // Title for the payout screen
+					title: "Withdraw Funds", // Title for the payout screen
 					headerShown: true, // Show the header
 					headerRight: () => (
 						<Pressable
