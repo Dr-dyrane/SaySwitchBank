@@ -46,13 +46,13 @@ const TransactionPage = () => {
 		setEndDate(end);
 	};
 
-	useEffect(() => {
-		return () => {
-			setFilter("All Status");
-			setStartDate(startOfMonth(subMonths(new Date(), 3)));
-			setEndDate(endOfMonth(new Date()));
-		};
-	}, []);
+	// useEffect(() => {
+	// 	return () => {
+	// 		setFilter("All Status");
+	// 		setStartDate(startOfMonth(subMonths(new Date(), 3)));
+	// 		setEndDate(endOfMonth(new Date()));
+	// 	};
+	// }, []);
 
 	const filteredAndSortedTransactions = useMemo(() => {
 		if (!transactions || !Array.isArray(transactions)) {
