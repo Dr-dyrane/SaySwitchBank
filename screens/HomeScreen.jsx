@@ -336,14 +336,20 @@ export default function HomeScreen() {
 				</View>
 
 				{/* Display a limited number of transactions */}
-				<View className='px-1'>
-					{displayedTransactions.map((transaction) => (
-						<TransactionCard
-							key={transaction.id}
-							transaction={transaction}
-							onViewDetails={handleViewDetails}
-						/>
-					))}
+				<View className="px-1">
+					{displayedTransactions && displayedTransactions.length > 0 ? (
+						displayedTransactions.map((transaction) => (
+							<TransactionCard
+								key={transaction.id}
+								transaction={transaction}
+								onViewDetails={handleViewDetails}
+							/>
+						))
+					) : (
+						<Text className="text-gray-500 text-center">
+							No transactions found.
+						</Text>
+					)}
 				</View>
 			</ScrollView>
 			{/* Modal for Transaction Details */}

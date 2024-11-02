@@ -93,21 +93,28 @@ const TransactionPage = () => {
 				onDateChange={handleDateChange}
 			/>
 			<ScrollView>
-				{Object.entries(groupedTransactions).map(
-					([month, monthTransactions]) => (
-						<View key={month} className="mb-2">
-							<Text className="mb-2 text-gray-500">{month}</Text>
-							{monthTransactions.map((transaction) => (
-								<TransactionCard
-									key={transaction.id}
-									transaction={transaction}
-									onViewDetails={handleViewDetails}
-								/>
-							))}
-						</View>
+				{Object.entries(groupedTransactions).length === 0 ? (
+					<Text className="text-gray-500 text-center">
+						No transactions found.
+					</Text>
+				) : (
+					Object.entries(groupedTransactions).map(
+						([month, monthTransactions]) => (
+							<View key={month} className="mb-2">
+								<Text className="mb-2 text-gray-500">{month}</Text>
+								{monthTransactions.map((transaction) => (
+									<TransactionCard
+										key={transaction.id}
+										transaction={transaction}
+										onViewDetails={handleViewDetails}
+									/>
+								))}
+							</View>
+						)
 					)
 				)}
 			</ScrollView>
+
 			{/* Modal for Transaction Details */}
 			<Modal
 				animationType="slide"
