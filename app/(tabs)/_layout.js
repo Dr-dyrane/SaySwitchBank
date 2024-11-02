@@ -141,7 +141,7 @@ export default function TabsLayout() {
 											width: 10,
 											height: 10,
 											borderRadius: 999,
-											backgroundColor: "#00dc8c",
+											backgroundColor: "#008773",
 										}}
 									/>
 								</View>
