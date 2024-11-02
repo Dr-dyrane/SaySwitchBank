@@ -171,9 +171,12 @@ export function ConfirmationModal({
 								<View className="flex-row justify-center mt-8">
 									<TouchableOpacity
 										onPress={onConfirm}
-										className="bg-primary p-3 rounded-2xl w-full"
+										className="bg-primary flex flex-row items-center justify-between p-4 rounded-2xl w-full shadow-md"
 									>
-										<Text className="text-white text-center text-lg">Pay</Text>
+										<Text className="text-white text-center text-lg">Withdraw Funds</Text>
+										<View className="w-6 h-6 bg-none border border-white rounded-full justify-center items-center">
+											<Ionicons name="arrow-down" size={18} color="white" />
+										</View>
 									</TouchableOpacity>
 								</View>
 							</View>
