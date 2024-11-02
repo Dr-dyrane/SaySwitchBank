@@ -41,11 +41,12 @@ export default function PayoutScreen() {
 
 	useEffect(() => {
 		// Filter transactions by service_type
-		const filtered = transactions.filter(
-			(t) => t.service_type === "Payout to Profiled Account"
-		);
+		const filtered = transactions
+			.filter((t) => t.service_type === "Payout to Profiled Account")
+			.slice(-3); // Get the last 3 transactions
+
 		setFilteredTransactions(filtered);
-	}, []);
+	}, [transactions]);
 
 	const [modalVisible, setModalVisible] = useState(false);
 	const [selectedTransactionId, setSelectedTransactionId] = useState(null);
@@ -95,7 +96,7 @@ export default function PayoutScreen() {
 			style={styles.container}
 		>
 			<ScrollView contentContainerStyle={styles.scrollContent}>
-				<View className='mb-6'>
+				<View className="mb-6">
 					<Banner />
 				</View>
 				<View>
