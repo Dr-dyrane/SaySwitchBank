@@ -28,7 +28,7 @@ const accounts = [
 	{ id: 3, name: "Business Account", number: "**** 9012", icon: "briefcase" },
 ];
 
-const quickAmounts = [10000, 25000, 50000, 100000];
+const quickAmounts = [5000, 10000, 25000, 50000, 100000];
 
 export default function PayoutScreen() {
 	const [step, setStep] = useState(1);
@@ -41,12 +41,13 @@ export default function PayoutScreen() {
 	const router = useRouter();
 
 	useEffect(() => {
+		const sliceCount = step === 1 ? 3 : 2;
 		const filtered = transactions
 			.filter((t) => t.service_type === "Payout to Profiled Account")
-			.slice(-3);
+			.slice(-sliceCount);
 
 		setFilteredTransactions(filtered);
-	}, [transactions]);
+	}, [transactions, step]);
 
 	const [modalVisible, setModalVisible] = useState(false);
 	const [selectedTransactionId, setSelectedTransactionId] = useState(null);
@@ -107,25 +108,39 @@ export default function PayoutScreen() {
 								onPress={() => setIsAccountModalOpen(true)}
 							>
 								{selectedAccount ? (
-									<View className="flex-row items-center">
-										<View className="bg-[#E5F5F1] p-2 rounded-full mr-3">
-											<Ionicons
-												name={selectedAccount.icon}
-												size={24}
-												color="#008773"
-											/>
+									<View className="flex-row items-center justify-between w-full">
+										<View className="flex-row items-center">
+											<View className="bg-[#E5F5F1] p-2 rounded-full mr-3">
+												<Ionicons
+													name={selectedAccount.icon}
+													size={24}
+													color="#008773"
+												/>
+											</View>
+											<View>
+												<Text className="font-semibold text-gray-800">
+													{selectedAccount.name}
+												</Text>
+												<Text className="text-gray-500">
+													{selectedAccount.number}
+												</Text>
+											</View>
 										</View>
-										<View>
-											<Text className="font-semibold text-gray-800">
-												{selectedAccount.name}
-											</Text>
-											<Text className="text-gray-500">
-												{selectedAccount.number}
-											</Text>
-										</View>
+										<TouchableOpacity
+											onPress={() => {
+												setSelectedAccount(null);
+											}}
+											style={{
+												padding: 4,
+												backgroundColor: "#ff000020",
+												borderRadius: 30,
+											}}
+										>
+											<Ionicons name="close" size={10} color="red" />
+										</TouchableOpacity>
 									</View>
 								) : (
-									<Text className="text-gray-400 p-2">Select an account</Text>
+									<Text className="text-gray-400 p-2.5">Select an account</Text>
 								)}
 							</TouchableOpacity>
 						</View>
@@ -133,40 +148,80 @@ export default function PayoutScreen() {
 
 					{step === 2 && (
 						<View>
-							<View className="flex-row justify-between">
-								<Text className="text-lg font-semibold text-gray-800">
-									Enter Amount
-								</Text>
+							<View className="flex-row justify-between mb-4">
+								<Text className="text-gray-500">Enter Amount</Text>
 								<Pressable onPress={() => setStep(1)}>
 									<Text className="text-primary">Go Back</Text>
 								</Pressable>
 							</View>
-							<TextInput
-								className="border border-gray-300 rounded-lg p-3 text-lg mb-4"
-								value={amount}
-								onChangeText={setAmount}
-								placeholder="Enter amount"
-								keyboardType="numeric"
-							/>
-							<View className="flex-row justify-between mb-4">
+							<View className="flex-row items-center bg-slate-50 p-3 px-4 rounded-xl mb-4">
+								<Text className="mr-2">₦</Text>
+								<TextInput
+									className="flex-1 bg-transparent"
+									value={amount}
+									onChangeText={setAmount}
+									placeholder="Enter amount"
+									keyboardType="numeric"
+								/>
+								{amount && (
+									<TouchableOpacity
+										onPress={() => {
+											setAmount("");
+										}}
+										style={{
+											padding: 4,
+											backgroundColor: "#ff000020",
+											borderRadius: 30,
+										}}
+									>
+										<Ionicons name="close" size={10} color="red" />
+									</TouchableOpacity>
+								)}
+							</View>
+
+							<ScrollView
+								horizontal
+								contentContainerStyle={{
+									width: "100%",
+									justifyContent: "space-between",
+								}}
+								className="flex-row space-x-4 mb-4"
+							>
 								{quickAmounts.map((quickAmount) => (
 									<TouchableOpacity
 										key={quickAmount}
 										onPress={() => handleAmountSelect(quickAmount)}
-										className="bg-teal-100 p-2 rounded-lg"
+										className="bg-slate-50 p-2 rounded-md"
 									>
-										<Text className="text-teal-600 font-medium">
+										<Text className="font-medium">
 											₦{quickAmount.toLocaleString()}
 										</Text>
 									</TouchableOpacity>
 								))}
+							</ScrollView>
+
+							<View className="flex-row items-center bg-slate-50 rounded-xl p-3 mb-4">
+								<TextInput
+									className="flex-1 bg-transparent"
+									value={remark}
+									onChangeText={setRemark}
+									placeholder="Add a remark (optional)"
+								/>
+								{remark && (
+									<TouchableOpacity
+										onPress={() => {
+											setRemark("");
+										}}
+										style={{
+											padding: 4,
+											backgroundColor: "#ff000020",
+											borderRadius: 30,
+										}}
+									>
+										<Ionicons name="close" size={10} color="red" />
+									</TouchableOpacity>
+								)}
 							</View>
-							<TextInput
-								className="border border-gray-300 rounded-xl p-3 text-lg mb-4"
-								value={remark}
-								onChangeText={setRemark}
-								placeholder="Add a remark (optional)"
-							/>
 						</View>
 					)}
 
