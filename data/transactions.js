@@ -9,6 +9,8 @@ const transactions = [
 		direction: "Credit",
 		transaction_reference: "AIR12345",
 		payment_response_code: "00",
+		narration: "Airtime recharge for 08012345678",
+		stan: "123456",
 	},
 	{
 		id: 2,
@@ -20,6 +22,8 @@ const transactions = [
 		direction: "Credit",
 		transaction_reference: "BILL12346",
 		payment_response_code: "01",
+		narration: "IKEDC Electricity bill payment",
+		stan: "123457",
 	},
 	{
 		id: 3,
@@ -31,6 +35,8 @@ const transactions = [
 		direction: "Credit",
 		transaction_reference: "BILL12347",
 		payment_response_code: "99",
+		narration: "Lagos Water Corporation bill payment",
+		stan: "123458",
 	},
 	{
 		id: 4,
@@ -42,6 +48,8 @@ const transactions = [
 		direction: "Credit",
 		transaction_reference: "FUND12348",
 		payment_response_code: "00",
+		narration: "Funds received from Sarah Brown",
+		stan: "123459",
 	},
 	{
 		id: 5,
@@ -53,6 +61,8 @@ const transactions = [
 		direction: "Credit",
 		transaction_reference: "TV12349",
 		payment_response_code: "00",
+		narration: "DSTV subscription renewal",
+		stan: "123460",
 	},
 	{
 		id: 6,
@@ -64,6 +74,8 @@ const transactions = [
 		direction: "Debit",
 		transaction_reference: "PAY12350",
 		payment_response_code: "00",
+		narration: "Payout to Agency account",
+		stan: "123461",
 	},
 	{
 		id: 7,
@@ -75,6 +87,8 @@ const transactions = [
 		direction: "Credit",
 		transaction_reference: "AIR12351",
 		payment_response_code: "00",
+		narration: "Airtime recharge for 08087654321",
+		stan: "123462",
 	},
 	{
 		id: 8,
@@ -86,6 +100,8 @@ const transactions = [
 		direction: "Credit",
 		transaction_reference: "NET12352",
 		payment_response_code: "00",
+		narration: "MTN 40GB data plan subscription",
+		stan: "123463",
 	},
 	{
 		id: 9,
@@ -97,6 +113,8 @@ const transactions = [
 		direction: "Credit",
 		transaction_reference: "BILL12353",
 		payment_response_code: "01",
+		narration: "EKEDC Electricity bill payment",
+		stan: "123464",
 	},
 	{
 		id: 10,
@@ -108,6 +126,8 @@ const transactions = [
 		direction: "Credit",
 		transaction_reference: "FUND12354",
 		payment_response_code: "00",
+		narration: "Funds received from James Brown",
+		stan: "123465",
 	},
 	{
 		id: 11,
@@ -119,6 +139,8 @@ const transactions = [
 		direction: "Credit",
 		transaction_reference: "BILL12355",
 		payment_response_code: "99",
+		narration: "Abuja Water Board bill payment",
+		stan: "123466",
 	},
 	{
 		id: 12,
@@ -130,6 +152,8 @@ const transactions = [
 		direction: "Debit",
 		transaction_reference: "PAY12356",
 		payment_response_code: "00",
+		narration: "Payout to Agency account",
+		stan: "123467",
 	},
 	{
 		id: 13,
@@ -141,6 +165,8 @@ const transactions = [
 		direction: "Credit",
 		transaction_reference: "TV12357",
 		payment_response_code: "00",
+		narration: "GOtv subscription renewal",
+		stan: "123468",
 	},
 	{
 		id: 14,
@@ -152,6 +178,8 @@ const transactions = [
 		direction: "Credit",
 		transaction_reference: "AIR12358",
 		payment_response_code: "00",
+		narration: "Airtime recharge for 07098765432",
+		stan: "123469",
 	},
 	{
 		id: 15,
@@ -163,6 +191,8 @@ const transactions = [
 		direction: "Credit",
 		transaction_reference: "NET12359",
 		payment_response_code: "01",
+		narration: "Airtel 60GB data plan subscription",
+		stan: "123470",
 	},
 	{
 		id: 16,
@@ -174,6 +204,8 @@ const transactions = [
 		direction: "Credit",
 		transaction_reference: "BILL12360",
 		payment_response_code: "00",
+		narration: "PHEDC Electricity bill payment",
+		stan: "123471",
 	},
 	{
 		id: 17,
@@ -185,6 +217,8 @@ const transactions = [
 		direction: "Credit",
 		transaction_reference: "AIR12361",
 		payment_response_code: "00",
+		narration: "Airtime recharge for 08123456789",
+		stan: "123472",
 	},
 	{
 		id: 18,
@@ -196,6 +230,8 @@ const transactions = [
 		direction: "Credit",
 		transaction_reference: "TV12362",
 		payment_response_code: "99",
+		narration: "StarTimes subscription renewal",
+		stan: "123473",
 	},
 	{
 		id: 19,
@@ -207,6 +243,8 @@ const transactions = [
 		direction: "Credit",
 		transaction_reference: "FUND12363",
 		payment_response_code: "00",
+		narration: "Funds received from William Taylor",
+		stan: "123474",
 	},
 	{
 		id: 20,
@@ -218,6 +256,8 @@ const transactions = [
 		direction: "Debit",
 		transaction_reference: "PAY12364",
 		payment_response_code: "00",
+		narration: "Payout to Agency account",
+		stan: "123475",
 	},
 	{
 		id: 21,
@@ -229,6 +269,8 @@ const transactions = [
 		direction: "Credit",
 		transaction_reference: "BILL12365",
 		payment_response_code: "01",
+		narration: "Kaduna Water Board bill payment",
+		stan: "123476",
 	},
 	{
 		id: 22,
@@ -240,6 +282,8 @@ const transactions = [
 		direction: "Credit",
 		transaction_reference: "NET12366",
 		payment_response_code: "00",
+		narration: "9mobile 10GB data plan subscription",
+		stan: "123477",
 	},
 ];
 
