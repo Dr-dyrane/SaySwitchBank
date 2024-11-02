@@ -56,8 +56,12 @@ function AuthenticatedStack() {
 		<Stack>
 			{/* Define the screen without showing the header */}
 			<Stack.Screen
-				name={isAuthenticated ? "(tabs)" : "(auth)"}
+				name={isAuthenticated ? "(tabs)" : "(auth)"} // Show tabs for authenticated users, auth for others
 				options={{ headerShown: false }} // Hide the header
+			/>
+			<Stack.Screen
+				name="(stacks)" // Show stacks for authenticated users
+				options={{ headerShown: false }} // Hide the header for stacks as well
 			/>
 		</Stack>
 	);
