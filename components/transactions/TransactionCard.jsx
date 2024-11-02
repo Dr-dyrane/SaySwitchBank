@@ -1,6 +1,10 @@
 import React from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import { Ionicons } from "@expo/vector-icons"; // Icon for directional arrows
+import {
+	Ionicons,
+	MaterialCommunityIcons,
+	FontAwesome5,
+} from "@expo/vector-icons"; // Icon for directional arrows
 
 export const getStatusCategory = (payment_response_code) => {
 	const approvedCodes = ["00"];
@@ -15,6 +19,51 @@ export const getStatusCategory = (payment_response_code) => {
 	}
 };
 
+const getServiceTypeIcon = (serviceType) => {
+	switch (serviceType) {
+		case "Airtime Recharge":
+			return (
+				<MaterialCommunityIcons
+					name="phone-in-talk"
+					size={18}
+					color="#4a5568"
+				/>
+			);
+		case "Electricity Bill Payment":
+			return (
+				<MaterialCommunityIcons
+					name="lightning-bolt"
+					size={18}
+					color="#4a5568"
+				/>
+			);
+		case "Water Bill Payment":
+			return <MaterialCommunityIcons name="water" size={18} color="#4a5568" />;
+		case "Fund Receipt":
+			return (
+				<MaterialCommunityIcons name="cash-plus" size={18} color="#4a5568" />
+			);
+		case "TV Subscription":
+			return (
+				<MaterialCommunityIcons name="television" size={18} color="#4a5568" />
+			);
+		case "Payout to Profiled Account":
+			return (
+				<MaterialCommunityIcons
+					name="bank-transfer"
+					size={18}
+					color="#4a5568"
+				/>
+			);
+		case "Internet Subscription":
+			return <FontAwesome5 name="wifi" size={16} color="#4a5568" />;
+		default:
+			return (
+				<MaterialCommunityIcons name="help-circle" size={18} color="#4a5568" />
+			);
+	}
+};
+
 const TransactionCard = ({ transaction, onViewDetails }) => {
 	const {
 		id,
@@ -26,6 +75,7 @@ const TransactionCard = ({ transaction, onViewDetails }) => {
 		direction,
 		transaction_reference,
 		payment_response_code,
+		service_type,
 	} = transaction;
 
 	// Format the date without external dependencies
@@ -85,7 +135,6 @@ const TransactionCard = ({ transaction, onViewDetails }) => {
 	return (
 		<TouchableOpacity
 			onPress={handleRowClick}
-
 			style={{
 				padding: 10,
 				marginBottom: 10,
@@ -119,17 +168,26 @@ const TransactionCard = ({ transaction, onViewDetails }) => {
 			>
 				{icon}
 			</View>
+			<View className="justify-center items-center p-1.5 ml-1.5 rounded-full bg-[#4a5968]/5">
+				{getServiceTypeIcon(service_type)}
+			</View>
 
 			{/* Details */}
-			<View className='space-y-[2px] ml-2' style={{ flex: 1, justifyContent: "center", padding: 5 }}>
-				<Text style={{ fontWeight: "bold"}}>
-					{transferDescription}
+			<View
+				className="space-y-[2px] ml-2"
+				style={{ flex: 1, justifyContent: "center", padding: 5 }}
+			>
+				<Text style={{ fontWeight: "bold" }}>{transferDescription}</Text>
+				<Text className="text-xs" style={{ color: "#6b7280" }}>
+					{formattedDate}
 				</Text>
-				<Text className='text-xs' style={{ color: "#6b7280" }}>{formattedDate}</Text>
 			</View>
 
 			{/* Amount and Status */}
-			<View style={{ alignItems: "flex-end", padding: 5 }} className='space-y-[2px]'>
+			<View
+				style={{ alignItems: "flex-end", padding: 5 }}
+				className="space-y-[2px]"
+			>
 				<Text
 					style={{
 						fontWeight: "bold",
@@ -149,7 +207,7 @@ const TransactionCard = ({ transaction, onViewDetails }) => {
 						paddingHorizontal: 8,
 						borderRadius: 6,
 					}}
-					className='py-[4px]'
+					className="py-[4px]"
 				>
 					<Text
 						style={{
