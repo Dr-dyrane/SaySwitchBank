@@ -3,7 +3,14 @@ import { View, Text, TouchableOpacity } from "react-native";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons"; // Importing icons
 import FilterButtons from "./FilterButtons";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { subMonths, isBefore, isAfter, format, startOfMonth, endOfMonth } from "date-fns";
+import {
+	subMonths,
+	isBefore,
+	isAfter,
+	format,
+	startOfMonth,
+	endOfMonth,
+} from "date-fns";
 
 const FilterHeader = ({
 	onFilterChange,
@@ -53,7 +60,7 @@ const FilterHeader = ({
 	return (
 		<View
 			style={{
-				padding: 4,
+				padding: 0,
 				borderRadius: 10,
 				marginBottom: 24,
 			}}
@@ -64,24 +71,36 @@ const FilterHeader = ({
 					className="items-center justify-center space-x-4 bg-slate-50 p-4 rounded-lg"
 				>
 					<TouchableOpacity
+						className="flex-row space-x-1"
 						onPress={() => {
 							setDateType("start");
 							setShowDatePicker(true);
 							setShowFilters(false);
 						}}
 					>
+						<MaterialCommunityIcons
+							name="calendar-start"
+							size={16}
+							color="teal"
+						/>
 						<Text className="text-sm text-gray-600">
 							{format(startDate, "dd MMM")}
 						</Text>
 					</TouchableOpacity>
 					<Ionicons name="arrow-forward" size={16} color="gray" />
 					<TouchableOpacity
+						className="flex-row space-x-1"
 						onPress={() => {
 							setDateType("end");
 							setShowDatePicker(true);
 							setShowFilters(false);
 						}}
 					>
+						<MaterialCommunityIcons
+							name="calendar-end"
+							size={16}
+							color="black"
+						/>
 						<Text className="text-sm text-gray-600">
 							{format(endDate, "dd MMM")}
 						</Text>
@@ -94,7 +113,7 @@ const FilterHeader = ({
 									startOfMonth(subMonths(new Date(), 3)), // Reset to three months ago
 									new Date() // Reset to today's date
 								); // Resetting to default dates
-								
+
 								setShowFilters(false);
 							}}
 							style={{
@@ -109,7 +128,7 @@ const FilterHeader = ({
 					)}
 				</View>
 
-				<View style={{ flexDirection: "row", alignItems: "center" }}>
+				<View style={{ flexDirection: "row", alignItems: "center" }} className='bg-slate-50 p-4 rounded-lg'>
 					<Text style={{ color: "#6b7280", marginRight: 10 }}>
 						<Text style={{ fontWeight: "bold" }}>{currentFilter}</Text>
 					</Text>
@@ -123,7 +142,7 @@ const FilterHeader = ({
 					>
 						<MaterialCommunityIcons
 							name={showFilters ? "toggle-switch" : "toggle-switch-off"}
-							size={24}
+							size={16}
 							color={showFilters ? "green" : "gray"}
 						/>
 					</TouchableOpacity>
@@ -132,7 +151,7 @@ const FilterHeader = ({
 							onPress={() => onFilterChange("All Status")} // Clear Filter Option
 							style={{
 								marginLeft: 10,
-								padding: 5,
+								padding: 2,
 								backgroundColor: "#ff000020",
 								borderRadius: 30,
 							}}

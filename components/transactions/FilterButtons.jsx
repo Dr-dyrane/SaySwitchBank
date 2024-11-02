@@ -14,7 +14,7 @@ const filterButtonStyles = (isActive, color) => {
 
 	return {
 		...buttonStyles,
-		backgroundColor: isActive ? "#d1fae5" : "#e0f2f1",
+		backgroundColor: isActive ? "#f8fafc" : "#f8fafc",
 		padding: isActive ? 8 : 10,
 		borderWidth: isActive ? 2 : 0,
 		borderColor: borderColorWithOpacity,
@@ -26,7 +26,7 @@ const FilterButtons = ({ onFilterChange, currentFilter }) => {
 		<View style={{ flexDirection: "row", marginTop: 5 }} className='justify-between w-full'>
 			<TouchableOpacity
 				onPress={() => onFilterChange("All Status")}
-				style={filterButtonStyles(currentFilter === "All Status", "#888")}
+				style={filterButtonStyles(currentFilter === "All Status", "transparent")}
 			>
 				<Text style={{ color: "#333", fontWeight: "bold" }}>All Status</Text>
 			</TouchableOpacity>
