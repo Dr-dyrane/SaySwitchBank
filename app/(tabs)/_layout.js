@@ -155,12 +155,17 @@ export default function TabsLayout() {
 				name="transactions"
 				options={{
 					title: "Transactions",
-					tabBarIcon: ({ color, size, focused }) => (
-						<Ionicons
-							name={focused ? "cash" : "cash-outline"}
-							color={color}
-							size={24}
-						/>
+					tabBarIcon: ({ focused }) => (
+						<View style={{ width: 24, height: 24 }}>
+							<Image
+								source={
+									focused
+										? require("../../assets/icons/transaction-sharp.png") // Focused icon
+										: require("../../assets/icons/transaction.png") // Unfocused icon
+								}
+								style={{ width: 24, height: 24 }} // Set width and height for the icon
+							/>
+						</View>
 					), // Add Ionicons for Transactions tab
 					headerShown: true,
 				}}
@@ -171,12 +176,17 @@ export default function TabsLayout() {
 				name="profile"
 				options={{
 					title: "Profile",
-					tabBarIcon: ({ color, size, focused }) => (
-						<Ionicons
-							name={focused ? "person" : "person-outline"}
-							color={color}
-							size={24}
-						/>
+					tabBarIcon: ({ focused }) => (
+						<View style={{ width: 24, height: 24 }}>
+							<Image
+								source={
+									focused
+										? require("../../assets/icons/profile-sharp.png") // Focused icon
+										: require("../../assets/icons/profile.png") // Unfocused icon
+								}
+								style={{ width: 24, height: 24 }} // Set width and height for the icon
+							/>
+						</View>
 					), // Add Ionicons for Profile tab
 					headerShown: true,
 				}}
@@ -187,16 +197,17 @@ export default function TabsLayout() {
 				name="more"
 				options={{
 					title: "More",
-					tabBarIcon: ({ color, size, focused }) => (
-						<Ionicons
-							name={
-								focused
-									? "ellipsis-horizontal-circle-sharp"
-									: "ellipsis-horizontal-circle"
-							}
-							color={color}
-							size={24}
-						/>
+					tabBarIcon: ({ focused }) => (
+						<View style={{ width: 24, height: 24 }}>
+							<Image
+								source={
+									focused
+										? require("../../assets/icons/more-sharp.png") // Focused icon
+										: require("../../assets/icons/more.png") // Unfocused icon
+								}
+								style={{ width: 24, height: 24 }} // Set width and height for the icon
+							/>
+						</View>
 					),
 					headerTitle: "More Options",
 					headerShown: true,
