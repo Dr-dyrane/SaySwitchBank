@@ -1,5 +1,5 @@
 import React from 'react';
-import TransactionsScreen from '../../screens/TransactionsScreen';
+import TransactionsScreen from '../../../screens/TransactionsScreen';
 
 const Transactions = () => {
   return (

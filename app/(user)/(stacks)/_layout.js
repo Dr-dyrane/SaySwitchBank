@@ -1,3 +1,5 @@
+// app/(stacks)/_layout.js
+
 import { Stack } from "expo-router";
 import { Pressable, Text } from "react-native";
 import { useRouter } from "expo-router"; // Import useRouter for navigation

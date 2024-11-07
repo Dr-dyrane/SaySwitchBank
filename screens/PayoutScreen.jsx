@@ -93,7 +93,7 @@ export default function PayoutScreen() {
 			setRemark("");
 			setIsConfirmModalOpen(false);
 			showToast("Transaction successful!", "success");
-			router.replace("/(tabs)");
+			router.replace("(tabs)");
 			setLoading(false);
 		}, 3000);
 	};

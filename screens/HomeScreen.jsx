@@ -149,7 +149,7 @@ export default function HomeScreen() {
 			iconName: "arrow-forward-circle",
 			iconColor: "#008773",
 			backgroundColor: "#e6f7ff",
-			onPress: () => router.push("/payout"),
+			onPress: () => router.push("payout"),
 		},
 		{
 			title: "Pay Bills",

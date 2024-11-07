@@ -1,10 +1,13 @@
+// app/(tabs)/_layout.js
+
 import { Tabs } from "expo-router";
 import { AntDesign, Ionicons } from "@expo/vector-icons"; // Import Ionicons for tab icons
 import { useRouter } from "expo-router";
 import React, { useEffect, useRef } from "react";
 import { Animated, Image, Text, TouchableOpacity, View } from "react-native";
-import { useAuth } from "../../contexts/AuthContext";
-import { useToast } from "../../contexts/ToastContext";
+import { useToast } from "../../../contexts/ToastContext";
+import { useAuth } from "../../../contexts/AuthContext";
+
 
 export default function TabsLayout() {
 	const router = useRouter();
@@ -68,8 +71,8 @@ export default function TabsLayout() {
 							<Image
 								source={
 									focused
-										? require("../../assets/icons/home-sharp.png") // Focused icon
-										: require("../../assets/icons/home.png") // Unfocused icon
+										? require("../../../assets/icons/home-sharp.png") // Focused icon
+										: require("../../../assets/icons/home.png") // Unfocused icon
 								}
 								style={{ width: 24, height: 24 }} // Set width and height for the icon
 							/>
@@ -87,7 +90,7 @@ export default function TabsLayout() {
 								source={
 									user.imageUri
 										? { uri: user.imageUri }
-										: require("../../assets/profile.jpg")
+										: require("../../../assets/profile.jpg")
 								}
 								resizeMode="fit"
 								style={{
@@ -161,8 +164,8 @@ export default function TabsLayout() {
 							<Image
 								source={
 									focused
-										? require("../../assets/icons/transaction-sharp.png") // Focused icon
-										: require("../../assets/icons/transaction.png") // Unfocused icon
+										? require("../../../assets/icons/transaction-sharp.png") // Focused icon
+										: require("../../../assets/icons/transaction.png") // Unfocused icon
 								}
 								style={{ width: 24, height: 24 }} // Set width and height for the icon
 							/>
@@ -182,8 +185,8 @@ export default function TabsLayout() {
 							<Image
 								source={
 									focused
-										? require("../../assets/icons/profile-sharp.png") // Focused icon
-										: require("../../assets/icons/profile.png") // Unfocused icon
+										? require("../../../assets/icons/profile-sharp.png") // Focused icon
+										: require("../../../assets/icons/profile.png") // Unfocused icon
 								}
 								style={{ width: 24, height: 24 }} // Set width and height for the icon
 							/>
@@ -203,8 +206,8 @@ export default function TabsLayout() {
 							<Image
 								source={
 									focused
-										? require("../../assets/icons/more-sharp.png") // Focused icon
-										: require("../../assets/icons/more.png") // Unfocused icon
+										? require("../../../assets/icons/more-sharp.png") // Focused icon
+										: require("../../../assets/icons/more.png") // Unfocused icon
 								}
 								style={{ width: 24, height: 24 }} // Set width and height for the icon
 							/>

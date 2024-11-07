@@ -46,7 +46,7 @@ function AuthenticatedStack() {
 
 		// Check authentication state and navigate accordingly
 		if (user.isAuthenticated) {
-			router.replace("(tabs)"); // Replace current route with the tabs route
+			router.replace("(user)"); // Replace current route with the user route
 		} else {
 			router.replace("(auth)"); // Replace current route with the auth route
 		}
@@ -56,12 +56,8 @@ function AuthenticatedStack() {
 		<Stack>
 			{/* Define the screen without showing the header */}
 			<Stack.Screen
-				name={isAuthenticated ? "(tabs)" : "(auth)"} // Show tabs for authenticated users, auth for others
+				name={isAuthenticated ? "(user)" : "(auth)"} // Show user for authenticated users, auth for others
 				options={{ headerShown: false }} // Hide the header
-			/>
-			<Stack.Screen
-				name="(stacks)" // Show stacks for authenticated users
-				options={{ headerShown: false }} // Hide the header for stacks as well
 			/>
 		</Stack>
 	);
