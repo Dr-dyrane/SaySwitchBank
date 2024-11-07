@@ -58,7 +58,8 @@ export default function PayoutScreen() {
 	const handleViewDetails = (id) => {
 		//setSelectedTransactionId(id);
 		//setModalVisible(true);
-		router.push('transactions')
+		// router.push('transactions')
+		router.push({ pathname: "transDetails", params: { id } });
 	};
 
 	const closeModal = () => {

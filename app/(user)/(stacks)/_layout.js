@@ -39,6 +39,14 @@ export default function StacksLayout() {
 					...commonStackOptions,
 				}}
 			/>
+			<Stack.Screen
+				name="transDetails"
+				options={{
+					title: "Transaction Details",
+					headerShown: false,
+					...commonStackOptions,
+				}}
+			/>
 		</Stack>
 	);
 }

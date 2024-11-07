@@ -6,6 +6,7 @@ import { useToast } from "../../contexts/ToastContext";
 import { LinearGradient } from "expo-linear-gradient";
 import * as NavigationBar from "expo-navigation-bar";
 import logo from "./../../assets/icon.png";
+import { useLocalSearchParams, useRouter } from "expo-router";
 
 // Function to map currency ID to currency name (ISO 4217)
 const getCurrencyName = (currencyId) => {
@@ -41,6 +42,8 @@ const formatDate = (date) => {
 // Main Transaction Details Component
 const TransDetails = ({ setModalIsOpen, selectedTransactionId }) => {
 	const { showToast } = useToast();
+	const { id } = useLocalSearchParams();
+	const router = useRouter();
 
 	// Move AuthProvider outside the return statement to ensure useAuth can be used
 	useEffect(() => {
@@ -61,7 +64,7 @@ const TransDetails = ({ setModalIsOpen, selectedTransactionId }) => {
 	// Function to get a single transaction's details
 	const getSingleTrans = () => {
 		const transaction = transactions.find(
-			(trans) => trans.id === selectedTransactionId
+			(trans) => trans.id === parseInt(id) || selectedTransactionId
 		);
 		if (!transaction) {
 			showToast("Transaction not found", "error");
@@ -101,10 +104,18 @@ const TransDetails = ({ setModalIsOpen, selectedTransactionId }) => {
 			}
 			className="flex flex-col w-full h-full p-6 pt-3 bg-backgroundLight  justify-start items-center"
 		>
-			<HeaderSection
-				handleCloseModal={() => setModalIsOpen(false)}
-				selectedTransactionId={selectedTransactionId}
-			/>
+			{setModalIsOpen && (
+				<HeaderSection
+					handleCloseModal={() => setModalIsOpen(false)}
+					selectedTransactionId={selectedTransactionId}
+				/>
+			)}
+			{id && (
+				<Header
+					handleCloseModal={() => router.back()}
+					selectedTransactionId={id}
+				/>
+			)}
 			<TitleSection
 				transferDescription={data.narration}
 				amount={data.amount}
@@ -161,6 +172,15 @@ const TransDetails = ({ setModalIsOpen, selectedTransactionId }) => {
 
 const HeaderSection = ({ handleCloseModal, selectedTransactionId }) => (
 	<View className="flex flex-row justify-between items-center mb-10 w-full">
+		<TouchableOpacity onPress={handleCloseModal}>
+			<Icon name="arrow-back" size={24} color="black" />
+		</TouchableOpacity>
+		<Text className="text-lg">Transaction Details</Text>
+		<Text className="text-md">ID: {selectedTransactionId || "N/A"}</Text>
+	</View>
+);
+const Header = ({ handleCloseModal, selectedTransactionId }) => (
+	<View className="flex flex-row justify-between items-center my-10 w-full">
 		<TouchableOpacity onPress={handleCloseModal}>
 			<Icon name="arrow-back" size={24} color="black" />
 		</TouchableOpacity>
