@@ -42,7 +42,7 @@ const formatDate = (date) => {
 // Main Transaction Details Component
 const TransDetails = ({ setModalIsOpen, selectedTransactionId }) => {
 	const { showToast } = useToast();
-	const { id } = useLocalSearchParams();
+	const { id = selectedTransactionId } = useLocalSearchParams(); // Fallback to selectedTransactionId if id is undefined
 	const router = useRouter();
 
 	// Move AuthProvider outside the return statement to ensure useAuth can be used
@@ -63,9 +63,7 @@ const TransDetails = ({ setModalIsOpen, selectedTransactionId }) => {
 
 	// Function to get a single transaction's details
 	const getSingleTrans = () => {
-		const transaction = transactions.find(
-			(trans) => trans.id === parseInt(id) || selectedTransactionId
-		);
+		const transaction = transactions.find((trans) => trans.id === parseInt(id));
 		if (!transaction) {
 			showToast("Transaction not found", "error");
 			return null; // Return null if not found
@@ -104,18 +102,19 @@ const TransDetails = ({ setModalIsOpen, selectedTransactionId }) => {
 			}
 			className="flex flex-col w-full h-full p-6 pt-3 bg-backgroundLight  justify-start items-center"
 		>
-			{setModalIsOpen && (
+			{setModalIsOpen ? (
 				<HeaderSection
 					handleCloseModal={() => setModalIsOpen(false)}
-					selectedTransactionId={selectedTransactionId}
+					selectedTransactionId={id}
 				/>
-			)}
-			{id && (
+			) : (
 				<Header
 					handleCloseModal={() => router.back()}
 					selectedTransactionId={id}
 				/>
 			)}
+
+			{/* Main content with TitleSection, TransactionSummary, etc. */}
 			<TitleSection
 				transferDescription={data.narration}
 				amount={data.amount}
