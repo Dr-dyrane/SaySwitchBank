@@ -87,14 +87,16 @@ export default function PayoutScreen() {
 	const handlePayout = () => {
 		setLoading(true);
 		setTimeout(() => {
-			console.log(`Payout of ₦${amount} from ${selectedAccount.name} with remark: ${remark}`);
+			console.log(
+				`Payout of ₦${amount} from ${selectedAccount.name} with remark: ${remark}`
+			);
 			setStep(1);
 			setSelectedAccount(null);
 			setAmount("");
 			setRemark("");
 			setIsConfirmModalOpen(false);
 			showToast("Transaction successful!", "success");
-			router.replace("(tabs)");
+			router.push({ pathname: "transDetails", params: { id: 6 } });
 			setLoading(false);
 		}, 3000);
 	};
