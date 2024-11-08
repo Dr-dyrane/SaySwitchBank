@@ -104,12 +104,13 @@ export default function HomeScreen() {
 	const commissionData = {
 		total: 125000, // The total commission amount in naira
 		progress: 65, // Represents 65% progress toward a target or milestone
+		trend: 15,
 	};
 
 	// Get status category
 	const statusCategory = getStatusCategory(transactions.payment_response_code);
 	// Limit the number of transactions to show on the home page
-	const displayedTransactions = transactions.slice(0, 3); // Only show first 3
+	const displayedTransactions = transactions.slice(0, 2); // Only show first 3
 
 	// Calculate total debit and credit from the transactions data
 	const totalDebit = transactions
@@ -123,6 +124,9 @@ export default function HomeScreen() {
 		setBalanceVisible((prev) => !prev);
 	};
 
+	const withdraw = () => router.push("payout");
+
+	
 	// Array of quick actions data
 	const makeTransfer = [
 		{
@@ -173,6 +177,7 @@ export default function HomeScreen() {
 					balanceVisible={balanceVisible}
 					toggleBalanceVisibility={toggleBalanceVisibility}
 					commissionData={commissionData}
+					withdraw={withdraw}
 				/>
 
 				<SpendingTrend
