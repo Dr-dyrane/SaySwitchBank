@@ -100,6 +100,7 @@ export default function HomeScreen() {
 	// State for dynamic balance and hide/show functionality
 	const [balanceVisible, setBalanceVisible] = useState(false);
 	const [balance, setBalance] = useState(12350.0); // Dynamic balance
+	const [commissionVisible, setCommissionVisible] = useState(true); // Default is visible
 
 	const commissionData = {
 		total: 125000, // The total commission amount in naira
@@ -109,8 +110,11 @@ export default function HomeScreen() {
 
 	// Get status category
 	const statusCategory = getStatusCategory(transactions.payment_response_code);
-	// Limit the number of transactions to show on the home page
-	const displayedTransactions = transactions.slice(0, 2); // Only show first 3
+
+	// Limit the number of transactions to show based on commission visibility
+	const displayedTransactions = commissionVisible
+		? transactions.slice(0, 2) // Show 3 transactions when commission is visible
+		: transactions.slice(0, 3); // Show 2 transactions when commission is hidden
 
 	// Calculate total debit and credit from the transactions data
 	const totalDebit = transactions
@@ -126,7 +130,6 @@ export default function HomeScreen() {
 
 	const withdraw = () => router.push("payout");
 
-	
 	// Array of quick actions data
 	const makeTransfer = [
 		{
@@ -178,6 +181,8 @@ export default function HomeScreen() {
 					toggleBalanceVisibility={toggleBalanceVisibility}
 					commissionData={commissionData}
 					withdraw={withdraw}
+					commissionVisible={commissionVisible}
+					setCommissionVisible={setCommissionVisible}
 				/>
 
 				<SpendingTrend
