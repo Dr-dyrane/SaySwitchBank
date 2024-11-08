@@ -19,17 +19,11 @@ import TransDetails from "../components/transactions/TransDetails";
 import SpendingTrend from "../components/home/SpendingTrend";
 
 // Modular Quick Action Component
-const QuickAction = ({
-	title,
-	iconName,
-	iconColor,
-	backgroundColor,
-	onPress,
-}) => (
+const QuickAction = ({ title, iconName, onPress }) => (
 	<TouchableOpacity
 		style={{
 			flex: 1,
-			flexDirection: "column",
+			flexDirection: "row",
 			padding: 16,
 			borderRadius: 10,
 			alignItems: "center",
@@ -58,52 +52,6 @@ const QuickAction = ({
 	</TouchableOpacity>
 );
 
-// Business Card Component
-const BusinessCard = ({
-	title,
-	iconName,
-	iconColor,
-	backgroundColor,
-	onPress,
-	number,
-}) => (
-	<TouchableOpacity
-		style={{
-			flex: 1,
-			flexDirection: "row",
-			padding: 16,
-			borderRadius: 10,
-			alignItems: "center",
-			justifyContent: "space-between",
-			marginBottom: 10,
-			marginHorizontal: 4,
-		}}
-		onPress={onPress}
-		className="bg-slate-50 justify-between"
-	>
-		<View className="flex-row flex items-center justify-center">
-			<View
-				className="p-1.5 bg-slate-200 rounded-lg"
-				style={{ backgroundColor: "#E5F5F1" }} // Set background color using inline style
-			>
-				<Ionicons name={iconName} size={20} color={"#008773" || "#000"} />
-			</View>
-
-			<View className="ml-2">
-				<Text
-					style={{ fontWeight: "bold", color: "#333", textAlign: "center" }}
-					className="text-xs"
-				>
-					{title}
-				</Text>
-			</View>
-		</View>
-		<View className="py-2 rounded-lg px-3 bg-[#fff]">
-			<Text className="text-primary">{number}</Text>
-		</View>
-	</TouchableOpacity>
-);
-
 export default function HomeScreen() {
 	const { user } = useAuth(); // Use the AuthContext to access user info
 	const router = useRouter();
@@ -128,7 +76,7 @@ export default function HomeScreen() {
 	// Get status category
 	const statusCategory = getStatusCategory(transactions.payment_response_code);
 	// Limit the number of transactions to show on the home page
-	const displayedTransactions = transactions.slice(0, 2); // Only show first 3
+	const displayedTransactions = transactions.slice(0, 3); // Only show first 3
 
 	// Calculate total debit and credit from the transactions data
 	const totalDebit = transactions
@@ -143,71 +91,29 @@ export default function HomeScreen() {
 	};
 
 	// Array of quick actions data
-	const quickActions = [
+	const makeTransfer = [
 		{
-			title: "Payout",
-			iconName: "arrow-forward-circle",
-			iconColor: "#008773",
-			backgroundColor: "#e6f7ff",
-			onPress: () => router.push("payout"),
+			title: "Bank Transfer",
+			iconName: "arrow-down-circle", // Represents financial transactions like bank transfer
+			onPress: () => console.log("Initiate Bank Transfer"),
 		},
 		{
-			title: "Pay Bills",
-			iconName: "card",
-			iconColor: "#32CD32",
-			backgroundColor: "#e6ffe6",
-			onPress: () => console.log("Pay Bills"),
-		},
-		{
-			title: "Top-Up",
-			iconName: "cellular",
-			iconColor: "#FF4500",
-			backgroundColor: "#ffe6e6",
-			onPress: () => console.log("Top up airtime"),
-		},
-		{
-			title: "Data",
-			iconName: "wifi",
-			iconColor: "#FFD700",
-			backgroundColor: "#fff9e6",
-			onPress: () => console.log("Load data"),
+			title: "Fund Agent",
+			iconName: "card", // Suitable for card transactions like NFC tap
+			onPress: () => console.log("Fund Agent via NFC Tap"),
 		},
 	];
 
-	// Sample business data array
-
-	const BusinessData = [
+	const makePayment = [
 		{
-			title: "Businesses",
-			iconName: "business", // Business icon
-			iconColor: "#007BFF", // Bright Blue
-			backgroundColor: "#E9F7FF", // Soft Light Blue
-			number: 3, // Assume there are 3 active businesses
-			onPress: () => console.log("Manage Businesses"),
+			title: "Airtime & Data",
+			iconName: "cellular", // Represents cellular activity, fitting for Airtime & Data
+			onPress: () => console.log("Top up Airtime & Data"),
 		},
 		{
-			title: "Performance",
-			iconName: "bar-chart", // Bar chart icon
-			iconColor: "#28A745", // Green
-			backgroundColor: "#E6F9E6", // Soft Light Green
-			number: 10, // Assume 10 performance metrics to review
-			onPress: () => console.log("View Performance"),
-		},
-		{
-			title: "Users",
-			iconName: "people", // People icon
-			iconColor: "#FFC107", // Amber
-			backgroundColor: "#FFF3CD", // Soft Light Yellow
-			number: 5, // Assume there are 5 users to manage
-			onPress: () => console.log("Manage Users"),
-		},
-		{
-			title: "Accounts", // Updated title
-			iconName: "wallet", // Wallet icon for accounts
-			iconColor: "#17A2B8", // Teal
-			backgroundColor: "#E3F2F8", // Soft Light Teal
-			number: 4, // Assume there are 4 profiled accounts
-			onPress: () => console.log("Manage Payout Accounts"),
+			title: "Bills Payment",
+			iconName: "receipt", // Represents bills and receipts, fitting for Bill Payments
+			onPress: () => console.log("Pay Bills"),
 		},
 	];
 
@@ -269,7 +175,7 @@ export default function HomeScreen() {
 				/>
 
 				<View>
-					<Text className="text-gray-500 mb-4">Make Payment</Text>
+					<Text className="text-gray-500 mb-4">Make Transfer</Text>
 					<View
 						style={{
 							flexDirection: "row",
@@ -278,11 +184,11 @@ export default function HomeScreen() {
 							marginBottom: 8, // Space below the grid
 						}}
 					>
-						{quickActions.map((action, index) => (
+						{makeTransfer.map((action, index) => (
 							<View
 								key={index} // Use index as key (consider using a unique identifier if available)
 								style={{
-									width: "22%", // Each action takes about 22% of the width to fit four in a row
+									width: "48%", // Each action takes about 22% of the width to fit four in a row
 									marginBottom: 6, // Space between rows
 								}}
 							>
@@ -297,34 +203,30 @@ export default function HomeScreen() {
 						))}
 					</View>
 				</View>
-
 				<View>
-					<View className="flex flex-row items-center justify-between mb-4">
-						<Text className="text-gray-500">Manage Your Business</Text>
-					</View>
+					<Text className="text-gray-500 mb-4">Make Payment</Text>
 					<View
 						style={{
 							flexDirection: "row",
 							flexWrap: "wrap",
 							justifyContent: "space-between",
-							marginBottom: 6, // Space below the grid
+							marginBottom: 8, // Space below the grid
 						}}
 					>
-						{BusinessData.map((action, index) => (
+						{makePayment.map((action, index) => (
 							<View
 								key={index} // Use index as key (consider using a unique identifier if available)
 								style={{
 									width: "48%", // Each action takes about 22% of the width to fit four in a row
-									marginBottom: 10, // Space between rows
+									marginBottom: 6, // Space between rows
 								}}
 							>
-								<BusinessCard
+								<QuickAction
 									title={action.title}
 									iconName={action.iconName}
 									iconColor={action.iconColor}
 									backgroundColor={action.backgroundColor}
 									onPress={action.onPress}
-									number={action.number}
 								/>
 							</View>
 						))}
