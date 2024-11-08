@@ -52,6 +52,33 @@ const QuickAction = ({ title, iconName, onPress }) => (
 	</TouchableOpacity>
 );
 
+const renderQuickActions = (actions) => (
+	<View
+		style={{
+			flexDirection: "row",
+			flexWrap: "wrap",
+			justifyContent: "space-between",
+			marginBottom: 8,
+		}}
+	>
+		{actions.map((action, index) => (
+			<View
+				key={index}
+				style={{
+					width: "48%",
+					marginBottom: 6,
+				}}
+			>
+				<QuickAction
+					title={action.title}
+					iconName={action.iconName}
+					onPress={action.onPress}
+				/>
+			</View>
+		))}
+	</View>
+);
+
 export default function HomeScreen() {
 	const { user } = useAuth(); // Use the AuthContext to access user info
 	const router = useRouter();
@@ -176,61 +203,11 @@ export default function HomeScreen() {
 
 				<View>
 					<Text className="text-gray-500 mb-4">Make Transfer</Text>
-					<View
-						style={{
-							flexDirection: "row",
-							flexWrap: "wrap",
-							justifyContent: "space-between",
-							marginBottom: 8, // Space below the grid
-						}}
-					>
-						{makeTransfer.map((action, index) => (
-							<View
-								key={index} // Use index as key (consider using a unique identifier if available)
-								style={{
-									width: "48%", // Each action takes about 22% of the width to fit four in a row
-									marginBottom: 6, // Space between rows
-								}}
-							>
-								<QuickAction
-									title={action.title}
-									iconName={action.iconName}
-									iconColor={action.iconColor}
-									backgroundColor={action.backgroundColor}
-									onPress={action.onPress}
-								/>
-							</View>
-						))}
-					</View>
+					{renderQuickActions(makeTransfer)}
 				</View>
 				<View>
 					<Text className="text-gray-500 mb-4">Make Payment</Text>
-					<View
-						style={{
-							flexDirection: "row",
-							flexWrap: "wrap",
-							justifyContent: "space-between",
-							marginBottom: 8, // Space below the grid
-						}}
-					>
-						{makePayment.map((action, index) => (
-							<View
-								key={index} // Use index as key (consider using a unique identifier if available)
-								style={{
-									width: "48%", // Each action takes about 22% of the width to fit four in a row
-									marginBottom: 6, // Space between rows
-								}}
-							>
-								<QuickAction
-									title={action.title}
-									iconName={action.iconName}
-									iconColor={action.iconColor}
-									backgroundColor={action.backgroundColor}
-									onPress={action.onPress}
-								/>
-							</View>
-						))}
-					</View>
+					{renderQuickActions(makePayment)}
 				</View>
 
 				<View className="flex flex-row items-center justify-between mb-4">
