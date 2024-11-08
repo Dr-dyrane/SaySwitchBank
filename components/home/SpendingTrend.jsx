@@ -121,7 +121,11 @@ const SpendingTrend = ({ totalCredit, totalDebit, statusCategory }) => {
 							Cash In
 						</Text>
 						<Text style={{ color: "#000", marginLeft: 4 }}>
-							₦{totalCredit.toFixed(2)}
+							₦
+							{totalCredit.toLocaleString("en-NG", {
+								minimumFractionDigits: 2,
+								maximumFractionDigits: 2,
+							})}
 						</Text>
 					</View>
 				</View>
@@ -137,7 +141,11 @@ const SpendingTrend = ({ totalCredit, totalDebit, statusCategory }) => {
 							Cash Out
 						</Text>
 						<Text style={{ color: "#000", marginLeft: 4 }}>
-							₦{totalDebit.toFixed(2)}
+							₦
+							{totalDebit.toLocaleString("en-NG", {
+								minimumFractionDigits: 2,
+								maximumFractionDigits: 2,
+							})}
 						</Text>
 					</View>
 				</View>

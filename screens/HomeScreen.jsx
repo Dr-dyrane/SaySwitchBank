@@ -239,7 +239,12 @@ export default function HomeScreen() {
 								marginTop: 8,
 							}}
 						>
-							{balanceVisible ? `₦${balance.toFixed(2)}` : "****"}
+							{balanceVisible
+								? `₦${balance.toLocaleString("en-NG", {
+										minimumFractionDigits: 2,
+										maximumFractionDigits: 2,
+								  })}`
+								: "****"}
 						</Text>
 						<TouchableOpacity
 							onPress={toggleBalanceVisibility}

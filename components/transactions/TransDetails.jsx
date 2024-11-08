@@ -218,7 +218,10 @@ const TitleSection = ({
 		<View className="flex justify-center items-center">
 			<Text className="text-3xl font-bold">
 				₦
-				{amount.toLocaleString("en-US", { minimumFractionDigits: 2 }) || "0.00"}
+				{amount.toLocaleString("en-NG", {
+					minimumFractionDigits: 2,
+					maximumFractionDigits: 2,
+				}) || "0.00"}
 			</Text>
 			{isReversed && (
 				<Text className="text-red-600">This transaction was reversed</Text>

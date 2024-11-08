@@ -194,7 +194,11 @@ const TransactionCard = ({ transaction, onViewDetails }) => {
 						color: direction === "Credit" ? "#065f46" : "#991b1b",
 					}}
 				>
-					{direction === "Credit" ? "+" : "-"}₦ {amount.toFixed(2)}
+					{direction === "Credit" ? "+" : "-"}₦{" "}
+					{amount.toLocaleString("en-NG", {
+						minimumFractionDigits: 2,
+						maximumFractionDigits: 2,
+					})}
 				</Text>
 				<View
 					style={{

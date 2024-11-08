@@ -12,7 +12,7 @@ const MoreScreen = () => {
     const { logout } = useAuth();
 
 
-	const options = [
+	const utilities = [
 		{ title: "Settings", icon: "settings", route: "/settings" },
 		{
 			title: "Notifications",
@@ -38,7 +38,7 @@ const MoreScreen = () => {
 
 	return (
 		<View className="flex-1 bg-white p-4 pt-0">
-			{options.map((option, index) => (
+			{utilities.map((option, index) => (
 				<TouchableOpacity
 					key={index}
 					className="flex-row items-center p-3 mb-3 bg-slate-50 rounded-xl justify-between"
