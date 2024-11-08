@@ -32,6 +32,7 @@ const AccountBalanceCard = ({
 				<TouchableOpacity
 					onPress={toggleBalanceVisibility}
 					className="flex-row items-center justify-center space-x-2 px-4 py-2 bg-white/10 rounded-2xl hover:bg-opacity-50 transition-all duration-300"
+					accessibilityLabel={balanceVisible ? "Hide Balance" : "Show Balance"}
 				>
 					<Text className="text-white text-sm">
 						{balanceVisible ? "Hide Balance" : "Show Balance"}
@@ -57,7 +58,7 @@ const AccountBalanceCard = ({
 					</Text>
 				</View>
 
-				<View className="bg-white/20 rounded-full h-1.5 overflow-hidden">
+				<View className="bg-white/10 rounded-full h-1.5 overflow-hidden mt-1">
 					<View
 						className="bg-teal-500 h-full"
 						style={{ width: `${commissionData.progress}%` }}
