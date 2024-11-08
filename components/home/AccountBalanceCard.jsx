@@ -59,7 +59,7 @@ const AccountBalanceCard = ({
 
 				<View className="bg-white/20 rounded-full h-1.5 overflow-hidden">
 					<View
-						className="bg-green-500 h-full"
+						className="bg-teal-500 h-full"
 						style={{ width: `${commissionData.progress}%` }}
 					/>
 				</View>
