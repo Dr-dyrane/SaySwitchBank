@@ -27,9 +27,9 @@ const AccountBalanceCard = ({
         </Text>
         <TouchableOpacity
           onPress={toggleBalanceVisibility}
-          className="flex-row items-center justify-center"
+          className="flex-row items-center justify-center space-x-2 px-4 py-2 bg-white/10 rounded-2xl hover:bg-opacity-50 transition-all duration-300"
         >
-          <Text className="mr-2 text-white">
+          <Text className="text-white text-sm">
             {balanceVisible ? "Hide Balance" : "Show Balance"}
           </Text>
           <Ionicons
