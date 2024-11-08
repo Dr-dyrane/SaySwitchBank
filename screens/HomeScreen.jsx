@@ -100,7 +100,7 @@ export default function HomeScreen() {
 	// State for dynamic balance and hide/show functionality
 	const [balanceVisible, setBalanceVisible] = useState(false);
 	const [balance, setBalance] = useState(12350.0); // Dynamic balance
-	const [commissionVisible, setCommissionVisible] = useState(true); // Default is visible
+	const [commissionVisible, setCommissionVisible] = useState(false); // Default is invisible
 
 	const commissionData = {
 		total: 125000, // The total commission amount in naira
