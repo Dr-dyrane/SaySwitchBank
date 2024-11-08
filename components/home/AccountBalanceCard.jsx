@@ -8,8 +8,8 @@ export default function AccountBalanceCard({
 	toggleBalanceVisibility = () => {},
 	commissionData = { total: 50000, progress: 75, trend: 15 },
 	withdraw,
-    commissionVisible,
-    setCommissionVisible
+	commissionVisible,
+	setCommissionVisible,
 }) {
 	// Determine trend direction and color
 	const isPositiveTrend = commissionData.trend >= 0;
@@ -37,18 +37,18 @@ export default function AccountBalanceCard({
 				</View>
 				<TouchableOpacity
 					onPress={toggleBalanceVisibility}
-					className="flex-row items-center justify-center p-2 px-4 bg-white/10 rounded-2xl"
+					className="flex-row items-center justify-center p-2 px-4 bg-white/10 rounded-xl"
 					accessibilityLabel={balanceVisible ? "Hide Balance" : "Show Balance"}
 				>
 					{balanceVisible ? (
 						<>
 							<Ionicons name="eye-off" size={20} color="#fff" />
-							<Text className="text-white ml-2">Hide Balance</Text>
+							<Text className="text-[#fff] ml-2">Hide Balance</Text>
 						</>
 					) : (
 						<>
 							<Ionicons name="eye" size={20} color="#ddd" />
-							<Text className="text-white ml-2">Show Balance</Text>
+							<Text className="text-[#ddd] ml-2">Show Balance</Text>
 						</>
 					)}
 				</TouchableOpacity>
@@ -60,7 +60,7 @@ export default function AccountBalanceCard({
 				<Ionicons
 					name={commissionVisible ? "chevron-up" : "chevron-down"}
 					size={20}
-					color="#fff"
+					color="#ddd"
 				/>
 				{/* <Text className="text-white text-sm">
 					{commissionVisible ? "Hide Commission" : "Show Commission"}
