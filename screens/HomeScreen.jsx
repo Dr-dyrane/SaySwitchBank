@@ -101,6 +101,11 @@ export default function HomeScreen() {
 	const [balanceVisible, setBalanceVisible] = useState(false);
 	const [balance, setBalance] = useState(12350.0); // Dynamic balance
 
+	const commissionData = {
+		total: 125000, // The total commission amount in naira
+		progress: 65, // Represents 65% progress toward a target or milestone
+	};
+
 	// Get status category
 	const statusCategory = getStatusCategory(transactions.payment_response_code);
 	// Limit the number of transactions to show on the home page
@@ -167,6 +172,7 @@ export default function HomeScreen() {
 					balance={balance}
 					balanceVisible={balanceVisible}
 					toggleBalanceVisibility={toggleBalanceVisibility}
+					commissionData={commissionData}
 				/>
 
 				<SpendingTrend
