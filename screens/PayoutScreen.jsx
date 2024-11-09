@@ -14,7 +14,6 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import transactions from "../data/transactions";
 import TransactionCard from "../components/transactions/TransactionCard";
-import TransDetails from "../components/transactions/TransDetails";
 import Banner from "../components/payment/Banner";
 import {
 	AccountSelectionModal,
@@ -52,19 +51,8 @@ export default function PayoutScreen() {
 		setFilteredTransactions(filtered);
 	}, [transactions, step]);
 
-	const [modalVisible, setModalVisible] = useState(false);
-	const [selectedTransactionId, setSelectedTransactionId] = useState(null);
-
 	const handleViewDetails = (id) => {
-		//setSelectedTransactionId(id);
-		//setModalVisible(true);
-		// router.push('transactions')
 		router.push({ pathname: "transDetails", params: { id } });
-	};
-
-	const closeModal = () => {
-		setModalVisible(false);
-		setSelectedTransactionId(null);
 	};
 
 	const handleAccountSelect = (account) => {
@@ -104,9 +92,14 @@ export default function PayoutScreen() {
 	return (
 		<KeyboardAvoidingView
 			behavior={Platform.OS === "ios" ? "padding" : "height"}
-			className="flex-1 bg-white px-4"
+			className="flex-1 bg-white px-4 pb-4"
 		>
-			<ScrollView contentContainerStyle="flex-grow p-4 justify-between">
+			<ScrollView
+				contentContainerStyle={{
+					flexGrow: 1, // Ensures the content stretches to fill available space
+					justifyContent: "space-between", // Ensures space is distributed evenly between elements
+				}}
+			>
 				<View className="mb-6">
 					<Banner />
 				</View>
@@ -293,18 +286,6 @@ export default function PayoutScreen() {
 					onConfirm={handlePayout}
 					onClose={() => setIsConfirmModalOpen(false)}
 				/>
-
-				<Modal
-					animationType="slide"
-					transparent={true}
-					visible={modalVisible}
-					onRequestClose={closeModal}
-				>
-					<TransDetails
-						transactionId={selectedTransactionId}
-						onClose={closeModal}
-					/>
-				</Modal>
 			</ScrollView>
 		</KeyboardAvoidingView>
 	);

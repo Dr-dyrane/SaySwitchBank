@@ -47,6 +47,23 @@ export default function StacksLayout() {
 					...commonStackOptions,
 				}}
 			/>
+			<Stack.Screen
+				name="airtimeData"
+				options={{
+					title: "Airtime/Data",
+					headerShown: true,
+					headerRight: () => (
+						<Pressable
+							onPress={() => router.push("transactions")} // Navigate to transactions
+							style={{ marginRight: 0 }} // Optional styling for spacing
+						>
+							<Text style={{ color: "#008773", fontSize: 16 }}>History</Text>
+							{/* Title for the button */}
+						</Pressable>
+					),
+					...commonStackOptions,
+				}}
+			/>
 		</Stack>
 	);
 }

@@ -148,7 +148,7 @@ export default function HomeScreen() {
 		{
 			title: "Airtime & Data",
 			iconName: "cellular", // Represents cellular activity, fitting for Airtime & Data
-			onPress: () => console.log("Top up Airtime & Data"),
+			onPress: () => router.push("airtimeData"),
 		},
 		{
 			title: "Bills Payment",
