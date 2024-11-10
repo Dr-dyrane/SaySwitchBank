@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { serviceProviders } from "../../data/dataPlans";
 import ProviderSelector from "./ProviderSelector";
@@ -84,14 +84,13 @@ const PhoneSelector = ({
 			const cleanedPhoneNumber = phoneNumber.replace(/\s/g, "");
 			// Extract the first 4 characters (prefix)
 			const prefix = cleanedPhoneNumber.substring(0, 4);
-			console.log("Extracted Prefix:", prefix);
 			const detectedProvider = providerPrefixes[prefix];
 			if (detectedProvider && serviceProviders[detectedProvider]) {
 				setSelectedProvider(serviceProviders[detectedProvider]);
 				onSelectProvider(serviceProviders[detectedProvider]);
 			}
 		}
-	}, [phoneNumber]);
+	}, [phoneNumber, selectedProvider]);
 
 	const handlePhoneNumberChange = (text) => {
 		// Remove non-digit characters
@@ -130,6 +129,20 @@ const PhoneSelector = ({
 				keyboardType="phone-pad"
 				maxLength={13} // 11 digits + 2 spaces
 			/>
+			{phoneNumber && (
+				<TouchableOpacity
+					onPress={() => {
+						setPhoneNumber("");
+					}}
+					style={{
+						padding: 4,
+						backgroundColor: "#ff000020",
+						borderRadius: 30,
+					}}
+				>
+					<Ionicons name="close" size={10} color="red" />
+				</TouchableOpacity>
+			)}
 			<TouchableOpacity className="p-2">
 				<Ionicons name="person-circle" size={24} color="#008773" />
 			</TouchableOpacity>
