@@ -13,7 +13,7 @@ const serviceProviders = {
   },
   glo: {
     name: "Glo",
-    backgroundColor: "#4CBB77", // Green for Glo
+    backgroundColor: "#009639", // Green for Glo
     textColor: "#FFFFFF", // White for contrast
     logo: require("../../assets/payment/serviceProvider/logo/Globacom.png"),
     aspect: "aspect-[1/1]",

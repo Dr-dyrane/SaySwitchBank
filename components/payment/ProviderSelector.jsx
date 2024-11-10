@@ -51,7 +51,7 @@ const ProviderSelector = ({ onSelect, selectedProvider }) => {
 				className="flex-row items-center space-x-2"
 			>
 				{renderProviderLogo(selectedProvider.id)}
-				<Ionicons name="chevron-down" size={16} color="#008773" />
+				<Ionicons name="chevron-down" size={16} color="gray" />
 			</TouchableOpacity>
 
 			<Modal
