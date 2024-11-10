@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { View, Text, TextInput, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { serviceProviders } from "../../data/dataPlans";
+import * as Contacts from "expo-contacts";
 import ProviderSelector from "./ProviderSelector";
+import ContactSelector from "./ContactSelector";
+import { serviceProviders } from "../../data/dataPlans";
 
 const providerPrefixes = {
 	"0803": "mtn",
@@ -43,23 +45,15 @@ const PhoneSelector = ({
 }) => {
 	const formatPhoneNumber = (number) => {
 		if (!number) return "";
-
-		// Remove non-digit characters (including + sign)
 		let cleaned = number.replace(/\D/g, "");
-
-		// Check if the number starts with "234" (without +) or "+234" and convert it to "080"
 		if (cleaned.startsWith("234")) {
-			cleaned = "0" + cleaned.substring(3); // Replace "234" with "0"
+			cleaned = "0" + cleaned.substring(3);
 		} else if (cleaned.startsWith("0")) {
 			// Already starts with "0", no change needed
 		} else {
 			return ""; // Invalid number format
 		}
-
-		// Limit to 11 digits
 		const limited = cleaned.substring(0, 11);
-
-		// Format the phone number
 		let formatted = limited;
 		if (limited.length > 3) {
 			formatted = `${limited.substring(0, 3)} ${limited.substring(3)}`;
@@ -67,7 +61,6 @@ const PhoneSelector = ({
 		if (limited.length > 7) {
 			formatted = `${formatted.substring(0, 8)} ${formatted.substring(8)}`;
 		}
-
 		return formatted;
 	};
 
@@ -77,12 +70,12 @@ const PhoneSelector = ({
 	const [selectedProvider, setSelectedProvider] = useState(
 		initialProvider || serviceProviders.mtn
 	);
+	const [isContactModalVisible, setIsContactModalVisible] = useState(false);
+	const [contacts, setContacts] = useState([]);
 
 	useEffect(() => {
 		if (phoneNumber.length >= 4) {
-			// Remove spaces from the phone number
 			const cleanedPhoneNumber = phoneNumber.replace(/\s/g, "");
-			// Extract the first 4 characters (prefix)
 			const prefix = cleanedPhoneNumber.substring(0, 4);
 			const detectedProvider = providerPrefixes[prefix];
 			if (detectedProvider && serviceProviders[detectedProvider]) {
@@ -93,23 +86,28 @@ const PhoneSelector = ({
 	}, [phoneNumber, selectedProvider]);
 
 	const handlePhoneNumberChange = (text) => {
-		// Remove non-digit characters
-		const cleaned = text.replace(/\D/g, "");
-
-		// Limit to 11 digits
-		const limited = cleaned.substring(0, 11);
-
-		// Format the phone number
-		let formatted = limited;
-		if (limited.length > 3) {
-			formatted = `${limited.substring(0, 3)} ${limited.substring(3)}`;
-		}
-		if (limited.length > 7) {
-			formatted = `${formatted.substring(0, 8)} ${formatted.substring(8)}`;
-		}
-
+		const formatted = formatPhoneNumber(text);
 		setPhoneNumber(formatted);
 		onChangePhoneNumber(formatted);
+	};
+
+	const openContacts = async () => {
+		const { status } = await Contacts.requestPermissionsAsync();
+		if (status === "granted") {
+			const { data } = await Contacts.getContactsAsync({
+				fields: [Contacts.Fields.PhoneNumbers],
+			});
+			if (data.length > 0) {
+				setContacts(data);
+				setIsContactModalVisible(true);
+			}
+		} else {
+			console.log("Permission denied");
+		}
+	};
+
+	const handleSelectContact = (selectedPhoneNumber) => {
+		handlePhoneNumberChange(selectedPhoneNumber);
 	};
 
 	return (
@@ -127,25 +125,28 @@ const PhoneSelector = ({
 				value={phoneNumber}
 				onChangeText={handlePhoneNumberChange}
 				keyboardType="phone-pad"
-				maxLength={13} // 11 digits + 2 spaces
+				maxLength={13}
 			/>
 			{phoneNumber && (
 				<TouchableOpacity
 					onPress={() => {
 						setPhoneNumber("");
+						onChangePhoneNumber("");
 					}}
-					style={{
-						padding: 4,
-						backgroundColor: "#ff000020",
-						borderRadius: 30,
-					}}
+					className="p-1 bg-red-200 rounded-full"
 				>
 					<Ionicons name="close" size={10} color="red" />
 				</TouchableOpacity>
 			)}
-			<TouchableOpacity className="p-2">
+			<TouchableOpacity className="p-2" onPress={openContacts}>
 				<Ionicons name="person-circle" size={24} color="#008773" />
 			</TouchableOpacity>
+			<ContactSelector
+				isVisible={isContactModalVisible}
+				onClose={() => setIsContactModalVisible(false)}
+				onSelectContact={handleSelectContact}
+				contacts={contacts}
+			/>
 		</View>
 	);
 };
