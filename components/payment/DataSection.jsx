@@ -7,8 +7,12 @@ import { serviceProviders } from "../../data/dataPlans";
 import { useAuth } from "../../contexts/AuthContext";
 import PhoneSelector from "./PhoneSelector";
 import ServiceBanner from "./ServiceBanner";
+import { useRouter } from "expo-router";
+import { useToast } from "../../contexts/ToastContext";
 
 const DataSection = () => {
+	const router = useRouter();
+	const { showToast } = useToast();
 	const { user } = useAuth();
 	const [phoneNumber, setPhoneNumber] = useState(user?.phone || "08012345678");
 	const [selectedProvider, setSelectedProvider] = useState(
@@ -33,6 +37,10 @@ const DataSection = () => {
 
 	const handleConfirm = () => {
 		setShowConfirmModal(false);
+		setSelectedPlan({ price: null, cashback: null });
+		setSelectedTimePeriod("Daily");
+		showToast("Data Top Up Successful!", "success");
+		router.push({ pathname: "transDetails", params: { id: 8 } });
 	};
 
 	const renderTimePeriodItem = ({ item }) => (

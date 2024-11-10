@@ -13,8 +13,12 @@ import { useAuth } from "../../contexts/AuthContext";
 import { serviceProviders } from "../../data/dataPlans";
 import ServiceBanner from "./ServiceBanner";
 import PhoneSelector from "./PhoneSelector";
+import { useToast } from "../../contexts/ToastContext";
+import { useRouter } from "expo-router";
 
 const AirtimeSection = () => {
+	const router = useRouter();
+	const { showToast } = useToast();
 	const { user } = useAuth();
 	const [phoneNumber, setPhoneNumber] = useState(user?.phone || "08012345678");
 	const [selectedProvider, setSelectedProvider] = useState(
@@ -28,6 +32,9 @@ const AirtimeSection = () => {
 	const handleConfirm = () => {
 		// Handle confirmation logic
 		setShowConfirmModal(false);
+		setAmount("");
+		showToast("Airtime Top Up Successful!", "success");
+		router.push({ pathname: "transDetails", params: { id: 1 } });
 	};
 
 	const renderAmountItem = ({ item }) => (
