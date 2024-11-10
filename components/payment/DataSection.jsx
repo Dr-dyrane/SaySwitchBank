@@ -1,16 +1,11 @@
 import React, { useState } from "react";
-import {
-	View,
-	Text,
-	TextInput,
-	TouchableOpacity,
-	FlatList,
-} from "react-native";
+import { View, Text, TouchableOpacity, FlatList } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import ProviderSelector from "./ProviderSelector";
 import ConfirmModal from "./ConfirmModal";
 import { serviceProviders } from "../../data/dataPlans";
 import { useAuth } from "../../contexts/AuthContext";
+import PhoneSelector from "./PhoneSelector";
 import ServiceBanner from "./ServiceBanner";
 
 const DataSection = () => {
@@ -20,6 +15,7 @@ const DataSection = () => {
 		serviceProviders.mtn
 	);
 	const [selectedTimePeriod, setSelectedTimePeriod] = useState("Daily");
+
 	const [selectedPlan, setSelectedPlan] = useState({
 		price: null,
 		cashback: null,
@@ -42,15 +38,19 @@ const DataSection = () => {
 
 	const renderTimePeriodItem = ({ item }) => (
 		<TouchableOpacity
-			className={`p-2 rounded-lg m-1 ${
-				selectedTimePeriod === item ? "bg-[#008773]" : "bg-[#E5E7EB]"
-			}`}
+			style={{
+				padding: 8,
+				borderRadius: 10,
+				margin: 4,
+				backgroundColor: selectedTimePeriod === item ? "#008773" : "#E5E7EB",
+			}}
 			onPress={() => setSelectedTimePeriod(item)}
 		>
 			<Text
-				className={`text-center ${
-					selectedTimePeriod === item ? "text-white" : "text-[#4B5563]"
-				}`}
+				style={{
+					textAlign: "center",
+					color: selectedTimePeriod === item ? "#FFFFFF" : "#4B5563",
+				}}
 			>
 				{item}
 			</Text>
@@ -59,18 +59,27 @@ const DataSection = () => {
 
 	const renderPlanItem = ({ item }) => (
 		<TouchableOpacity
-			className="bg-white p-3 rounded-lg m-1 flex-1 min-w-[30%]"
+			style={{
+				backgroundColor: "#FFFFFF",
+				padding: 12,
+				borderRadius: 10,
+				margin: 4,
+				flex: 1,
+				minWidth: "30%",
+			}}
 			onPress={() => {
 				setSelectedPlan(item);
 				setShowConfirmModal(true);
 			}}
 		>
-			<Text className="font-bold text-center">{item.data}</Text>
-			<Text className="text-center">{item.duration}</Text>
-			<Text className="text-center">
+			<Text style={{ fontWeight: "bold", textAlign: "center" }}>
+				{item.data}
+			</Text>
+			<Text style={{ textAlign: "center" }}>{item.duration}</Text>
+			<Text style={{ textAlign: "center" }}>
 				{item.price ? `₦${item.price}` : "Price N/A"}
 			</Text>
-			<Text className="text-center text-teal-500">
+			<Text style={{ textAlign: "center", color: "#16A34A" }}>
 				Cashback: {item.cashback ? `₦${item.cashback}` : "N/A"}
 			</Text>
 		</TouchableOpacity>
@@ -79,22 +88,13 @@ const DataSection = () => {
 	return (
 		<View className="space-y-4">
 			<ServiceBanner selectedProvider={selectedProvider.id} />
-			<View className="flex-row items-center space-x-2 justify-between py-2 mb-3 border-gray-200 bg-slate-50 rounded-xl px-4">
-				<ProviderSelector
-					onSelect={setSelectedProvider}
-					selectedProvider={selectedProvider}
-				/>
-				<TextInput
-					className="flex-1 pl-2 text-base"
-					placeholder="Enter phone number"
-					value={phoneNumber}
-					onChangeText={setPhoneNumber}
-					keyboardType="phone-pad"
-				/>
-				<TouchableOpacity className="p-2">
-					<Ionicons name="person-circle" size={24} color="#008773" />
-				</TouchableOpacity>
-			</View>
+
+			<PhoneSelector
+				onSelectProvider={setSelectedProvider}
+				onChangePhoneNumber={setPhoneNumber}
+				initialPhoneNumber={phoneNumber}
+				initialProvider={selectedProvider}
+			/>
 
 			<FlatList
 				data={timePeriods}

@@ -243,7 +243,11 @@ const TitleSection = ({
 							: "text-red-800"
 					}`}
 					size={16}
-					color="currentColor"
+					color={statusCategory === "Successful"
+						? "green"
+						: statusCategory === "Pending"
+						? "brown" // Styling for pending status
+						: "red"}
 				/>
 
 				<Text

@@ -1,17 +1,12 @@
 import React, { useState } from "react";
-import {
-	View,
-	Text,
-	TextInput,
-	TouchableOpacity,
-	FlatList,
-} from "react-native";
+import { View, Text, TextInput,TouchableOpacity, FlatList } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import ProviderSelector from "./ProviderSelector";
 import ConfirmModal from "./ConfirmModal";
 import { useAuth } from "../../contexts/AuthContext";
 import { serviceProviders } from "../../data/dataPlans";
 import ServiceBanner from "./ServiceBanner";
+import PhoneSelector from "./PhoneSelector";
 
 const AirtimeSection = () => {
 	const { user } = useAuth();
@@ -47,22 +42,13 @@ const AirtimeSection = () => {
 	return (
 		<View className="space-y-4">
 			<ServiceBanner selectedProvider={selectedProvider.id} />
-			<View className="flex-row items-center space-x-2 justify-between py-2 mb-3 border-gray-200 bg-slate-50 rounded-xl px-4">
-				<ProviderSelector
-					onSelect={setSelectedProvider}
-					selectedProvider={selectedProvider}
-				/>
-				<TextInput
-					className="flex-1 pl-2 text-base"
-					placeholder="Enter phone number"
-					value={phoneNumber}
-					onChangeText={setPhoneNumber}
-					keyboardType="phone-pad"
-				/>
-				<TouchableOpacity className="p-2">
-					<Ionicons name="person-circle" size={24} color="#008773" />
-				</TouchableOpacity>
-			</View>
+
+			<PhoneSelector
+				onSelectProvider={setSelectedProvider}
+				onChangePhoneNumber={setPhoneNumber}
+				initialPhoneNumber={phoneNumber}
+				initialProvider={selectedProvider}
+			/>
 
 			<FlatList
 				data={amounts}
