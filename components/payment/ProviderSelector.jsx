@@ -1,7 +1,20 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, Modal, FlatList } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import {
+	View,
+	Text,
+	TouchableOpacity,
+	Modal,
+	FlatList,
+	Image,
+} from "react-native";
 import { serviceProviders } from "../../data/dataPlans";
+
+const providerLogos = {
+	mtn: require("../../assets/payment/serviceProvider/logo/MTN.png"),
+	glo: require("../../assets/payment/serviceProvider/logo/Globacom.png"),
+	airtel: require("../../assets/payment/serviceProvider/logo/Airtel Nigeria.png"),
+	"9mobile": require("../../assets/payment/serviceProvider/logo/9mobile.png"),
+};
 
 const ProviderSelector = ({ onSelect, selectedProvider }) => {
 	const [modalVisible, setModalVisible] = useState(false);
@@ -15,19 +28,14 @@ const ProviderSelector = ({ onSelect, selectedProvider }) => {
 		<View>
 			<TouchableOpacity
 				onPress={() => setModalVisible(true)}
-				className="flex-row items-center"
+				style={{ flexDirection: "row", alignItems: "center" }}
 			>
-				<Ionicons
-					name={selectedProvider?.icon || "help-circle"}
-					size={24}
-					color="#008773"
+				<Image
+					source={providerLogos[selectedProvider.id]}
+					style={{ width: 24, height: 24, marginRight: 4 }}
+					resizeMode="contain"
 				/>
-				<Ionicons
-					name="chevron-down"
-					size={16}
-					color="#008773"
-					className="ml-1"
-				/>
+				<Text>{selectedProvider.name}</Text>
 			</TouchableOpacity>
 
 			<Modal
@@ -37,29 +45,54 @@ const ProviderSelector = ({ onSelect, selectedProvider }) => {
 				onRequestClose={() => setModalVisible(false)}
 			>
 				<TouchableOpacity
-					className="flex-1 bg-black bg-opacity-50"
+					style={{ flex: 1, backgroundColor: "rgba(0, 0, 0, 0.5)" }}
 					activeOpacity={1}
 					onPress={() => setModalVisible(false)}
 				>
-					<View className="flex-1 justify-end">
-						<View className="bg-white rounded-t-2xl p-4">
-							<View className="w-10 h-1 bg-[#CCC] rounded-full self-center mb-4" />
-							<Text className="text-xl font-bold mb-4">Select Provider</Text>
+					<View style={{ flex: 1, justifyContent: "flex-end" }}>
+						<View
+							style={{
+								backgroundColor: "#FFFFFF",
+								borderTopLeftRadius: 30,
+								borderTopRightRadius: 30,
+								padding: 16,
+							}}
+						>
+							<View
+								style={{
+									width: 40,
+									height: 4,
+									backgroundColor: "#CCC",
+									borderRadius: 2,
+									alignSelf: "center",
+									marginBottom: 16,
+								}}
+							/>
+							<Text
+								style={{ fontSize: 20, fontWeight: "bold", marginBottom: 16 }}
+							>
+								Select Provider
+							</Text>
 							<FlatList
 								data={Object.values(serviceProviders)}
-								keyExtractor={(item) => item?.id || ""}
+								keyExtractor={(item) => item.id}
 								renderItem={({ item }) => (
 									<TouchableOpacity
-										className="flex-row items-center py-3 border-b border-[#E5E7EB]"
+										style={{
+											flexDirection: "row",
+											alignItems: "center",
+											paddingVertical: 12,
+											borderBottomColor: "#E5E7EB",
+											borderBottomWidth: 1,
+										}}
 										onPress={() => handleSelect(item)}
 									>
-										<Ionicons
-											name={item?.icon || "help-circle"}
-											size={24}
-											color="#008773"
-											className="mr-3"
+										<Image
+											source={providerLogos[item.id]}
+											style={{ width: 24, height: 24, marginRight: 12 }}
+											resizeMode="contain"
 										/>
-										<Text>{item?.name || "Unknown Provider"}</Text>
+										<Text>{item.name}</Text>
 									</TouchableOpacity>
 								)}
 							/>

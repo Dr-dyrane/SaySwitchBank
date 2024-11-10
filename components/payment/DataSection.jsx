@@ -42,10 +42,16 @@ const DataSection = () => {
 
 	const renderTimePeriodItem = ({ item }) => (
 		<TouchableOpacity
-			className={`p-2 rounded-lg m-1 ${selectedTimePeriod === item ? "bg-[#008773]" : "bg-[#E5E7EB]"}`}
+			className={`p-2 rounded-lg m-1 ${
+				selectedTimePeriod === item ? "bg-[#008773]" : "bg-[#E5E7EB]"
+			}`}
 			onPress={() => setSelectedTimePeriod(item)}
 		>
-			<Text className={`text-center ${selectedTimePeriod === item ? "text-white" : "text-[#4B5563]"}`}>
+			<Text
+				className={`text-center ${
+					selectedTimePeriod === item ? "text-white" : "text-[#4B5563]"
+				}`}
+			>
 				{item}
 			</Text>
 		</TouchableOpacity>
@@ -61,7 +67,9 @@ const DataSection = () => {
 		>
 			<Text className="font-bold text-center">{item.data}</Text>
 			<Text className="text-center">{item.duration}</Text>
-			<Text className="text-center">{item.price ? `₦${item.price}` : "Price N/A"}</Text>
+			<Text className="text-center">
+				{item.price ? `₦${item.price}` : "Price N/A"}
+			</Text>
 			<Text className="text-center text-teal-500">
 				Cashback: {item.cashback ? `₦${item.cashback}` : "N/A"}
 			</Text>
@@ -69,10 +77,8 @@ const DataSection = () => {
 	);
 
 	return (
-		<View className="gap-4">
-			<View>
-				<ServiceBanner />
-			</View>
+		<View className="space-y-4">
+			<ServiceBanner selectedProvider={selectedProvider.id} />
 			<View className="flex-row items-center bg-white rounded-lg p-2">
 				<ProviderSelector
 					onSelect={setSelectedProvider}
