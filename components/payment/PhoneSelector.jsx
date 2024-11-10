@@ -48,7 +48,7 @@ const PhoneSelector = ({ onSelectProvider, onChangePhoneNumber, initialPhoneNumb
   };
 
   return (
-    <View className="flex-row items-center space-x-2 justify-between py-2 mb-2 border-gray-200 bg-slate-50 rounded-xl px-4 mt-4">
+    <View className="flex-row items-center space-x-2 justify-between py-2 border-gray-200 bg-slate-50 rounded-xl px-4 mt-4">
       <ProviderSelector
         onSelect={(provider) => {
           setSelectedProvider(provider);

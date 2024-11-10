@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { View, Text, TextInput,TouchableOpacity, FlatList } from "react-native";
+import {
+	View,
+	Text,
+	TextInput,
+	TouchableOpacity,
+	FlatList,
+} from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import ProviderSelector from "./ProviderSelector";
 import ConfirmModal from "./ConfirmModal";
@@ -26,16 +32,18 @@ const AirtimeSection = () => {
 
 	const renderAmountItem = ({ item }) => (
 		<TouchableOpacity
-			className="bg-white p-4 rounded-xl m-1 flex-1 min-w-[30%]"
+			className="bg-slate-50 pb-4 rounded-lg m-2 flex-1 min-w-[30%]"
 			onPress={() => {
 				setAmount(item.toString());
 				setShowConfirmModal(true);
 			}}
 		>
+			<View className='mb-2 bg-teal-50 w-full rounded-t-lg p-1'>
+				<Text className="text-center text-xs text-teal-500">
+				₦{Math.floor(item * 0.02)} {' '}Cashback
+				</Text>
+			</View>
 			<Text className="text-center font-bold">₦{item}</Text>
-			<Text className="text-center text-xs text-teal-500">
-				Cashback: ₦{Math.floor(item * 0.02)}
-			</Text>
 		</TouchableOpacity>
 	);
 
@@ -58,19 +66,43 @@ const AirtimeSection = () => {
 				scrollEnabled={false}
 			/>
 
-			<View className="flex-row items-center bg-white rounded-xl p-2">
+			<View className="flex-row items-center bg-slate-50 pl-4 rounded-xl">
+				<Text className="mr-2">₦</Text>
 				<TextInput
-					className="flex-1 text-base"
-					placeholder="Enter custom amount"
+					className="flex-1 bg-transparent py-2"
 					value={amount}
 					onChangeText={setAmount}
+					placeholder="Enter amount"
 					keyboardType="numeric"
 				/>
+				{amount && (
+					<TouchableOpacity
+						onPress={() => {
+							setAmount("");
+						}}
+						style={{
+							padding: 4,
+							backgroundColor: "#ff000020",
+							borderRadius: 30,
+						}}
+					>
+						<Ionicons name="close" size={10} color="red" />
+					</TouchableOpacity>
+				)}
 				<TouchableOpacity
-					className="bg-[#008773] py-2 px-4 rounded-xl"
-					onPress={() => setShowConfirmModal(true)}
+					className={`p-4 rounded-xl ml-2 ${
+						amount ? "bg-primary" : "bg-gray-400"
+					}`}
+					onPress={() => amount && setShowConfirmModal(true)} // only allow pressing if amount is set
+					disabled={!amount} // disable button when amount is empty
 				>
-					<Text className="text-white font-bold">Pay ₦{amount || "0"}</Text>
+					<Text
+						className={
+							amount ? "text-white font-bold" : "text-gray-200 font-bold"
+						}
+					>
+						{amount ? `Pay ₦${amount}` : "Pay"}
+					</Text>
 				</TouchableOpacity>
 			</View>
 
