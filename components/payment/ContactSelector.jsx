@@ -72,7 +72,7 @@ const ContactSelector = ({ isVisible, onClose, onSelectContact, contacts }) => {
           <View className='flex flex-row space-x-2 items-center justify-center'>
             <Ionicons name="search" size={16} color="gray" />
             <TextInput
-              className="p-1 pl-3 flex-1"
+              className="p-1 pl-3"
               placeholder="Search contacts..."
               value={searchQuery}
               onChangeText={setSearchQuery}
