@@ -41,7 +41,6 @@ const PhoneSelector = ({
 	initialPhoneNumber,
 	initialProvider,
 }) => {
-    
 	const formatPhoneNumber = (number) => {
 		if (!number) return "";
 
@@ -81,7 +80,11 @@ const PhoneSelector = ({
 
 	useEffect(() => {
 		if (phoneNumber.length >= 4) {
-			const prefix = phoneNumber.substring(0, 4);
+			// Remove spaces from the phone number
+			const cleanedPhoneNumber = phoneNumber.replace(/\s/g, "");
+			// Extract the first 4 characters (prefix)
+			const prefix = cleanedPhoneNumber.substring(0, 4);
+			console.log("Extracted Prefix:", prefix);
 			const detectedProvider = providerPrefixes[prefix];
 			if (detectedProvider && serviceProviders[detectedProvider]) {
 				setSelectedProvider(serviceProviders[detectedProvider]);
