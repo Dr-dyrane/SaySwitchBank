@@ -62,6 +62,7 @@ export default function StacksLayout() {
 						</Pressable>
 					),
 					...commonStackOptions,
+					headerTitleAlign: "center", 
 				}}
 			/>
 		</Stack>
