@@ -32,25 +32,20 @@ const DataSection = () => {
 	];
 
 	const handleConfirm = () => {
-		// Handle confirmation logic
 		setShowConfirmModal(false);
 	};
 
 	const renderTimePeriodItem = ({ item }) => (
 		<TouchableOpacity
-			style={{
-				padding: 8,
-				borderRadius: 10,
-				margin: 4,
-				backgroundColor: selectedTimePeriod === item ? "#008773" : "#E5E7EB",
-			}}
+			className={`p-2 rounded-lg mx-1 ${
+				selectedTimePeriod === item ? "bg-primary" : "bg-slate-50"
+			}`}
 			onPress={() => setSelectedTimePeriod(item)}
 		>
 			<Text
-				style={{
-					textAlign: "center",
-					color: selectedTimePeriod === item ? "#FFFFFF" : "#4B5563",
-				}}
+				className={`text-center font-normal ${
+					selectedTimePeriod === item ? "text-white" : "text-gray-500"
+				}`}
 			>
 				{item}
 			</Text>
@@ -59,29 +54,25 @@ const DataSection = () => {
 
 	const renderPlanItem = ({ item }) => (
 		<TouchableOpacity
-			style={{
-				backgroundColor: "#FFFFFF",
-				padding: 12,
-				borderRadius: 10,
-				margin: 4,
-				flex: 1,
-				minWidth: "30%",
-			}}
+			className="bg-slate-50 pb-3 rounded-lg m-2 flex-1 min-w-[30%]"
 			onPress={() => {
 				setSelectedPlan(item);
 				setShowConfirmModal(true);
 			}}
 		>
-			<Text style={{ fontWeight: "bold", textAlign: "center" }}>
-				{item.data}
-			</Text>
-			<Text style={{ textAlign: "center" }}>{item.duration}</Text>
-			<Text style={{ textAlign: "center" }}>
-				{item.price ? `₦${Number(item.price).toLocaleString()}` : "Price N/A"}
-			</Text>
-			<Text style={{ textAlign: "center", color: "#16A34A" }}>
-				Cashback: {item.cashback ? `₦${Number(item.cashback).toLocaleString()}` : "N/A"}
-			</Text>
+			<View className="mb-2 bg-teal-50 w-full rounded-t-lg p-1">
+				<Text className="text-center text-xs text-primary">
+					{item.cashback ? `₦${Number(item.cashback).toLocaleString()}` : "N/A"}{" "}
+					Cashback
+				</Text>
+			</View>
+			<View className='gap-1'>
+				<Text className="font-bold text-center">{item.data}</Text>
+				<Text className="text-center text-sm text-gray-500">{item.duration}</Text>
+				<Text className="text-center text-xs text-gray-500">
+					{item.price ? `₦${Number(item.price).toLocaleString()}` : "Price N/A"}
+				</Text>
+			</View>
 		</TouchableOpacity>
 	);
 
@@ -102,6 +93,10 @@ const DataSection = () => {
 				keyExtractor={(item) => item}
 				horizontal
 				showsHorizontalScrollIndicator={false}
+				contentContainerStyle={{
+					flex: 1, // Takes the full width of the screen
+					justifyContent: "space-between", // Distributes items across the width
+				}}
 			/>
 
 			<FlatList
