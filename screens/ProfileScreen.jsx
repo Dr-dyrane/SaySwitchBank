@@ -43,7 +43,7 @@ const ProfileScreen = () => {
 				setUsername(userData.username || "testUser");
 				setGender(userData.gender || "Male");
 				setEmail(userData.email || "test@example.com");
-				setPhone(userData.mobile || "08036049719");
+				setPhone(userData.phone || "08036048719");
 				setAddress(userData.address || "Somehwere in Nigeria");
 				setDateOfBirth(userData.dateOfBirth || "26 02 1994");
 				setImageUri(userData.imageUri || null);

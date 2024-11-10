@@ -9,7 +9,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ActivityIndicator, View } from "react-native";
 import { getCurrentUserAPI } from "../api/auth";
 
-
 // Create AuthContext
 export const AuthContext = createContext(null);
 
@@ -52,8 +51,8 @@ export const AuthProvider = ({ children }) => {
 			isLoggedIn: !!user, // Alias for isAuthenticated
 			email: user?.email || null, // Return email or null if not logged in
 			username: user?.username || null, // Return username or null if not logged in
-			fullName: user?.fullName || null, 
-			imageUri: user?.imageUri || null, 
+			fullName: user?.fullName || null,
+			imageUri: user?.imageUri || null,
 		}),
 		[user, token]
 	);
@@ -98,6 +97,7 @@ export const AuthProvider = ({ children }) => {
 				username: authStatus.username,
 				fullName: authStatus.fullName,
 				imageUri: authStatus.imageUri,
+				phone: user?.phone || null,
 				isAuthenticated: authStatus.isAuthenticated,
 				isLoggedIn: authStatus.isLoggedIn,
 			},
