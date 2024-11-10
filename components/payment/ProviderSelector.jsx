@@ -1,115 +1,98 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, Modal, FlatList, Image } from "react-native";
+import {
+	View,
+	Text,
+	TouchableOpacity,
+	Modal,
+	FlatList,
+	Image,
+	TouchableWithoutFeedback,
+} from "react-native";
 import { serviceProviders } from "../../data/dataPlans";
+import { Ionicons } from "@expo/vector-icons";
+import { RadioButton } from "react-native-paper";
 
 const providerLogos = {
-  mtn: require("../../assets/payment/serviceProvider/logo/MTN.png"),
-  glo: require("../../assets/payment/serviceProvider/logo/Globacom.png"),
-  airtel: require("../../assets/payment/serviceProvider/logo/Airtel Nigeria.png"),
-  '9mobile': require("../../assets/payment/serviceProvider/logo/9mobile.png"),
+	mtn: require("../../assets/payment/serviceProvider/logo/MTN.png"),
+	glo: require("../../assets/payment/serviceProvider/logo/Globacom.png"),
+	airtel: require("../../assets/payment/serviceProvider/logo/Airtel Nigeria.png"),
+	"9mobile": require("../../assets/payment/serviceProvider/logo/9mobile.png"),
 };
 
 const logoStyles = {
-  mtn: {backgroundColor: "#FFCD00",
-    borderRadius: 999,
-    padding: 2,},
-  glo: {},
-  airtel: {
- 
-  },
-  '9mobile': {
-    
-  },
+	mtn: { backgroundColor: "#FFCD00", borderRadius: 999, padding: 2 },
+	glo: {},
+	airtel: {},
+	"9mobile": {},
 };
 
 const ProviderSelector = ({ onSelect, selectedProvider }) => {
-  const [modalVisible, setModalVisible] = useState(false);
+	const [modalVisible, setModalVisible] = useState(false);
 
-  const handleSelect = (provider) => {
-    onSelect(provider);
-    setModalVisible(false);
-  };
+	const handleSelect = (provider) => {
+		onSelect(provider);
+		setModalVisible(false);
+	};
 
-  const renderProviderLogo = (providerId) => (
-    <View style={[{ width: 24, height: 24 }, logoStyles[providerId]]}>
-      <Image
-        source={providerLogos[providerId]}
-        style={{ width: '100%', height: '100%' }}
-        resizeMode="contain"
-      />
-    </View>
-  );
+	const renderProviderLogo = (providerId) => (
+		<View className="w-6 h-6" style={logoStyles[providerId]}>
+			<Image
+				source={providerLogos[providerId]}
+				className="w-full h-full"
+				resizeMode="contain"
+			/>
+		</View>
+	);
 
-  return (
-    <View>
-      <TouchableOpacity
-        onPress={() => setModalVisible(true)}
-        style={{ flexDirection: "row", alignItems: "center" }}
-      >
-        {renderProviderLogo(selectedProvider.id)}
-        <Text style={{ marginLeft: 8 }}>{selectedProvider.name}</Text>
-      </TouchableOpacity>
+	return (
+		<View>
+			<TouchableOpacity
+				onPress={() => setModalVisible(true)}
+				className="flex-row items-center space-x-2"
+			>
+				{renderProviderLogo(selectedProvider.id)}
+				<Ionicons name="chevron-down" size={16} color="#008773" />
+			</TouchableOpacity>
 
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => setModalVisible(false)}
-      >
-        <TouchableOpacity
-          style={{ flex: 1, backgroundColor: "rgba(0, 0, 0, 0.5)" }}
-          activeOpacity={1}
-          onPress={() => setModalVisible(false)}
-        >
-          <View style={{ flex: 1, justifyContent: "flex-end" }}>
-            <View
-              style={{
-                backgroundColor: "#FFFFFF",
-                borderTopLeftRadius: 30,
-                borderTopRightRadius: 30,
-                padding: 16,
-              }}
-            >
-              <View
-                style={{
-                  width: 40,
-                  height: 4,
-                  backgroundColor: "#CCC",
-                  borderRadius: 2,
-                  alignSelf: "center",
-                  marginBottom: 16,
-                }}
-              />
-              <Text
-                style={{ fontSize: 20, fontWeight: "bold", marginBottom: 16 }}
-              >
-                Select Provider
-              </Text>
-              <FlatList
-                data={Object.values(serviceProviders)}
-                keyExtractor={(item) => item.id}
-                renderItem={({ item }) => (
-                  <TouchableOpacity
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      paddingVertical: 12,
-                      borderBottomColor: "#E5E7EB",
-                      borderBottomWidth: 1,
-                    }}
-                    onPress={() => handleSelect(item)}
-                  >
-                    {renderProviderLogo(item.id)}
-                    <Text style={{ marginLeft: 12 }}>{item.name}</Text>
-                  </TouchableOpacity>
-                )}
-              />
-            </View>
-          </View>
-        </TouchableOpacity>
-      </Modal>
-    </View>
-  );
+			<Modal
+				animationType="slide"
+				transparent={true}
+				visible={modalVisible}
+				onRequestClose={() => setModalVisible(false)}
+			>
+				<TouchableWithoutFeedback onPress={() => setModalVisible(false)}>
+					<View className="flex-1 bg-black/50">
+						<View className="flex-1 justify-start">
+							<View className="bg-white rounded-b-3xl p-4 shadow-lg">
+								<Text className="text-lg font-bold mb-2">Select Provider</Text>
+								<RadioButton.Group
+									onValueChange={(newValue) =>
+										handleSelect(serviceProviders[newValue])
+									}
+									value={selectedProvider.id}
+								>
+									{Object.values(serviceProviders).map((provider) => (
+										<TouchableOpacity
+											key={provider.id}
+											className="flex-row items-center justify-between py-2"
+											onPress={() => handleSelect(provider)}
+										>
+											<View className="flex-row items-center ml-2">
+												{renderProviderLogo(provider.id)}
+												<Text className="ml-2">{provider.name}</Text>
+											</View>
+											<RadioButton value={provider.id} color="#008773" />
+										</TouchableOpacity>
+									))}
+								</RadioButton.Group>
+							</View>
+							<View className="h-1 w-20 bg-gray-300 rounded-full self-center mt-2" />
+						</View>
+					</View>
+				</TouchableWithoutFeedback>
+			</Modal>
+		</View>
+	);
 };
 
 export default ProviderSelector;

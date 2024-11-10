@@ -64,7 +64,7 @@ const AirtimeDataScreen = () => {
 
 					{activeTab === "airtime" ? <AirtimeSection /> : <DataSection />}
 				</View>
-				<View className="mt-8">
+				<View className="mt-4">
 					<View className="flex flex-row items-center justify-between mb-4">
 						<Text className="text-gray-500">Recent Top-ups</Text>
 						<Pressable onPress={() => router.push("transactions")}>

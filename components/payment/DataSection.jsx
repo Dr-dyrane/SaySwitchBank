@@ -79,13 +79,13 @@ const DataSection = () => {
 	return (
 		<View className="space-y-4">
 			<ServiceBanner selectedProvider={selectedProvider.id} />
-			<View className="flex-row items-center bg-white rounded-lg p-2">
+			<View className="flex-row items-center space-x-2 justify-between py-2 mb-3 border-gray-200 bg-slate-50 rounded-xl px-4">
 				<ProviderSelector
 					onSelect={setSelectedProvider}
 					selectedProvider={selectedProvider}
 				/>
 				<TextInput
-					className="flex-1 ml-2 text-base"
+					className="flex-1 pl-2 text-base"
 					placeholder="Enter phone number"
 					value={phoneNumber}
 					onChangeText={setPhoneNumber}
