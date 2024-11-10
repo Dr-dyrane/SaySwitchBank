@@ -38,12 +38,12 @@ const AirtimeSection = () => {
 				setShowConfirmModal(true);
 			}}
 		>
-			<View className='mb-2 bg-teal-50 w-full rounded-t-lg p-1'>
+			<View className="mb-2 bg-teal-50 w-full rounded-t-lg p-1">
 				<Text className="text-center text-xs text-teal-500">
-				₦{Math.floor(item * 0.02)} {' '}Cashback
+					₦{Math.floor(item * 0.02)} Cashback
 				</Text>
 			</View>
-			<Text className="text-center font-bold">₦{item}</Text>
+			<Text className="text-center font-bold">₦{Number(item).toLocaleString()}</Text>
 		</TouchableOpacity>
 	);
 
@@ -70,7 +70,7 @@ const AirtimeSection = () => {
 				<Text className="mr-2">₦</Text>
 				<TextInput
 					className="flex-1 bg-transparent py-2"
-					value={amount}
+					value={Number(amount).toLocaleString()}
 					onChangeText={setAmount}
 					placeholder="Enter amount"
 					keyboardType="numeric"
@@ -101,7 +101,7 @@ const AirtimeSection = () => {
 							amount ? "text-white font-bold" : "text-gray-200 font-bold"
 						}
 					>
-						{amount ? `Pay ₦${amount}` : "Pay"}
+						{amount ? `Pay ₦${Number(amount).toLocaleString()}` : "Pay"}
 					</Text>
 				</TouchableOpacity>
 			</View>
