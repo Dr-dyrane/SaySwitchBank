@@ -37,14 +37,14 @@ const DataSection = () => {
 
 	const renderTimePeriodItem = ({ item }) => (
 		<TouchableOpacity
-			className={`p-2 rounded-lg mx-1 ${
-				selectedTimePeriod === item ? "bg-primary" : "bg-slate-50"
+			className={`px-2 py-1.5 rounded-xl bg-slate-50 mx-1 ${
+				selectedTimePeriod === item ? " border border-primary" : ""
 			}`}
 			onPress={() => setSelectedTimePeriod(item)}
 		>
 			<Text
 				className={`text-center font-normal ${
-					selectedTimePeriod === item ? "text-white" : "text-gray-500"
+					selectedTimePeriod === item ? "text-primary" : "text-gray-500"
 				}`}
 			>
 				{item}

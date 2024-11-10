@@ -72,7 +72,7 @@ const AirtimeSection = () => {
 				<Text className="mr-2">₦</Text>
 				<TextInput
 					className="flex-1 bg-transparent py-2"
-					value={Number(amount).toLocaleString()}
+					value={amount ? Number(amount).toLocaleString() : amount}
 					onChangeText={setAmount}
 					placeholder="Enter amount"
 					keyboardType="numeric"

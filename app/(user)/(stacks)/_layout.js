@@ -50,7 +50,7 @@ export default function StacksLayout() {
 			<Stack.Screen
 				name="airtimeData"
 				options={{
-					title: "Airtime/Data",
+					title: "Airtime & Data",
 					headerShown: true,
 					headerRight: () => (
 						<Pressable
