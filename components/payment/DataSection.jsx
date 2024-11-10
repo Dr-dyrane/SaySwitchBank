@@ -77,10 +77,10 @@ const DataSection = () => {
 			</Text>
 			<Text style={{ textAlign: "center" }}>{item.duration}</Text>
 			<Text style={{ textAlign: "center" }}>
-				{item.price ? `₦${item.price}` : "Price N/A"}
+				{item.price ? `₦${Number(item.price).toLocaleString()}` : "Price N/A"}
 			</Text>
 			<Text style={{ textAlign: "center", color: "#16A34A" }}>
-				Cashback: {item.cashback ? `₦${item.cashback}` : "N/A"}
+				Cashback: {item.cashback ? `₦${Number(item.cashback).toLocaleString()}` : "N/A"}
 			</Text>
 		</TouchableOpacity>
 	);

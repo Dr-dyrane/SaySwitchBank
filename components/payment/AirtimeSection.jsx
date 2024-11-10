@@ -39,11 +39,13 @@ const AirtimeSection = () => {
 			}}
 		>
 			<View className="mb-2 bg-teal-50 w-full rounded-t-lg p-1">
-				<Text className="text-center text-xs text-teal-500">
-					₦{Math.floor(item * 0.02)} Cashback
+				<Text className="text-center text-xs text-primary">
+					₦{Math.floor(item * 0.02).toLocaleString()} Cashback
 				</Text>
 			</View>
-			<Text className="text-center font-bold">₦{Number(item).toLocaleString()}</Text>
+			<Text className="text-center font-bold">
+				₦{Number(item).toLocaleString()}
+			</Text>
 		</TouchableOpacity>
 	);
 
