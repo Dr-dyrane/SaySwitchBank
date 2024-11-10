@@ -49,6 +49,21 @@ const AirtimeSection = () => {
 		</TouchableOpacity>
 	);
 
+	const handleAmountChange = (value) => {
+		const numericValue = parseInt(value.replace(/,/g, ""), 10); // Convert to number, ignoring commas
+		if (!isNaN(numericValue)) {
+			if (numericValue <= 500000) {
+				setAmount(numericValue.toString()); // Only update if within range
+			} else if (numericValue > 500000) {
+				setAmount("500000"); // Cap at 500,000 if input exceeds limit
+			} else {
+				setAmount(""); // Clear if below minimum
+			}
+		} else {
+			setAmount(""); // Clear if input is invalid
+		}
+	};
+
 	return (
 		<View className="space-y-4">
 			<ServiceBanner selectedProvider={selectedProvider.id} />
@@ -72,8 +87,8 @@ const AirtimeSection = () => {
 				<Text className="mr-2">₦</Text>
 				<TextInput
 					className="flex-1 bg-transparent py-2"
-					value={amount ? Number(amount).toLocaleString() : amount}
-					onChangeText={setAmount}
+					value={amount ? Number(amount).toLocaleString() : ""}
+					onChangeText={handleAmountChange}
 					placeholder="Enter amount"
 					keyboardType="numeric"
 				/>
@@ -115,7 +130,7 @@ const AirtimeSection = () => {
 				details={{
 					type: "Airtime",
 					provider: selectedProvider,
-					amount: amount,
+					amount: Number(amount), // Format amount for ConfirmModal
 					phoneNumber: phoneNumber,
 				}}
 			/>

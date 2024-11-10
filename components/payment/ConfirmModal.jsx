@@ -128,7 +128,9 @@ const ConfirmModal = ({ visible, onClose, onConfirm, details }) => {
 								<Text className="font-semibold text-primary">
 									₦
 									{details?.type === "Airtime"
-										? Math.floor((details.amount || 0) * 0.02).toLocaleString()
+										? Math.floor(
+												(Number(details.amount) || 0) * 0.02
+										  ).toLocaleString()
 										: (details.plan?.cashback || 0).toLocaleString()}
 								</Text>
 							</View>
