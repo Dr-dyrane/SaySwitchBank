@@ -66,9 +66,11 @@ const DataSection = () => {
 					Cashback
 				</Text>
 			</View>
-			<View className='gap-1'>
+			<View className="gap-1">
 				<Text className="font-bold text-center">{item.data}</Text>
-				<Text className="text-center text-sm text-gray-500">{item.duration}</Text>
+				<Text className="text-center text-sm text-gray-500">
+					{item.duration}
+				</Text>
 				<Text className="text-center text-xs text-gray-500">
 					{item.price ? `₦${Number(item.price).toLocaleString()}` : "Price N/A"}
 				</Text>
@@ -115,6 +117,7 @@ const DataSection = () => {
 					type: "Data",
 					provider: selectedProvider,
 					plan: selectedPlan,
+					amount: selectedPlan.price || 0, // Fallback to 0 if price is null
 					phoneNumber: phoneNumber,
 				}}
 			/>

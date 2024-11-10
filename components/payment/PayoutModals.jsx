@@ -182,7 +182,7 @@ export function ConfirmationModal({
 											{loading ? (
 												<ActivityIndicator size={18} color="white" />
 											) : (
-												<Ionicons name="arrow-down" size={18} color="white" />
+												<Ionicons name="arrow-up" size={18} color="white" />
 											)}
 										</View>
 									</TouchableOpacity>
