@@ -58,14 +58,14 @@ const ContactSelector = ({ isVisible, onClose, onSelectContact, contacts }) => {
 
   return (
     <Modal visible={isVisible} animationType="slide">
-      <SafeAreaView className="flex-1 bg-white px-4">
-        <View className="flex-row items-center justify-between p-4">
+      <SafeAreaView className="flex-1 bg-white p-4">
+        <View className="flex-row items-center justify-between py-4">
           <TouchableOpacity onPress={onClose}>
             <Ionicons name="arrow-back" size={24} color="black" />
           </TouchableOpacity>
           <Text className="text-lg font-semibold">Select Contact</Text>
           <TouchableOpacity onPress={confirmSelection} disabled={!selectedContact}>
-            <Text className={`text-base ${selectedContact ? 'text-blue-500' : 'text-gray-400'}`}>Done</Text>
+            <Text className={`text-base ${selectedContact ? 'text-primary' : 'text-gray-400'}`}>Done</Text>
           </TouchableOpacity>
         </View>
         <View className="flex-row items-center space-x-2 justify-between py-2 my-4 border-gray-200 bg-slate-50 rounded-xl px-4">
