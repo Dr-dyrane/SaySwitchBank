@@ -13,13 +13,16 @@ import { RadioButton } from 'react-native-paper';
 
 const ContactSelector = ({ isVisible, onClose, onSelectContact, contacts }) => {
   const [searchQuery, setSearchQuery] = useState("");
-  const [filteredContacts, setFilteredContacts] = useState(contacts);
+  const [filteredContacts, setFilteredContacts] = useState([]);
   const [selectedContact, setSelectedContact] = useState(null);
 
   useEffect(() => {
-    const filtered = contacts.filter((contact) =>
-      contact.name.toLowerCase().includes(searchQuery.toLowerCase())
-    );
+    const filtered = contacts.filter((contact) => {
+      const hasValidName = contact.name && typeof contact.name === 'string';
+      const hasValidPhoneNumber = contact.phoneNumbers && contact.phoneNumbers.length > 0;
+      const matchesSearch = hasValidName && contact.name.toLowerCase().includes(searchQuery.toLowerCase());
+      return hasValidName && hasValidPhoneNumber && matchesSearch;
+    });
     setFilteredContacts(filtered);
   }, [searchQuery, contacts]);
 
@@ -29,7 +32,8 @@ const ContactSelector = ({ isVisible, onClose, onSelectContact, contacts }) => {
 
   const confirmSelection = () => {
     if (selectedContact && selectedContact.phoneNumbers && selectedContact.phoneNumbers.length > 0) {
-      onSelectContact(selectedContact.phoneNumbers[0].number);
+      const phoneNumber = selectedContact.phoneNumbers[0].number || selectedContact.phoneNumbers[0];
+      onSelectContact(phoneNumber);
       onClose();
     }
   };
@@ -43,7 +47,7 @@ const ContactSelector = ({ isVisible, onClose, onSelectContact, contacts }) => {
         <Text className="text-md">{item.name}</Text>
         {item.phoneNumbers && item.phoneNumbers.length > 0 && (
           <Text className="text-sm text-gray-600">
-            {item.phoneNumbers[0].number}
+            {item.phoneNumbers[0].number || item.phoneNumbers[0]}
           </Text>
         )}
       </View>
