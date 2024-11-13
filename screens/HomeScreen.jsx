@@ -140,7 +140,7 @@ export default function HomeScreen() {
 		{
 			title: "Fund Agent",
 			iconName: "card", // Suitable for card transactions like NFC tap
-			onPress: () => console.log("Fund Agent via NFC Tap"),
+			onPress: () => router.push("fundAgent"),
 		},
 	];
 

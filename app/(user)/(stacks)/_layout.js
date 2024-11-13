@@ -65,10 +65,29 @@ export default function StacksLayout() {
 					headerTitleAlign: "center",
 				}}
 			/>
+
 			<Stack.Screen
 				name="bankTransfer"
 				options={{
 					title: "Pay By Transfer",
+					headerShown: true,
+					headerRight: () => (
+						<Pressable
+							onPress={() => router.push("transactions")} // Navigate to transactions
+							style={{ marginRight: 0 }} // Optional styling for spacing
+						>
+							<Text style={{ color: "#008773", fontSize: 16 }}>History</Text>
+							{/* Title for the button */}
+						</Pressable>
+					),
+					...commonStackOptions,
+					headerTitleAlign: "center",
+				}}
+			/>
+			<Stack.Screen
+				name="fundAgent"
+				options={{
+					title: "Pay By Tap",
 					headerShown: true,
 					headerRight: () => (
 						<Pressable
