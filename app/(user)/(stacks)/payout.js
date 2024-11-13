@@ -1,10 +1,8 @@
-import React from 'react';
-import PayoutScreen from '../../../screens/PayoutScreen';
+import React from "react";
+import PayoutScreen from "../../../screens/PayoutScreen";
 
 const Payout = () => {
-  return (
-    <PayoutScreen />
-  );
+	return <PayoutScreen />;
 };
 
 export default Payout;

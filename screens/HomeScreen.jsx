@@ -135,7 +135,7 @@ export default function HomeScreen() {
 		{
 			title: "Bank Transfer",
 			iconName: "arrow-down-circle", // Represents financial transactions like bank transfer
-			onPress: () => console.log("Initiate Bank Transfer"),
+			onPress: () => router.push("bankTransfer"),
 		},
 		{
 			title: "Fund Agent",

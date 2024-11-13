@@ -1,10 +1,8 @@
-import React from 'react';
-import AirtimeDataScreen from '../../../screens/AirtimeDataScreen';
+import React from "react";
+import AirtimeDataScreen from "../../../screens/AirtimeDataScreen";
 
 const AirtimeData = () => {
-  return (
-    <AirtimeDataScreen />
-  );
+	return <AirtimeDataScreen />;
 };
 
 export default AirtimeData;

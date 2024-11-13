@@ -1,10 +1,8 @@
-import React from 'react';
-import TransDetails from '../../../components/transactions/TransDetails';
+import React from "react";
+import TransDetails from "../../../components/transactions/TransDetails";
 
 const transDetails = () => {
-  return (
-    <TransDetails />
-  );
+	return <TransDetails />;
 };
 
 export default transDetails;

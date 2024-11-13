@@ -162,7 +162,7 @@ export default function PayoutScreen() {
 								<Text className="mr-2">₦</Text>
 								<TextInput
 									className="flex-1 bg-transparent"
-									value={amount}
+									value={amount ? Number(amount).toLocaleString() : ""}
 									onChangeText={setAmount}
 									placeholder="Enter amount"
 									keyboardType="numeric"
