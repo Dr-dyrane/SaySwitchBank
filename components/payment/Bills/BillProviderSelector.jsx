@@ -49,7 +49,7 @@ const BillProviderSelector = ({ billType, onSelect, selectedProvider }) => {
 				onPress={() => setModalVisible(true)}
 				className="flex-row items-center space-x-2 bg-slate-50 p-3 rounded-xl justify-between"
 			>
-				<View className='flex flex-row items-center justify-center gap-2'>
+				<View className="flex flex-row items-center justify-center gap-2">
 					{renderProviderIcon(selectedProvider)}
 					<Text>{selectedProvider?.name}</Text>
 				</View>
