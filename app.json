@@ -24,7 +24,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.dyrane.SaySwitchBank"
+      "package": "com.dyrane.SaySwitchBank",
+      "newArchEnabled": true
     },
     "web": {
       "favicon": "./assets/favicon.png"
