@@ -153,7 +153,7 @@ export default function HomeScreen() {
 		{
 			title: "Bills Payment",
 			iconName: "receipt", // Represents bills and receipts, fitting for Bill Payments
-			onPress: () => console.log("Pay Bills"),
+			onPress: () => router.push("billsPayment"),
 		},
 	];
 

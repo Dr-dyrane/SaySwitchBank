@@ -102,6 +102,25 @@ export default function StacksLayout() {
 					headerTitleAlign: "center",
 				}}
 			/>
+
+<Stack.Screen
+				name="billsPayment"
+				options={{
+					title: "Bill Payment",
+					headerShown: true,
+					headerRight: () => (
+						<Pressable
+							onPress={() => router.push("transactions")} // Navigate to transactions
+							style={{ marginRight: 0 }} // Optional styling for spacing
+						>
+							<Text style={{ color: "#008773", fontSize: 16 }}>History</Text>
+							{/* Title for the button */}
+						</Pressable>
+					),
+					...commonStackOptions,
+					headerTitleAlign: "center",
+				}}
+			/>
 		</Stack>
 	);
 }
